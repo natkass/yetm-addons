@@ -1,0 +1,64 @@
+<odoo>
+  <data noupdate="1">
+    <record id="seq_hr_overtime" model="ir.sequence">
+      <field name="name">Overtime</field>
+      <field name="code">hr.overtime</field>
+      <field name="prefix">OT/</field>
+      <field name="padding">4</field>
+    </record>
+  </data>
+
+  <data noupdate="1">
+    <record id="seq_hr_incentive" model="ir.sequence">
+      <field name="name">Incentive</field>
+      <field name="code">hr.incentive</field>
+      <field name="prefix">INC/</field>
+      <field name="padding">4</field>
+    </record>
+  </data> 
+
+  <data noupdate="1">
+    <record id="seq_hr_daily_allowance" model="ir.sequence">
+      <field name="name">Daly Allowance</field>
+      <field name="code">hr.daily.allowance</field>
+      <field name="prefix">DA-AL/</field>
+      <field name="padding">4</field>
+    </record>
+  </data> 
+
+  <data noupdate="1">
+    <record id="seq_hr_driver_incentive" model="ir.sequence">
+      <field name="name">Driver Incentive</field>
+      <field name="code">hr.driver.incentive</field>
+      <field name="prefix">DR-IN/</field>
+      <field name="padding">4</field>
+    </record>
+  </data> 
+
+  <data noupdate="1">
+    <record id="seq_hr_penalty" model="ir.sequence">
+      <field name="name">Penalty</field>
+      <field name="code">hr.penalty</field>
+      <field name="prefix">PEN/</field>
+      <field name="padding">4</field>
+    </record>
+  </data>
+
+  <data noupdate="1">
+    <record id="seq_hr_loan" model="ir.sequence">
+      <field name="name">Loan</field>
+      <field name="code">hr.loan</field>
+      <field name="prefix">LOAN/</field>
+      <field name="padding">4</field>
+    </record>
+  </data>
+
+  <data noupdate="1">
+    <record id="seq_hr_advance" model="ir.sequence">
+      <field name="name">Advance</field>
+      <field name="code">hr.advance</field>
+      <field name="prefix">ADVANCE/</field>
+      <field name="padding">4</field>
+    </record>
+  </data> 
+</odoo>

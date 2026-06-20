@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="human_health_form_view">
+            <field name="name">human.health.form</field>
+            <field name="model">human.health</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="human_health_tree_view">
+            <field name="name">human.health.tree</field>
+            <field name="model">human.health</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_human_health" model="ir.actions.act_window">
+            <field name="name">Human Health</field>
+            <field name="res_model">human.health</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem name="Human Health" id="sub_menu_human_health" parent="odoo_agriculture.configuration_topmenu" sequence="15" action="action_human_health"/>
+    </data>
+</odoo>

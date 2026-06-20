@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_crops_animals_form" model="ir.ui.view">
+            <field name="name">Crops Animals View</field>
+            <field name="model">crops.animals</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <!-- <field name='crops_tasks_template_id'/> -->
+                                <!-- <field name='task_id'/> -->
+                                <field name='partner_id'/>
+                                <field name='quantity'/>
+                            </group>
+                            <group>
+                                <field name='start_date'/>
+                                <field name='end_date'/>
+                                <!-- <field name='description'/> -->
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="description_page" string="Description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+                       
+        <record id="view_crops_animals_tree" model="ir.ui.view">
+                <field name="name">Crops Animals Tree View</field>
+                <field name="model">crops.animals</field>
+                <field name="arch" type="xml">
+                    <tree>
+                        <!-- <field name='crops_tasks_template_id'/> -->
+                        <!-- <field name='task_id'/> -->
+                        <field name='partner_id'/>
+                        <field name='quantity'/>
+                        <field name='start_date'/>
+                        <field name='end_date'/>
+                        <field name='description'/>
+                    </tree>
+                </field>
+        </record>
+
+        <record id="view_crops_animals_search" model="ir.ui.view">
+                <field name="name">Crops Animals Search View</field>
+                <field name="model">crops.animals</field>
+                <field name="arch" type="xml">
+                    <search>
+                        <!-- <field name='crops_tasks_template_id'/> -->
+                        <!-- <field name='task_id'/> -->
+                        <field name='partner_id'/>
+                        <field name='quantity'/>
+                        <field name='start_date'/>
+                        <field name='end_date'/>
+                        <field name='description'/>
+                        <group expand="0" string="Group By">
+                            <filter name="Animals" context="{'group_by':'partner_id'}"/>
+                            <filter name="Start Date" context="{'group_by':'start_date'}"/>
+                            <filter name="End Date" context="{'group_by':'end_date'}"/>
+                        </group>
+                    </search>
+                </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_crops_animals">
+            <field name="name">Crops Animals</field>
+            <field name="res_model">crops.animals</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+
+</odoo>
+
+

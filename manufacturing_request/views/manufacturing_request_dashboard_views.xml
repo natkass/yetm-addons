@@ -1,0 +1,154 @@
+<odoo>
+    <!-- Parent Menu -->
+    <menuitem id="menu_manufacturing_request_graph"
+              name="Manufacturing Request Analysis"
+              parent="menu_manufacturing_requests"
+              sequence="10"/>
+
+    <!-- Requests by Month -->
+    <record id="view_manufacturing_request_graph_month" model="ir.ui.view">
+        <field name="name">manufacturing.request.graph.month</field>
+        <field name="model">manufacturing.request</field>
+        <field name="arch" type="xml">
+            <graph string="Requests by Month" type="bar">
+                <field name="create_date" type="row"/>
+                <field name="id" type="measure"/>
+            </graph>
+        </field>
+    </record>
+    
+    <record id="action_graph_requests_by_month" model="ir.actions.act_window">
+        <field name="name">Requests by Month</field>
+        <field name="res_model">manufacturing.request</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_manufacturing_request_graph_month"/>
+    </record>
+    <menuitem id="menu_graph_requests_by_month"
+              name="By Month"
+              parent="menu_manufacturing_request_graph"
+              action="action_graph_requests_by_month"/>
+
+    <!-- Requests by Year -->
+
+    <record id="view_manufacturing_request_graph_year" model="ir.ui.view">
+        <field name="name">manufacturing.request.graph.year</field>
+        <field name="model">manufacturing.request</field>
+        <field name="arch" type="xml">
+            <graph string="Requests by Year" type="bar">
+                <field name="create_year" type="row"/>
+                <field name="id" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_graph_requests_by_year" model="ir.actions.act_window">
+        <field name="name">Requests by Year</field>
+        <field name="res_model">manufacturing.request</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_manufacturing_request_graph_year"/>
+    </record>
+    <menuitem id="menu_graph_requests_by_year"
+              name="By Year"
+              parent="menu_manufacturing_request_graph"
+              action="action_graph_requests_by_year"/>
+
+    <!-- Requests by State -->
+
+    <record id="view_manufacturing_request_graph_state" model="ir.ui.view">
+        <field name="name">manufacturing.request.graph.state</field>
+        <field name="model">manufacturing.request</field>
+        <field name="arch" type="xml">
+            <graph string="Requests by State" type="bar">
+                <field name="request_state" type="row"/>
+                <field name="id" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_graph_requests_by_state" model="ir.actions.act_window">
+        <field name="name">Requests by State</field>
+        <field name="res_model">manufacturing.request</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_manufacturing_request_graph_state"/>
+    </record>
+    <menuitem id="menu_graph_requests_by_state"
+              name="By State"
+              parent="menu_manufacturing_request_graph"
+              action="action_graph_requests_by_state"/>
+
+    <!-- Average Lead Time -->
+
+    <record id="view_manufacturing_request_graph_lead_time" model="ir.ui.view">
+        <field name="name">manufacturing.request.graph.lead.time</field>
+        <field name="model">manufacturing.request</field>
+        <field name="arch" type="xml">
+            <graph string="Requests by Lead Time" type="bar">
+                
+                <field name="production_location_id" type="row"/>
+                <field name="lead_time_hours" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_graph_lead_time" model="ir.actions.act_window">
+        <field name="name">Average Lead Time</field>
+        <field name="res_model">manufacturing.request</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_manufacturing_request_graph_lead_time"/>
+    </record>
+    <menuitem id="menu_graph_lead_time"
+              name="Lead Time"
+              parent="menu_manufacturing_request_graph"
+              action="action_graph_lead_time"/>
+
+    
+
+    <record id="view_manufacturing_request_graph_stage_duration_prod" model="ir.ui.view">
+        <field name="name">manufacturing.request.graph.stage.duration</field>
+        <field name="model">manufacturing.request</field>
+        <field name="arch" type="xml">
+            <graph string="Requests by Stage Duration" type="bar">
+                
+                <field name="production_location_id" type="row"/>
+                <field name="avg_stage_hours" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_graph_stage_duration_prod" model="ir.actions.act_window">
+        <field name="name">Average Stage Duration Production Location</field>
+        <field name="res_model">manufacturing.request</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_manufacturing_request_graph_stage_duration_prod"/>
+    </record>
+    <menuitem id="menu_graph_stage_duration"
+              name="Average Stage Duration (Prod Location) "
+              parent="menu_manufacturing_request_graph"
+              action="action_graph_stage_duration_prod"/>
+
+    <!-- Average Stage Duration Production Location -->
+
+    <record id="view_manufacturing_request_graph_stage_duration_branch" model="ir.ui.view">
+        <field name="name">manufacturing.request.graph.stage.duration.branch</field>
+        <field name="model">manufacturing.request</field>
+        <field name="arch" type="xml">
+            <graph string="Requests by Stage Duration Branch" type="bar">
+                
+                <field name="branch_id" type="row"/>
+                <field name="avg_stage_hours" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_graph_stage_duration_branch" model="ir.actions.act_window">
+        <field name="name">Average Stage Duration Branch</field>
+        <field name="res_model">manufacturing.request</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_manufacturing_request_graph_stage_duration_branch"/>
+    </record>
+    <menuitem id="menu_graph_stage_duration_branch"
+              name="Average Stage Duration (Branch) "
+              parent="menu_manufacturing_request_graph"
+              action="action_graph_stage_duration_branch"/>
+              
+</odoo>

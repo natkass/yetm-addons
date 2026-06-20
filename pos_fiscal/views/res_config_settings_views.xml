@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- POS Fiscal Settings View -->
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.pos.fiscal</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="90"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <app name="general_settings" position="after">
+                <app string="POS Fiscal" name="pos_fiscal">
+                    <block title="Inventory Integration">
+                        <setting string="Enable POS Fiscal Inventory Integration" help="Enable automatic inventory updates for POS fiscal reconciliation">
+                            <field name="pos_fiscal_enable_inventory"/>
+                        </setting>
+                        <setting string="Create Picking for New Orders" invisible="not pos_fiscal_enable_inventory">
+                            <field name="pos_fiscal_create_picking_on_create"/>
+                        </setting>
+                        <setting string="Create Picking on Amount Sync" invisible="not pos_fiscal_enable_inventory">
+                            <field name="pos_fiscal_create_picking_on_sync"/>
+                        </setting>
+                        <setting string="Auto-Validate Pickings" invisible="not pos_fiscal_enable_inventory">
+                            <field name="pos_fiscal_validate_picking_auto"/>
+                        </setting>
+                    </block>
+
+                    <block title="Accounting Integration">
+                        <setting string="Enable POS Fiscal Accounting Integration" help="Enable automatic invoice creation and accounting updates">
+                            <field name="pos_fiscal_enable_accounting"/>
+                        </setting>
+                        <setting string="Auto-Invoice Created Orders" invisible="not pos_fiscal_enable_accounting">
+                            <field name="pos_fiscal_auto_invoice_orders"/>
+                        </setting>
+                        <setting string="Auto-Post Invoices" invisible="not pos_fiscal_enable_accounting">
+                            <field name="pos_fiscal_auto_post_invoices"/>
+                        </setting>
+                        <setting string="Auto-Validate Payments" invisible="not pos_fiscal_enable_accounting">
+                            <field name="pos_fiscal_auto_validate_payments"/>
+                        </setting>
+                    </block>
+
+                    <block title="Reconciliation Settings">
+                        <setting string="Auto-Reconcile Orders" help="Automatically reconcile orders when fiscal data is synced">
+                            <field name="pos_fiscal_auto_reconcile"/>
+                        </setting>
+                        <setting string="Strict Matching Mode" help="Require exact amount matching during reconciliation">
+                            <field name="pos_fiscal_strict_matching"/>
+                        </setting>
+                    </block>
+                </app>
+            </app>
+        </field>
+    </record>
+
+    <!-- Action to open POS Fiscal Settings -->
+    <record id="action_pos_fiscal_config_settings" model="ir.actions.act_window">
+        <field name="name">POS Fiscal Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module': 'pos_fiscal', 'bin_size': False}</field>
+    </record>
+
+</odoo>

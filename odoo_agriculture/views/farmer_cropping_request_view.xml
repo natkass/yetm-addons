@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_farmer_cropping_request_form" model="ir.ui.view">
+            <field name="name">Farmer Cropping Request From View</field>
+            <field name="model">farmer.cropping.request</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <button name="action_confirm" type="object" string="Confirm" 
+                            invisible="state not in ('new')" class="btn-primary"/>
+                        <button name="action_in_progress" type="object" string="In Progress" invisible="state not in ('confirm')" class="btn-primary"/>
+                        <button name="action_done" type="object" string="Done" 
+                            invisible="state not in ('in_progress')" class="btn-primary"/>
+                        <button name="action_cancel" type="object" string="Cancel" 
+                            invisible="state not in ('new')"/>
+                        <button name="action_reset_to_draft" type="object" string="Reset to Draft" invisible="state not in ('cancel')" class="btn-primary"/>
+                        <!-- <button name="action_confirm" type="object" string="Confirm" 
+                            states="new" class="btn-primary"/>
+                        <button name="action_in_progress" type="object" string="In Progress" states="confirm" class="btn-primary"/>
+                        <button name="action_done" type="object" string="Done" 
+                            states="in_progress" class="btn-primary"/>
+                        <button name="action_cancel" type="object" string="Cancel" 
+                            states="new"/>
+                        <button name="action_reset_to_draft" type="object" string="Reset to Draft" states="cancel" class="btn-primary"/> -->
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="view_task_request"
+                               type="object"
+                               class="oe_stat_button"
+                               icon="fa-pencil-square-o">
+                               <field  string="Tasks" name="task_count" widget="statinfo"/>
+                            </button>
+                            <button name="view_equipment_request"
+                               type="object"
+                               class="oe_stat_button"
+                               icon="fa-pencil-square-o">
+                               <field  string="Equipments" name="equipment_count" widget="statinfo"/>
+                            </button>
+                            <button name="view_animal_request"
+                               type="object"
+                               class="oe_stat_button"
+                               icon="fa-pencil-square-o">
+                               <field  string="Animals" name="animal_count" widget="statinfo"/>
+                            </button>
+                            <button name="view_dieases_request"
+                               type="object"
+                               class="oe_stat_button"
+                               icon="fa-pencil-square-o">
+                               <field  string="Dieases" name="dieases_count" widget="statinfo"/>
+                            </button>
+                            <button name="view_fleet_request"
+                               type="object"
+                               class="oe_stat_button"
+                               icon="fa-pencil-square-o">
+                               <field  string="Fleets" name="fleet_count" widget="statinfo"/>
+                            </button>
+                            <button name="view_project_request"
+                               type="object"
+                               class="oe_stat_button"
+                               icon="fa-pencil-square-o">
+                               <field  string="Projects" name="project_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                                    <h1>
+                                            <field name="number" placeholder="Number..."/>
+                                        <group>
+                                            <field name="crop_ids" placeholder="Crop..."/>
+                                        </group>
+                                    </h1>
+
+                        </div>
+                        <group>
+                            <group>
+                                <!-- <field name='number'/> -->
+                                <field name='name'/>
+                                <field name='user_id'/>
+                                <field name='responsible_user_id'/>
+                            </group>
+                            <group>
+                                <field name='start_date'/>
+                                <field name='end_date'/>
+                                <field name='company_id' groups="base.group_multi_company"/>
+                                <field name='project_id' readonly='1'/>
+                            </group>
+                        </group>
+                            <notebook>
+                                <page string="Description">
+                                    <field name="description" placeholder="Description..."/>
+                                </page>
+                                <page string="Internal Notes">
+                                    <field name="internal_note" placeholder="Internal Notes..."/>
+                                </page>
+                            </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+                       
+        <record id="view_farmer_cropping_request_tree" model="ir.ui.view">
+                <field name="name">Farmer Cropping Request Tree View</field>
+                <field name="model">farmer.cropping.request</field>
+                <field name="arch" type="xml">
+                    <tree>
+                        <field name='number'/>
+                        <field name='name'/>
+                        <field name='crop_ids'/>
+                        <field name='project_id' readonly='1'/>
+                        <field name='start_date'/>
+                        <field name='end_date'/>
+                        <field name='user_id'/>
+                        <field name='responsible_user_id'/>
+                        <field name='company_id' groups="base.group_multi_company"/>
+                        <field name='state'/>
+                    </tree>
+                </field>
+        </record>
+
+        <record id="farmer_cropping_request_kanban" model="ir.ui.view">
+            <field name="name">Farmer Cropping Request kanban View</field>
+            <field name="model">farmer.cropping.request</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by='state'>
+                    <field name='state'/>
+                    <field name="number"/>
+                    <field name="name"/>
+                    <field name='crop_ids'/>
+                    <field name="user_id"/>
+                    <field name="responsible_user_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <!-- <div t-attf-class="oe_kanban_card oe_kanban_global_click"> -->
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="o_kanban_record_top mb16">
+                                    <div class="o_kanban_record_headings mt4">
+                                        <strong class="o_kanban_record_title"><span><field name="number"/></span></strong>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban">
+                                        <span style="font-weight:bold">Name :</span>
+                                        <field name="name"/>
+                                    </div>
+                                </div>
+
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban">
+                                        <span style="font-weight:bold">Crop:</span>
+                                            <field name="crop_ids"/>
+                                    </div>
+                                </div>
+
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban">
+                                        <span style="font-weight:bold">Responsible User:</span>
+                                            <field name="responsible_user_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                        <group expand="0" string="Group By">
+                            <filter name="State" context="{'group_by':'state'}"/>
+                        </group>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_farmer_cropping_request_search" model="ir.ui.view">
+                <field name="name">Farmer Cropping Request Search View</field>
+                <field name="model">farmer.cropping.request</field>
+                <field name="arch" type="xml">
+                    <search>
+                        <filter name="New"  domain="[('state','=','new')]"/>
+                        <filter name="Confirm" domain="[('state','=','confirm')]"/>
+                        <filter name="In Progress" domain="[('state','=','in_progress')]"/>
+                        <filter name="Done" domain="[('state','=','done')]"/>
+                        <!-- <filter name="Cancel" domain="[('state','=','cancel')]"/> -->
+                        <field name='number'/>
+                        <field name='name'/>
+                        <field name='user_id'/>
+                        <field name='responsible_user_id'/>
+                        <field name='project_id' readonly='1' />
+                        <field name='start_date'/>
+                        <field name='end_date'/>
+                        <field name='company_id' groups="base.group_multi_company"/>
+                        <field name='crop_ids'/>
+                        <field name='state'/>
+                        <group expand="0" string="Group By">
+                            <filter name="Crop" context="{'group_by':'crop_ids'}"/>
+                            <filter name="Start Date" context="{'group_by':'start_date'}"/>
+                            <filter name="End Date" context="{'group_by':'end_date'}"/>
+                            <filter name="Supervisor" context="{'group_by':'user_id'}"/>
+                            <filter name="Responsible User" context="{'group_by':'responsible_user_id'}"/>
+                            <filter name="Company" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
+                            <filter name="State" context="{'group_by':'state'}"/>
+                        </group>
+                    </search>
+                </field>
+        </record>
+
+        <record id="view_farmer_cropping_request_pivot" model="ir.ui.view">
+            <field name="name">Farmer Cropping Request Pivot View</field>
+            <field name="model">farmer.cropping.request</field>
+            <field name="arch" type="xml">
+                <pivot string="Crop Requests">
+                    <field name='crop_ids' type="row"/>
+                    <field name="state" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_farmer_cropping_request_graph" model="ir.ui.view">
+            <field name="name">Farmer Cropping Request Graph View</field>
+            <field name="model">farmer.cropping.request</field>
+            <field name="arch" type="xml">
+                 <graph>
+                    <field name='crop_ids'/>
+                    <field name="state"/>
+                 </graph>
+            </field>
+        </record>
+
+        <record id="view_farmer_Cropping_request_calendar" model="ir.ui.view">
+           <field name="name">Farmer Cropping Request Calender View</field>
+           <field name="model">farmer.cropping.request</field>
+           <field name="arch" type="xml">
+               <calendar color="crop_ids" date_start="start_date">
+                    <field name="number"/>
+                    <field name="crop_ids"/>
+                    <field name="project_id"/>
+               </calendar>
+           </field>
+       </record>
+
+        <record model="ir.actions.act_window" id="action_farmer_cropping_request">
+            <field name="name">Crop Requests</field>
+            <field name="res_model">farmer.cropping.request</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">kanban,tree,form,calendar,pivot,graph</field>
+        </record>
+    </data>
+
+</odoo>
+
+

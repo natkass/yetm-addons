@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mrp_bom_user,access_mrp_bom_users,mrp.model_mrp_bom,odoo_agriculture.group_agriculture_user,1,0,0,0
+access_mrp_bom_line_user,access_mrp_bom_line_users,mrp.model_mrp_bom_line,odoo_agriculture.group_agriculture_user,1,0,0,0
+access_mrp_production_user,access_mrp_production_users,mrp.model_mrp_production,odoo_agriculture.group_agriculture_user,1,0,0,0
+access_mrp_document_user,access_mrp_document_users,mrp.model_mrp_document,odoo_agriculture.group_agriculture_user,1,0,0,0
+access_stock_picking_user,access_stock_picking_users,mrp.model_stock_picking,odoo_agriculture.group_agriculture_user,1,0,0,0
+access_mrp_workorder_user,access_mrp_workorder_users,mrp.model_mrp_workorder,odoo_agriculture.group_agriculture_user,1,0,0,0
+access_stock_move_user,access_stock_move_users,mrp.model_stock_move,odoo_agriculture.group_agriculture_user,1,0,0,0
+access_stock_scrap_user,access_stock_scrap_users,mrp.model_stock_scrap,odoo_agriculture.group_agriculture_user,1,0,0,0
+access_stock_warehouse_orderpoint_user,access_stock_warehouse_orderpoint_users,stock.model_stock_warehouse_orderpoint,odoo_agriculture.group_agriculture_user,1,0,0,0
+
+

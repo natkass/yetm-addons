@@ -1,0 +1,50 @@
+.o_horizontal_group {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.o_horizontal_fields {
+    
+    display: flex;
+    justify-content: flex-start;
+    white-space: nowrap;   /* text won’t break */
+    flex-shrink: 0;
+    gap: 0  px; /* Adjust spacing as needed */
+}
+
+.o_input_box {
+    width: 100%; /* Set a fixed width or adjust as necessary */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    border: 2px solid #ccc;
+    background-color: #dfe8ea;
+}
+
+.o_display_box {
+    width: 300px; /* Set a fixed width or adjust as necessary */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    border: 2px solid #ccc;
+    background-color: #b0e1ed;
+}
+
+.o_display_summary {
+    width: 300px; /* Set a fixed width or adjust as necessary */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    border: 2px solid #ccc;
+    background-color: #c3e8dd;
+}
+
+.o_fabric_fields[style*="display: none"] {
+    display: flex !important;   /* keep the space */
+    visibility: hidden !important; /* hide contents but reserve space */
+}
+
+.o_no_label_space .o_form_label {
+    display: none;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}

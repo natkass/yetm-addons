@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit POS Sales Details Report to hide Session Control table -->
+        <template id="report_saledetails_inherit" inherit_id="point_of_sale.report_saledetails">
+
+            <!-- Hide the table with Expected/Counted/Difference columns -->
+            <xpath expr="//t[@id='closing_session']//table[@class='table table-sm']" position="replace">
+                <!-- Table hidden as per requirement -->
+            </xpath>
+
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,11 @@
+.watermark {
+    position: fixed;
+    top: 40%;
+    left: 20%;
+    font-size: 100px;
+    color: rgba(0, 0, 0, 0.1);
+    transform: rotate(-30deg);
+    z-index: -1;
+    pointer-events: none;
+    white-space: nowrap;
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_farmer_location_crop_form_inherit_bom" model="ir.ui.view">
+        <field name="name">Crop Form View Bom</field>
+        <field name="model">farmer.location.crops</field>
+        <field name="inherit_id" ref="odoo_agriculture.view_farmer_location_crop_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="is_create_bom" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='location_id']" position="after">
+                <field name='custom_bom_id'/>
+                <!-- <field name='routing_id'/> -->
+                <field name='manufacturing_quantity'/>
+                <field name='manufacturing_uom_id'/>
+            </xpath>
+            <xpath expr="//button[@name='action_create_product']" position="after">
+                     <!-- <button name="action_create_bom" type="object" string="Create Bills of Material" class="btn-primary"  attrs="{'invisible':[('is_create_bom', '=', True)]}" confirm="Are you sure you want to create a Bills of Material?"/> -->
+                <button name="action_create_bom" type="object" string="Create Bills of Material" class="btn-primary" invisible="is_create_bom" confirm="Are you sure you want to create a Bills of Material?"/>
+            </xpath>
+            <xpath expr="//button[@name='view_product_temp_request']" position="before">
+                    <!-- <button name="view_bom_request" string="Bills of Material" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible':[('is_create_bom', '!=', True)]}"/> -->
+                    <button name="view_bom_request" string="Bills of Material" type="object" class="oe_stat_button" icon="fa-pencil-square-o" invisible="not is_create_bom"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

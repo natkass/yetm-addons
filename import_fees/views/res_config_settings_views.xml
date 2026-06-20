@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.stock.landed.costs</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock_account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <block name="valuation_setting_container" position="inside">
+                <div class="content-group">
+                    <div class="row mt16">
+                        <div class="col-12">
+                            <i>Enable/Disable Custom Duties/Tariffs in Harmonized System Code forms</i>
+                        </div>
+                    </div>
+                    <div class="o_setting_box">
+                        <field name="com_visible"/>
+                        <label for="com_visible"/>
+                    </div>
+                    <div class="o_setting_box">
+                        <field name="exm_visible"/>
+                        <label for="exm_visible"/>
+                    </div>
+                    <div class="o_setting_box">
+                        <field name="cid_visible"/>
+                        <label for="cid_visible"/>
+                    </div>
+                    <div class="o_setting_box">
+                        <field name="surcharge_visible"/>
+                        <label for="surcharge_visible"/>
+                    </div>
+                    <div class="o_setting_box">
+                        <field name="pal_visible"/>
+                        <label for="pal_visible"/>
+                    </div>
+                    <div class="o_setting_box">
+                        <field name="eic_visible"/>
+                        <label for="eic_visible"/>
+                    </div>
+                    <div class="o_setting_box">
+                        <field name="cess_levy_visible"/>
+                        <label for="cess_levy_visible"/>
+                    </div>
+                    <div class="o_setting_box">
+                        <field name="excise_duty_visible"/>
+                        <label for="excise_duty_visible"/>
+                    </div>
+                    <div class="o_setting_box">
+                        <field name="ridl_visible"/>
+                        <label for="ridl_visible"/>
+                    </div>
+                    <div class="o_setting_box">
+                        <field name="srl_visible"/>
+                        <label for="srl_visible"/>
+                    </div>
+                    <div class="o_setting_box">
+                        <field name="sscl_visible"/>
+                        <label for="sscl_visible"/>
+                    </div>
+                    <div class="o_setting_box">
+                        <field name="vat_visible"/>
+                        <label for="vat_visible"/>
+                    </div>
+                    <div class="row mt16">
+                        <div class="col-12">
+                            <i>Enable/Disable Bill Generation</i>
+                        </div>
+                    </div>
+                    <div class="o_setting_box">
+                        <field name="customs_bill_visible"/>
+                        <label for="customs_bill_visible"/>
+                    </div>
+                    <div class="o_setting_box">
+                        <field name="shipping_bill_visible"/>
+                        <label for="shipping_bill_visible"/>
+                    </div>
+                    <div class="o_setting_box">
+                        <field name="add_10pc_cif"/>
+                        <label for="add_10pc_cif"/>
+                    </div>
+                </div>
+            </block>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="job_costing_form_view_inherit" model="ir.ui.view">
+            <field name="name">Job Costing Form View Inherit</field>
+            <field name="model">job.costing</field>
+            <field name="inherit_id" ref="odoo_job_costing_management.job_costing_form_view"/>
+            <field name="arch" type="xml">
+               <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="cropping_request_id"/>
+                </xpath>
+           </field>
+        </record>
+    </data>
+</odoo>

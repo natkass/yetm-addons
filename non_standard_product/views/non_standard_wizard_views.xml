@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Wizard Form -->
+    <record id="view_non_standard_wizard_form" model="ir.ui.view">
+        <field name="name">non.standard.wizard.form</field>
+        <field name="model">non.standard.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Non-Standard Product Configurator">
+                <sheet>
+                    <group>
+                        <group class="o_horizontal_fields">
+                                <field name="length" required="1" class="o_input_box"/>
+                                <field name="width" required="1" class="o_input_box"/>
+                                <field name="height" required="1" class="o_input_box"/>
+                        </group>
+
+                        <group class="o_horizontal_fields">
+                                <field name="shape_id" class="o_input_box" options="{'no_create': True, 'no_open': True}" required="1"/>
+                                <field name="has_packrise" string="Packrise"/>
+                                <field name="packrise" class="o_input_box" nolabel="1" invisible= "has_packrise == False " required="has_packrise == True"/>
+                        </group>
+                    </group>
+                    
+                        <!-- Left Group: Inputs and selections -->
+                    <group>  
+                        
+                            <group  class="o_horizontal_fields">
+                                <field name="foam_type_id" class="o_input_box" options="{'no_create': True, 'no_open': True}" required="1"/>
+                                <field name="foam_value_id" class="o_input_box" options="{'no_create': True, 'no_open': True}" required="1"/>
+                            </group>
+                        
+                            <group class="o_horizontal_fields">
+                                <field name="foam_unit_price" class="o_display_box" readonly="1"/>
+                                <field name="foam_total_price" class="o_display_box" readonly="1"/>
+                            </group>
+                            
+                        
+                    </group>
+                    
+                    <group>  
+                        
+                            <group class="o_horizontal_fields">
+                                <field name="has_fabric" class="o_no_label_space"/>
+                                <field name="fabric_type_id" class="o_input_box" nolabel="1" invisible= "has_fabric == False" required= "has_fabric != False" options="{'no_create': True, 'no_open': True}"/>
+                                
+                            </group>
+                        
+                            <group class="o_horizontal_fields" invisible= "has_fabric == False">
+                                <field name="fabric_size" class="o_display_box"/>
+                                <field name="fabric_unit_price" class="o_display_box" readonly="1"/>
+                                <field name="fabric_total_price" class="o_display_box" readonly="1"/>
+                            </group>
+                            
+                        
+                    </group>
+                    <group>  
+                        
+                            <group class="o_horizontal_fields" invisible= "has_fabric == False">                               
+                                <field name="has_fabric_value" class="o_no_label_space" invisible= "1"/>
+                                <field name="fabric_value_id" class="o_input_box" nolabel="1" required= "has_fabric != False" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="has_corner"/>
+                            </group>
+                        
+                            <group class="o_horizontal_fields"  invisible= "has_fabric == False">
+                                <field name="fabric_value_size" class="o_display_box"/>
+                                <field name="fabric_value_unit_price" class="o_display_box" readonly="1"/>
+                                <field name="fabric_value_total_price" class="o_display_box" readonly="1"/>
+                            </group>
+                            
+                        
+                    </group>
+
+                    <group>  
+                        
+                            <group class="o_horizontal_fields">
+                                <field name="has_seal" class="o_no_label_space"/>
+                                <field name="seal_type_id" class="o_input_box" nolabel="1" invisible= "has_seal == False" required= "has_seal != False" options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+                        
+                            <group class="o_horizontal_fields"  invisible= "has_seal == False">
+                                <field name="seal_size" class="o_display_box"/>
+                                <field name="seal_unit_price" class="o_display_box" readonly="1"/>
+                                <field name="seal_total_price" class="o_display_box" readonly="1"/>
+                            </group>
+                            
+                        
+                    </group>
+
+                    <group>  
+                        
+                            <group class="o_horizontal_fields">
+                                <field name="has_glue" class="o_no_label_space"/>
+                                <field name="glue_type_id" class="o_input_box" nolabel="1" invisible= "has_glue == False" required= "has_glue != False" options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+                        
+                            <group class="o_horizontal_fields" invisible= "has_glue == False">
+                                <field name="glue_qty" class="o_display_box"/>
+                                <field name="glue_unit_price" class="o_display_box" readonly="1"/>
+                                <field name="glue_total_price" class="o_display_box" readonly="1"/>
+                            </group>
+                            
+                        
+                    </group>
+
+                    <group>  
+                        
+                            <group class="o_horizontal_fields">
+                                <field name="has_tape" class="o_no_label_space"/>
+                                <field name="tape_type_id" class="o_input_box"  nolabel="1" invisible= "has_tape == False" required= "has_tape != False" options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+                        
+                            <group class="o_horizontal_fields"  invisible= "has_tape == False">
+                                <field name="tape_qty" class="o_display_box"/>
+                                <field name="tape_unit_price" class="o_display_box" readonly="1"/>
+                                <field name="tape_total_price" class="o_display_box" readonly="1"/>
+                            </group>
+                            
+                        
+                    </group>
+                    
+                    <group class="o_horizontal_fields">
+                        
+                            <field name="description" readonly="1" class="o_display_summary"/>
+                            <field name="subtotal" readonly="1" class="o_display_summary"/>
+                        
+                    </group>
+
+                </sheet>
+                <footer>
+                    <button name="action_add_to_order" type="object" string="Add to Order" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    <button name="action_clear" type="object" string="Clear" class="btn-secondary ms-auto"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_non_standard_wizard" model="ir.actions.act_window">
+        <field name="name">Non-Standard Configurator</field>
+        <field name="res_model">non.standard.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_farmer_location_crop_form_inherit" model="ir.ui.view">
+            <field name="name">View Farmer Cropping Request Form Inherit</field>
+            <field name="model">farmer.location.crops</field>
+            <field name="inherit_id" ref="odoo_agriculture.view_farmer_location_crop_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='crop_material_ids']/tree/field[@name='internal_type']" position="before">
+                    <field name="job_type_id"/>
+                </xpath>
+                <xpath expr="//field[@name='crop_material_ids']/form/sheet/group/group/field[@name='internal_type']" position="after">
+                    <field name="job_type_id"/>
+                </xpath>
+                <xpath expr="//field[@name='crop_labour_ids']/tree/field[@name='internal_type']" position="before">
+                    <field name="job_type_id"/>
+                </xpath>
+                <xpath expr="//field[@name='crop_labour_ids']/form/sheet/group/group/field[@name='internal_type']" position="after">
+                    <field name="job_type_id"/>
+                </xpath>
+                <xpath expr="//field[@name='crop_overhead_ids']/tree/field[@name='internal_type']" position="before">
+                    <field name="job_type_id"/>
+                </xpath>
+                <xpath expr="//field[@name='crop_overhead_ids']/form/sheet/group/group/field[@name='internal_type']" position="after">
+                    <field name="job_type_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

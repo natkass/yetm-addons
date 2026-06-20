@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+     <menuitem 
+         id="menu_purchase_requisition" 
+         name="Material Requisition" 
+         sequence='8' 
+         parent="odoo_agriculture.agricultural_management_topmenu"/>
+
+    <menuitem 
+        id="menu_action_purchase_requisition" 
+        name="Material Requisitions" 
+        parent="menu_purchase_requisition" 
+        action="action_material_purchase_requisitions"/>
+
+</odoo>
+

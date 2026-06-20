@@ -1,0 +1,109 @@
+<odoo>
+<template id="print_crv_document">
+<t t-call="web.basic_layout" style="position: relative;">
+<div class="row" t-attf-style="#{o.crv_format.font_css}">
+<div t-attf-style="#{o.crv_format.date_css};position: absolute;">
+<span t-esc="o.date"/>
+</div>
+</div>
+<div class="row" t-attf-style="#{o.crv_format.font_css}">
+<div t-attf-style="#{o.crv_format.name_css};position: absolute;">
+<span t-esc="o.partner_id.name"/>
+</div>
+</div>
+<div class="row" t-attf-style="#{o.crv_format.font_css}">
+<div t-attf-style="#{o.crv_format.tin_css};position: absolute;">
+<span t-esc="o.partner_id.vat"/>
+</div>
+</div>
+<div class="row" t-attf-style="#{o.crv_format.font_css}">
+<div t-attf-style="#{o.crv_format.reason_css};position: absolute;">
+<strong>Reason For Collection: </strong>
+<span t-esc="o.ref"/>
+</div>
+</div>
+<div class="row" t-attf-style="#{o.crv_format.font_css}">
+<div t-attf-style="#{o.crv_format.amount_digit_css};position: absolute;">
+<strong>Amount In Digit: </strong>
+<t t-esc="o.x_studio_total_amount" />
+</div>
+</div>
+<div class="row" t-attf-style="#{o.crv_format.font_css}">
+<div t-attf-style="#{o.crv_format.amount_total_amount_css};position: absolute;">
+<strong>Amount: </strong>
+<t t-esc="o.amount" />
+</div>
+</div>
+<div class="row" t-attf-style="#{o.crv_format.font_css}">
+<div t-attf-style="#{o.crv_format.amount_vat_css};position: absolute;">
+<strong>VAT Voucher: </strong>
+<t t-esc="o.x_studio_vat" />
+</div>
+</div>
+<div class="row" t-attf-style="#{o.crv_format.font_css}">
+<t t-set="currency" t-value="o.company_id.currency_id"/>
+<div t-attf-style="#{o.crv_format.amount_word_css};position: absolute;">
+<strong>Amount in word: </strong>
+<span t-esc="o.number_to_words"/>
+</div>
+</div><div class="row" t-attf-style="#{o.crv_format.font_css}">
+<t t-set="currency" t-value="o.company_id.currency_id"/>
+<div t-attf-style="#{o.crv_format.whtamount_css};position: absolute;">
+<strong>WHT: </strong>
+<span t-esc="o.tds_amt"/>
+</div>
+</div>
+<div class="row" t-attf-style="#{o.crv_format.font_css}">
+<div t-attf-style="#{o.crv_format.payment_mode_css};position: absolute;">
+<strong>Mode of Payment: </strong>
+<span t-esc="o.payment_method_code"/>
+</div>
+</div>
+<div class="row" t-attf-style="#{o.crv_format.font_css}">
+<div t-attf-style="#{o.crv_format.document_css};position: absolute;">
+<strong> Document Reference: </strong>
+<span t-esc="o.name"/>
+</div>
+</div>
+<div class="row" t-attf-style="#{o.crv_format.font_css}">
+<div t-attf-style="#{o.crv_format.user_css};position: absolute;">
+<strong>Cashier Name: </strong>
+<span t-esc="env.user.name"/>
+<strong style="width: 100px;"> Signature:___________________________________ </strong>
+</div>
+</div>
+</t>
+</template>
+<template id="report_print_crv">
+<t t-call="web.html_container">
+<t t-foreach="docs" t-as="o">
+<t t-call="crv_print.print_crv_document" t-lang="o.partner_id.lang"/>
+</t>
+</t>
+</template>
+<record id="paperformat_print_crv" model="report.paperformat">
+<field name="name">CRV Layout</field>
+<field name="default" eval="False"/>
+<field name="format">A4</field>
+<field name="page_height">0</field>
+<field name="page_width">0</field>
+<field name="orientation">Portrait</field>
+<field name="margin_top">10</field>
+<field name="margin_bottom">32</field>
+<field name="margin_left">0</field>
+<field name="margin_right">0</field>
+<field name="header_line" eval="False"/>
+<field name="header_spacing">0</field>
+<field name="dpi">90</field>
+</record>
+<record id="action_report_print_crv" model="ir.actions.report">
+<field name="name">CRV Print</field>
+<field name="model">account.payment</field>
+<field name="report_type">qweb-pdf</field>
+<field name="report_name">crv_print.report_print_crv</field>
+<field name="report_file">crv_print.report_print_crv</field>
+<field name="paperformat_id" ref="crv_print.paperformat_print_crv"/>
+<field name="binding_model_id" ref="model_account_payment"/>
+<field name="binding_type">report</field>
+</record>
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2010-2020 Akretion (http://www.akretion.com/)
+  @author Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <!-- Product category form view -->
+    <record id="product_category_form_view" model="ir.ui.view">
+        <field name="name">import_fees.product.category.form</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='first']" position="after">
+                <group name="import_fees" string="Customs Info">
+                    <field name="allowed_harmonized_code_ids" invisible="True" />
+                    <field name="harmonized_code_id" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

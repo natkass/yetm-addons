@@ -1,0 +1,9 @@
+<odoo>
+
+  <menuitem 
+        id="menu_hr_plus_root" 
+        name="HR Plus" 
+        sequence="10"
+        web_icon= "hr_plus,static\description\icon.png"/>
+  
+</odoo>

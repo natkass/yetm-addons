@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- POS Z Report Tree View -->
+    <record id="view_pos_zreport_tree" model="ir.ui.view">
+        <field name="name">pos.zreport.tree</field>
+        <field name="model">pos.zreport</field>
+        <field name="arch" type="xml">
+            <tree create="false" duplicate="false">
+                <field name="zNumber"/>
+                <field name="salesTotal"/>
+                <field name="taxTotal"/>
+                <field name="date"/>
+                <field name="device_id"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- POS Z Report Form View -->
+    <record id="view_pos_zreport_form" model="ir.ui.view">
+        <field name="name">pos.zreport.form</field>
+        <field name="model">pos.zreport</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false" duplicate="false">
+                <sheet>
+                    <group>
+                        <group string="General">
+                            <field name="zNumber"/>
+                            <field name="date"/>
+                            <field name="time"/>
+                            <field name="device_id"/>
+                            <field name="lastReceiptDate"/>
+                            <field name="lastReceiptTime"/>
+                        </group>
+                        <group string="Financials">
+                            <field name="salesTotal"/>
+                            <field name="taxTotal"/>
+                            <field name="txblTotal"/>
+                            <field name="rfdSalesTotal"/>
+                            <field name="rfdTaxTotal"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Tax Details">
+                            <group>
+                                <field name="txbl1"/>
+                                <field name="tax1"/>
+                                <field name="tax1Val"/>
+                                <field name="txbl2"/>
+                                <field name="tax2"/>
+                                <field name="tax2Val"/>
+                                <field name="txbl3"/>
+                                <field name="tax3"/>
+                                <field name="tax3Val"/>
+                                <field name="notxbl"/>
+                            </group>
+                        </page>
+                        <page string="Refund Tax Details">
+                            <group>
+                                <field name="rfdTxbl1"/>
+                                <field name="rfdTax1"/>
+                                <field name="rfdTxbl2"/>
+                                <field name="rfdTax2"/>
+                                <field name="rfdTxbl3"/>
+                                <field name="rfdTax3"/>
+                                <field name="rfdNotxbl"/>
+                            </group>
+                        </page>
+                        <page string="Counts and Status">
+                            <group>
+                                <field name="accumulatedFs"/>
+                                <field name="sessionFSCount"/>
+                                <field name="accumulatedRfd"/>
+                                <field name="sessionRfdCount"/>
+                                <field name="lastFsNo"/>
+                                <field name="savedOnERCAFtp"/>
+                                <field name="isPrinted"/>
+                                <field name="toBePrint"/>
+                                <field name="ejPath"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- POS Z Report Action -->
+    <record id="action_pos_zreport" model="ir.actions.act_window">
+        <field name="name">Z Reports</field>
+        <field name="res_model">pos.zreport</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+    </record>
+</odoo>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_crops_insects_form" model="ir.ui.view">
+            <field name="name">Crops Insects View</field>
+            <field name="model">farmer.cropping.insects</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='insect_scout_id'/>
+                                <field name='insect_id'/>
+                                <field name='description'/>
+                                <!-- <field name='name'/> -->
+                                <field name='causing_damage'/>
+                                <field name='insect_col_1'/>
+                                <field name='insect_col_2'/>
+                                <field name='insect_col_3'/>
+                            </group>
+                            <group>
+                               <field name='insect_col_4'/>
+                               <field name='insect_col_5'/>
+                               <field name='no_of_area_scouted' readonly='1'/> 
+                               <field name='total'/>
+                               <field name='percentage'/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+                       
+        <record id="view_crops_insects_tree" model="ir.ui.view">
+                <field name="name">Crops Insects Tree View</field>
+                <field name="model">farmer.cropping.insects</field>
+                <field name="arch" type="xml">
+                    <tree>
+                        <field name='insect_scout_id' invisible="1"/>
+                        <field name='insect_id'/>
+                        <field name='description'/>
+                        <!-- <field name='name'/> -->
+                        <field name='causing_damage'/>
+                        <field name='no_of_area_scouted' readonly='1'/> 
+                        <field name='total'/>
+                        <field name='percentage'/>
+                    </tree>
+                </field>
+        </record>
+
+        <record id="view_crops_insects_search" model="ir.ui.view">
+                <field name="name">Crops Insects Search View</field>
+                <field name="model">farmer.cropping.insects</field>
+                <field name="arch" type="xml">
+                    <search>
+                        <field name='insect_scout_id' invisible="1"/>
+                        <field name='insect_id'/>
+                        <field name='description'/>
+                        <!-- <field name='name'/> -->
+                        <field name='causing_damage'/>
+                        <field name='no_of_area_scouted' readonly='1'/> 
+                        <field name='total'/>
+                        <field name='percentage'/>
+                    </search>
+                </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_crops_insects">
+            <field name="name">Crop Insects</field>
+            <field name="res_model">farmer.cropping.insects</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+    </data>
+</odoo>
+
+

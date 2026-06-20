@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="menu_pos_fiscal_root"
+              name="Electronic Journal"
+              parent="point_of_sale.menu_point_root"
+              sequence="110"/>
+
+    <menuitem id="menu_pos_fiscal_devices"
+              name="Fiscal Printers"
+              action="action_pos_device"
+              parent="menu_pos_fiscal_root"
+              sequence="10"/>
+
+    <menuitem id="menu_pos_fiscal_invoices"
+              name="Sales"
+              action="action_pos_invoice"
+              parent="menu_pos_fiscal_root"
+              sequence="20"/>
+
+    <menuitem id="menu_pos_fiscal_refunds"
+              name="Refunds"
+              action="action_pos_refund"
+              parent="menu_pos_fiscal_root"
+              sequence="30"/>
+
+    <menuitem id="menu_pos_fiscal_zreport"
+              name="Z Report"
+              action="action_pos_zreport"
+              parent="menu_pos_fiscal_root"
+              sequence="40"/>
+
+    <menuitem id="menu_pos_fs_check"
+              name="Run FS Check"
+              parent="menu_pos_fiscal_root"
+              action="action_pos_fs_check_wizard"
+              sequence="50"/>
+
+    <menuitem id="menu_pos_fs_check_enhanced"
+              name="Reconciliation Center"
+              parent="menu_pos_fiscal_root"
+              action="action_pos_fs_check_wizard_enhanced"
+              sequence="60"/>
+
+    <menuitem id="menu_pos_daily_report"
+              name="Daily Reports"
+              action="action_pos_daily_report"
+              parent="menu_pos_fiscal_root"
+              sequence="70"/>
+
+    <menuitem id="menu_pos_change_log"
+              name="Change Logs"
+              action="action_pos_change_log"
+              parent="menu_pos_fiscal_root"
+              sequence="80"/>
+
+    <!-- Configuration Menu - Now opens Global Settings -->
+    <menuitem id="menu_pos_fiscal_config"
+              name="Configuration"
+              parent="menu_pos_fiscal_root"
+              action="action_pos_fiscal_config_settings"
+              sequence="100"/>
+</odoo>

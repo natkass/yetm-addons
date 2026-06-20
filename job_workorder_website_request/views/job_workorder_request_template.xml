@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+         <template id="job_workorder" name="Job work order Generate" customize_show="True">
+           <t t-call="website.layout">
+            <form action="/job_order/workorder_submitted" method="post" class="form-horizontal mt32" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <!-- <h2 class="text-center">Please fill up below form to Create Work Order</h2> -->
+                <h2 class="text-center">Create work order request by filling below form and submit it</h2>
+                <br/>
+                <group>
+                <!-- <div class="container mb64"> -->
+                <div class="container mt-2" align="center">
+                <!-- <div class="row"> -->
+                <!-- <div class="col-lg-8"> -->
+                    <!-- <div t-attf-class="mb-0 py-2 form-group #{error and 'your_name' in error and 'has-error' or ''}"> -->
+                    <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                        <label class="col-lg-3 col-md-4 col-form-label" for="customer_id">Customer</label>
+                        <div class="col-lg-7 col-md-8">
+                            <t t-if="request.env.user and request.env.user.partner_id.name == 'Public user'">
+                                <input type="text" class="form-control" name="your_name" required="True"/>
+                            </t>
+                            <t t-if="request.env.user and request.env.user.partner_id.name != 'Public user'">
+                                <input class="form-control" id="your_name" name="your_name" type="text" title="Your Name" t-att-value="request.env.user.partner_id.name"/>
+                            </t>
+                        </div>
+                    </div>
+                    <!-- <div t-attf-class="mb-0 py-2 form-group #{error and 'email' in error and 'has-error' or ''}"> -->
+                    <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                        <label class="col-lg-3 col-md-4 col-form-label" for="email">Your Email</label>
+                        <div class="col-lg-7 col-md-8">
+                            <t t-if="request.env.user and request.env.user.partner_id.name == 'Public user'">
+                                <input type="text" class="form-control" name="email" required="True"/>
+                            </t>
+                            <t t-if="request.env.user and request.env.user.partner_id.name != 'Public user'">
+                                <input class="form-control" id="email" name="email" type="text" title="Email" t-att-value="request.env.user.partner_id.email"/>
+                            </t>
+                        </div>
+                    </div>
+                    <!-- <div t-attf-class="mb-0 py-2 form-group #{error and 'phone' in error and 'has-error' or ''}"> -->
+                    <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                        <label class="col-lg-3 col-md-4 col-form-label" for="phone">Your Phone</label>
+                        <div class="col-lg-7 col-md-8">
+                            <t t-if="request.env.user and request.env.user.partner_id.name == 'Public user'">
+                                <input type="text" class="form-control" name="phone" required="True"/>
+                            </t>
+                            <t t-if="request.env.user and request.env.user.partner_id.name != 'Public user'"> 
+                                <input class="form-control" id="phone" name="phone" type="text" title="Phone" t-att-value="request.env.user.partner_id.phone"/>
+                            </t>
+                        </div>
+                    </div>
+                    <!-- <div t-attf-class="mb-0 py-2 form-group #{error and 'name' in error and 'has-error' or ''}"> -->
+                    <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                        <label class="col-lg-3 col-md-4 col-form-label" for="name">Subject</label>
+                        <div class="col-lg-7 col-md-8">
+                            <input type="text" class="form-control" name="name" required="True"/>
+                        </div>
+                    </div>
+                    
+                    <!-- <div t-attf-class="mb-0 py-2 form-group #{error and 'project_code' in error and 'has-error' or ''}"> -->
+                    <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                        <label class="col-lg-3 col-md-4 col-form-label" for="project_code">Project Code</label>
+                        <div class="col-lg-7 col-md-8">
+                            <input type="text" class="form-control" name="project_code" required="True"/>
+                        </div>
+                    </div>
+                    
+                    <!-- <div t-attf-class="mb-0 py-2 form-group #{error and 'description' in error and 'has-error' or ''}"> -->
+                    <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                        <label class="col-lg-3 col-md-4 col-form-label" for="description">Description</label>
+                        <div class="col-lg-7 col-md-8">
+                             <textarea class="form-control" cols="60" name="description" required="True" rows="6"></textarea> 
+                        </div>
+                    </div>
+                    <!-- <div t-attf-class="mb-0 py-2 form-group #{error and 'priority' in error and 'has-error' or ''}"> -->
+                    <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                        <label class="col-lg-3 col-md-4 col-form-label" for="priority">Priority</label>
+                        <div class="col-lg-7 col-md-8">
+                            <select class="form-control" name="priority">
+                                <option value="0" selected="selected">Normal</option>
+                                <option value="1">High</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <div t-attf-class="mb-0 py-2 form-group #{error and 'job_category' in error and 'has-error' or ''}"> -->
+                    <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                        <label class="col-lg-3 col-md-4 col-form-label" for="job_category">Job Order Category</label>
+                        <div class="col-lg-7 col-md-8">
+                            <select class="form-control" required="required" id="job_category" name="job_category">
+                                <option>Select category</option>
+                                <option value="new_request" >New Request</option>
+                                <option value="maintenance">Maintenance</option>
+                                <option value="repair">Repair</option>
+                                <option value="technical">Technical</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <div t-attf-class="mb-0 py-2 form-group"> -->
+                    <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                        <label class="col-lg-3 col-md-4 col-form-label" for="Attachments" >Attach Files</label>
+                        <div class="col-lg-7 col-md-8">
+                            <input type="file" class="form-control o_website_form_input" name="attachment" multiple='multiple'/>
+                        </div>
+                        <label class="col-lg-3 col-md-4 col-form-label"/>
+                        <div class="col-lg-7 col-md-8">
+                            <label class="pull-left" style="color:grey; font-size:12px;">Multiple files can be attach</label>
+                        </div>
+                    </div>
+                    <!--<div class="mb-0 py-2 form-group">
+                        <div class="col-md-offset-8 col-sm-offset-4 col-sm-2 col-md-1">
+                            <button class="btn btn-success">Submit</button>
+                        </div>
+                        <div class="col-md-offset-0 col-sm-offset-2 col-sm-2 col-md-2">
+                            <a t-attf-href="/my/home" class="btn btn-danger">
+                                Cancel
+                            </a>
+                        </div>
+                    </div>-->
+                    <!-- <div class="mb-0 py-2 form-group">  -->
+                    <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                        <label class="col-lg-3 col-md-4 col-form-label"/>
+                        <!-- <div class="col-sm-offset-5 col-sm-7 pull-right"> -->
+                        <div class="col-lg-7 col-md-8">
+                          <!-- <button type="submit" class="btn btn-success">Submit</button> -->
+                          <button type="submit" class="btn btn-primary btn-md-8 s_website_form_send">Submit</button>
+                          
+                        
+                            <!-- <a t-attf-href="/my/home" class="btn btn-danger">
+                                Cancel
+                            </a> -->
+                        </div>
+                    <!-- </div> -->
+                    <!-- </div> -->
+                    </div>
+                </div>
+                </group>
+            </form>
+          </t>
+        </template>
+
+        <template id="thanks_mail_send" name="Thanks">
+            <t t-call="website.layout">
+              <div id="wrap">
+                <div class="oe_structure" id="oe_structure_website_form_contact_us_thanks_1"/>
+                <div class="container mt-4">
+                    <div class="row">
+                        <div class="col-lg-7 col-xl-6 mr-lg-auto oe_structure">
+                            <section class="pt40 s_text_block pb40 o_colored_level o_cc o_cc1" data-snippet="s_text_block" data-name="Text">
+                                <div class="container">
+                                    <span class="d-block fa fa-4x fa-thumbs-up mx-auto rounded-circle bg-primary"/><br/>
+                                    <h1 class="text-center">Thank You!</h1>
+                                    <div class="pb16 pt16 s_hr" data-snippet="s_hr" data-name="Separator">
+                                        <hr class="mx-auto border-top w-50 border-dark text-center"/>
+                                    </div>
+                                    <h5 class="text-center">
+                                        <span class="fa fa-check-circle"/>
+                                        <span>We have received your job order request.</span>
+                                    </h5>
+                                    <p class="text-center">Your Job Order reference is
+                                        <t t-esc="order.job_number"/>.
+                                        please note it for further communication and you will also receive email from our
+                                        support team shortly, Please reply to that email for feature conversation. Project Team.
+                                    </p>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </t>
+        </template>
+        
+        <!-- <template id="thanks_mail_send" name="Thanks">
+        <t t-call="website.layout">
+          <div id="wrap">
+            <div class="oe_structure"/>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="alert alert-success">
+                                 <button type="button" class="close" data-dismiss="alert">&amp;times;</button>
+                                 <h5>Dear,
+                                    <t t-esc="order.job_partner_id.name"/>
+                                    <br/>
+                                    We have received your job order request. 
+                                    <br/>
+                                    Your Job Order reference is <t t-esc="order.job_number"/> for further communication.
+                                    <br/>
+                                    Thank You,
+                                    <br/>
+                                    Project Team.
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="oe_structure"/>
+
+            <div class="text-center my-3">
+                <a role="button" t-attf-class="btn btn-primary" href="/">Back to Home</a>
+            </div>
+          </div>
+        </t>
+      </template> -->
+      
+   <template id="my_customer_job_order" name="my job_orders: project menu entry" inherit_id="portal.portal_breadcrumbs" priority="28">
+       <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'portal_joborder' or portal_joborder" t-attf-class="breadcrumb-item">
+                <a t-if="portal_joborder" t-attf-href="/my/joborders?{{ keep_query() }}">Job Orders</a>
+                <t t-else="">Job Orders</t>
+            </li>
+            <li  t-if="portal_joborder" class="breadcrumb-item active">
+                <t t-esc="portal_joborder.name"/>
+            </li>
+        </xpath>
+    </template>
+        
+    <template id="portal_job_order" name="portal_joborder: joborder menu entry"
+        inherit_id="portal.portal_my_home" priority="30">
+        <!--<xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <li t-if="joborder_count" class="list-group-item">
+                <span class="badge" t-esc="joborder_count"/>
+                <a href="/my/joborders">Job Order</a>
+            </li>
+        </xpath>-->
+        
+        <!-- <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-if="joborder_count" t-call="portal.portal_docs_entry">
+                <t t-set="title">Job Order</t>
+                <t t-set="url" t-value="'/my/custom_joborders'"/>
+                <t t-set="count" t-value="joborder_count"/>
+            </t>
+        </xpath> -->
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <!-- <t t-set="title">Job Order</t> -->
+                <t t-set="title">Job/Work Orders</t>
+                <t t-set="url" t-value="'/my/custom_joborders'"/>
+                <t t-set="placeholder_count" t-value="'joborder_count'"/>
+            </t>
+        </xpath>
+    </template>
+     
+     <template id="my_portal_job_order" name="Portal Job Order">
+        <t t-call="portal.portal_layout"> 
+            <!--<div class="row" t-if="job_orders">
+                <div class="mb-0 py-2 form-group">
+                    <div class="col-sm-6">
+                        <input type="text" id="myInput"  class="myInput" placeholder="Search for names.." title="Type in a name"/>
+                    </div>
+                </div>  
+            </div>-->
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Your Job Orders</t>
+            </t>
+                <div class="row">
+            </div>
+            <div class="panel panel-default">
+                <t t-if="not job_orders">
+                    <div class="alert alert-warning mt8" role="alert">
+                        There is no job orders found.
+                    </div>
+                </t>
+                <table id="joborder_table" t-if="job_orders" class="table table-hover status_table">
+                    <thead>
+                        <!-- <tr class="active"> -->
+                        <tr>
+                            <!-- <th class="col-md-8">Name</th> -->
+                            <!-- <th class="col-md-4">Name</th>
+                            <th class="col-md-4"></th>
+                            <th class="col-md-4"></th> -->
+                            <th>Number</th>
+                            <th>Name</th>
+                            <th>Job Order Category</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="job_orders" t-as="job_order">
+                            <tr>
+                                <td>
+                                    <span t-field="job_order.job_number"/>
+                                </td>
+                                <td>
+                                    <span t-field="job_order.name"/>
+                                </td>
+                                <td>
+                                    <span t-field="job_order.job_category"/>
+                                </td>
+                                <td>
+                                   <!-- <a t-att-href="'/report/pdf/job_workorder_website_request.joborder_report_id/'+str(job_order.id)" t-att-title="job_order.name" class="btn btn-xs btn-primary"><i class="fa fa-print"/> Print Job</a>-->
+                                    <a class="btn btn-xs btn-primary" target="_blank" t-attf-href="/my/custom_joborder/#{job_order.id}"><i class="fa fa-print"/>Print Job</a> 
+                                </td>
+                                <td>
+                                    <!-- <a class="btn btn-xs btn-primary" target="_blank" t-attf-href="/my/task/#{job_order.id}"><i class="fa fa-tasks"/>View Job Order</a> -->
+                                    <a class="btn btn-xs btn-primary" target="_blank" t-attf-href="/my/tasks/{{ job_order.id }}"> <i class="fa fa-tasks"/>View Job Order</a>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <div t-if="pager" class="o_portal_pager text-center">
+                <t t-call="website.pager"/>
+            </div>
+        </t>
+    </template>
+    
+    <!--    <record id="job_workorder_website_menu" model="website.menu">
+          <field name="name">Job Workorder</field>
+          <field name="parent_id" ref="website.main_menu"/>
+          <field name="url">/page/job_workorder</field>
+          <field name="sequence" type="int">59</field>
+        </record>-->
+        
+       <!-- <record id="job_workorder_website_menu" model="website.menu">
+            <field name="name">Job Workorder</field>
+            <field name="url">/job_workorder</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">59</field>
+        </record>-->
+       
+        <!--<record id="job_workorder_request_page" model="website.page">
+            <field name="url">/job_workorder</field>
+            <field name="website_published">True</field>
+            <field name="view_id" ref="job_workorder" />
+        </record>
+            -->    
+        <record id="job_workorder_create_menu" model="website.menu">
+          <field name="name">Create Workorder</field>
+          <field name="url">/page/custom_job_workorder</field>
+          <field name="parent_id" ref="website.main_menu" />
+          <field name="sequence" type="int">20</field>
+        </record>
+
+        <record id="job_workorder_list_view" model="website.menu">
+          <field name="name">My Job/Work Orders</field>
+          <field name="url">/my/custom_joborders</field>
+          <field name="parent_id" ref="website.main_menu" />
+          <field name="sequence" type="int">22</field>
+        </record>
+    </data>
+</odoo>

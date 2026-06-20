@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+    
+        <record id="edit_project_inherit_code" model="ir.ui.view">
+            <field name="name">Project form</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr = "//field[@name='partner_id']" position="after">
+                    <field name="custom_code"/>
+                </xpath>
+            </field>
+          </record>
+          
+    </data>
+ </odoo>
+ 

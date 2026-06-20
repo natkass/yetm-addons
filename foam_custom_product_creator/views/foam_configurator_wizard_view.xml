@@ -1,0 +1,35 @@
+<odoo>
+    <record id="view_foam_configurator_wizard" model="ir.ui.view">
+        <field name="name">foam.configurator.wizard.form</field>
+        <field name="model">foam.configurator.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Foam Configurator">
+                <group>
+                    <field name="length"/>
+                    <field name="width"/>
+                    <field name="height"/>
+                    <field name="shape"/>
+                    <field name="foam_type"/>
+                    <field name="quantity"/>
+                    <field name="fabric"/>
+                    <field name="glue"/>
+                    <field name="seal"/>
+                    <field name="tape_edge"/>
+                    <field name="corner"/>
+                    <field name="packrise"/>
+                </group>
+                <footer>
+                    <button string="Add Product" type="object" name="compute_and_add_product" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="action_foam_configurator_wizard"
+                name="Foam Configurator"
+                res_model="foam.configurator.wizard"
+                view_mode="form"
+                target="new"
+                binding_model="sale.order"/>
+</odoo>

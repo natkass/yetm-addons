@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_sales_request_form" model="ir.ui.view">
+        <field name="name">sales.request.form</field>
+        <field name="model">sales.request</field>
+        <field name="arch" type="xml">
+        <form string="Sales Request" version="17.0">
+            <header>
+                <button name="action_submit" type="object" string="Submit" class="oe_highlight"
+                        groups="sales_target_vs_achievement.group_sales_request_account_manager"
+                        invisible= "state != 'draft'"/>
+                <button name="action_verify" type="object" string="Verify" class="oe_highlight"
+                        groups="sales_target_vs_achievement.group_sales_request_sales_manager"
+                        invisible= "state != 'submitted'"
+                />
+                <button name="action_approve" type="object" string="Approve" class="oe_highlight"
+                        groups="sales_target_vs_achievement.group_sales_request_marketing_manager"
+                        invisible= "state != 'verified'"
+                />
+                <button name="action_mark_ready" type="object" string="Mark Ready" class="oe_highlight"
+                        groups="sales_target_vs_achievement.group_sales_request_dispatcher"
+                        invisible= "state != 'approved'"
+                />
+                <button name="action_done" type="object" string="Done" class="oe_highlight"
+                        groups="sales_target_vs_achievement.group_sales_request_account_manager"
+                        invisible= "state != 'ready'"
+                />
+                <button name="action_cancel" type="object" string="Cancel"
+                        groups="sales_target_vs_achievement.group_sales_request_account_manager"
+                        invisible="state != 'submitted'"
+                />
+
+                <button name="action_create_sale_order"
+                        type="object"
+                        string="Create Sales Order"
+                        class="btn-primary"   
+                        groups="sales_target_vs_achievement.group_franchise_sales"                 
+                        invisible="state != 'ready'"
+                />
+                
+
+                <button name="action_refuse" type="object" string="Refuse"
+                        groups="sales_target_vs_achievement.group_sales_request_marketing_manager"
+                        invisible="state in ['draft','submitted','approved','ready', 'refused', 'done']"/>
+
+                <button name="action_print_pdf"
+                        string="Print"
+                        type="object"
+                        invisible="state in ['drafft']"
+                        class="btn-secondary"/>
+
+                <field name="state" widget="statusbar" statusbar_visible="draft,submitted,verified,approved,ready,done"/>
+                
+            </header>
+
+            <sheet>
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_open_sale_order"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-shopping-cart"                        
+                            invisible= "sale_order_count == 0">
+                            
+                        <field name="sale_order_count" widget="statinfo"
+                            string="Sales Order"/>
+                    </button>
+                </div>
+                <h1><field name="name" readonly="1" /></h1>
+                <group>
+                    <group>
+                    <field name="partner_id" readonly= "state != 'draft'" options="{'no_create': True, 'no_create_edit': True}"/>
+                    <field name="date_request" readonly= "state != 'draft'"/>
+                    <field name="expiration_date" readonly= "state != 'draft'"/>
+                    </group>
+                    <group>
+                    <field name="payment_term_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                    <field name="requested_by" readonly = "1"/>
+                    <field name="next_actor_group" readonly="1"/>
+                    </group>
+                </group>
+
+                <notebook>
+                    <page string="Order Lines">
+                        <field name="line_ids" readonly= "state != 'draft'">
+                            <tree editable="bottom">
+                            
+                            <field name="product_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                            <field name="name"/>
+                            <field name="quantity"/>
+                            <field name="price_unit"/>
+                            <field name="tax_id" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}"/>
+                            <field name="discount"/>
+                            <field name="price_subtotal"/>
+                            </tree>
+                        </field>
+                    </page>
+
+                    <page string="Payment">
+                        <group>
+                            <group>
+                                <button name="action_pay" type="object" string="Verify Payment" class="oe_highlight"
+                                        groups="sales_target_vs_achievement.group_sales_request_marketing_manager"
+                                        invisible="pay_state not in ['waiting']"
+                                />
+                                <button name="action_waiting" type="object" string="Reset" 
+                                        groups="sales_target_vs_achievement.group_sales_request_marketing_manager"
+                                        invisible="pay_state not in ['pay']"
+                                />
+                            </group>
+
+                            <group>
+                                <field name="pay_state" widget="statusbar" statusbar_visible="waiting,pay"/>
+                            </group>
+
+                            <group>
+
+                            </group>
+
+                            
+                        </group>
+                    </page>
+
+                    <page string="Other Info">
+                        <group>
+                            <field name="note" nolabel="0" />
+                            <field name="refusal_reason" invisible= "state != 'refused'"/>
+                            <field name="requested_by" readonly = "1"/>
+                            <field name="verified_by" readonly = "1"/>
+                            <field name="approved_by" readonly = "1"/>
+                        </group>
+                    </page>
+                </notebook>
+
+                <!-- Totals area similar to sale order -->
+                <div class="o_form_bottom_right">
+                    <group>
+                    
+                        <group>
+                        </group>
+
+                        <group>
+                            <group>
+                            </group>
+                            <group>
+                                <field name="amount_untaxed" widget="monetary" string="Untaxed Amount :" options="{'currency_field': 'currency_id'}"/>
+
+                                <field name="discount" widget="monetary" string="Discount Amount :" options="{'currency_field': 'currency_id'}"/>
+                            
+                                <field name="amount_tax" widget="monetary" string="Tax Amount :" options="{'currency_field': 'currency_id'}"/>
+                                
+                                <field name="amount_total" widget="monetary" string="Total :" options="{'currency_field': 'currency_id'}" style="font-weight:bold; font-size:20px;"/>
+                            </group>
+                        </group>
+                    </group>
+                </div>
+            </sheet>
+
+            <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
+            </div>
+
+            
+        </form>
+        </field>
+    </record>
+
+    <!-- Tree view -->
+    <record id="view_sales_request_tree" model="ir.ui.view">
+        <field name="name">sales.request.tree</field>
+        <field name="model">sales.request</field>
+        <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+            <field name="partner_id"/>
+            <field name="requested_by"/>
+            <field name="amount_total"/>
+            
+            
+            <!-- <field name="state"/> -->
+            <field name="pay_state" widget="badge"            
+                decoration-success="pay_state == 'pay'"                        
+                decoration-info="pay_state == 'waiting'"/>
+
+            <field name="state" widget="badge"
+            decoration-info="state == 'submitted'" 
+            decoration-success="state == 'approved'"            
+            decoration-primary="state == 'done'"
+            decoration-warning="state == 'ready'"          
+            decoration-danger="state == 'refused'"/>
+
+            
+        </tree>
+        </field>
+    </record>
+
+    <record id="action_sales_request_tree" model="ir.actions.act_window">
+        <field name="name">Sales Requests</field>
+        <field name="res_model">sales.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_sales_request_tree"/>
+    </record>
+
+    
+    
+    
+
+    <menuitem id="menu_sales_request_root" 
+                name="Sales Requests" 
+                parent="target_achieve_menu_sales_target_root" 
+                groups="sales_target_vs_achievement_group_sales_target_user"
+                sequence="2"/>
+    <menuitem id="menu_sales_request" 
+                name="Requests" 
+                parent="menu_sales_request_root" 
+                action="action_sales_request_tree"
+                groups="sales_target_vs_achievement_group_sales_target_user"/>
+
+
+
+</odoo>

@@ -1,0 +1,29 @@
+<data>
+  <xpath expr="//field[@name='payment_term_id']" position="after">
+    <field name="non_standard" string="Non Standard"/>
+  </xpath>
+  <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+    <page string="Non Standard Order" name="studio_page_1tRnj" options="{&quot;invisible&quot;: [[&quot;x_studio_non_standard_1&quot;,&quot;=&quot;,False]]}">
+      <group name="studio_group_1tRnj">
+        <group name="studio_group_1tRnj_left">
+          <field name="foam_type" string="Foam Type"/>
+          <field name="length" string="Length"/>
+          <field name="width" string="Width"/>
+          <field name="height" string="Height"/>
+          <field name="foam_unit_price" string="Unit Price"/>
+          <field name="size" string="Foam Size"/>
+        </group>
+        <group name="studio_group_1tRnj_right">
+          <field name="fabric" string="Fabric"/>
+          <field name="x_studio_fabric_unit_price_2" string="Fabric Unit Price" options="{&quot;invisible&quot;: [[&quot;x_studio_fabric_1&quot;,&quot;=&quot;,False]]}"/>
+          <field name="glue" string="Glue"/>
+          <field name="seal" string="Seal"/>
+          <field name="tape_edge" string="Tape edge"/>
+          <field name="fabric_size" string="Fabric Size"/>
+        </group>
+        <button class="oe_stat_button btn-primary" id="scan_id2">Calculate and Create Product
+        </button>
+      </group>
+    </page>
+  </xpath>
+</data>

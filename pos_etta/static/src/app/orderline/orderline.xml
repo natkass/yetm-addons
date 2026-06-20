@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_etta.Orderline" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension">
+        <xpath expr="//li[contains(@class, 'price-per-unit')]" position="after">
+            <li t-if="line.price !== 0 and line.service_charge and line.service_charge !== '0'">
+                With a <em><t t-esc="line.service_charge" />% </em> service charge
+            </li>
+        </xpath>
+    </t>
+
+</templates>

@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pos_device,pos.device,model_pos_device,,1,1,1,0
+access_pos_invoice,pos.invoice,model_pos_invoice,,1,1,1,1
+access_pos_invoice_line,pos.invoice.line,model_pos_invoice_line,,1,1,1,1
+access_pos_refund,pos.refund,model_pos_refund,,1,0,1,1
+access_pos_refund_line,pos.refund.line,model_pos_refund_line,,1,0,1,1
+access_pos_zreport,pos.zreport,model_pos_zreport,,1,0,1,1
+access_pos_daily_report,pos.daily.report,model_pos_daily_report,,1,1,1,1
+access_pos_change_log,pos.change.log,model_pos_change_log,,1,1,1,1
+access_pos_zreport_exception,pos.zreport.exception,model_pos_zreport_exception,,1,1,1,1
+access_pos_fs_check_wizard,pos.fs.check.wizard,model_pos_fs_check_wizard,,1,1,1,1

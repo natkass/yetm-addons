@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mrp_production_only_form_view_inherit_crop_product" model="ir.ui.view">
+        <field name="name">mrp.production.form.inherit.crop</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <!-- <xpath expr="//page[last()]/group/group[last()]/field[@name='availability']"  position='after'>
+                <field name="crop_id"/>
+                <field name="custom_request_id"/>
+            </xpath> -->
+            <xpath expr="//page[last()]//field[@name='location_dest_id']"  position='after'>
+                <field name="crop_id"/>
+                <field name="custom_request_id"/>
+            </xpath> <!-- odoo13 -->
+        </field>
+    </record>
+</odoo>
+

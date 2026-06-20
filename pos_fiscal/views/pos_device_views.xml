@@ -1,0 +1,39 @@
+<odoo>
+    <record id="pos_device_tree_view" model="ir.ui.view">
+        <field name="name">pos.device.tree</field>
+        <field name="model">pos.device</field>
+        <field name="arch" type="xml">
+            <tree duplicate="false">
+                <field name="mrc"/>
+                <field name="name"/>
+                <widget name="pos_device_sync_component"/>
+                                <field name="company_id"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_pos_device_form" model="ir.ui.view">
+        <field name="name">pos.device.form</field>
+        <field name="model">pos.device</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="mrc"/>
+                            <field name="name"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pos_device" model="ir.actions.act_window">
+        <field name="name">Fiscal Printers</field>
+        <field name="res_model">pos.device</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

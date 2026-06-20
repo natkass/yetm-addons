@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_croping_dieases_form" model="ir.ui.view">
+            <field name="name">Crops dieases View</field>
+            <field name="model">cropping.dieases</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='name'/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+                       
+        <record id="view_croping_dieases_tree" model="ir.ui.view">
+                <field name="name">Crops dieases Tree View</field>
+                <field name="model">cropping.dieases</field>
+                <field name="arch" type="xml">
+                    <tree>
+                        <field name='name'/>
+                    </tree>
+                </field>
+        </record>
+
+        <record id="view_croping_dieases_search" model="ir.ui.view">
+                <field name="name">Crops dieases Search View</field>
+                <field name="model">cropping.weeds</field>
+                <field name="arch" type="xml">
+                    <search>
+                        <field name='name'/>
+                    </search>
+                </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_croping_dieases">
+            <field name="name">Scouting Dieases</field>
+            <field name="res_model">cropping.dieases</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+    </data>
+</odoo>
+
+

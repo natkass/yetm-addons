@@ -1,0 +1,13 @@
+<odoo>
+    <record id="view_mrp_production_form_inherit_non_standard" model="ir.ui.view">
+        <field name="name">mrp.production.form.inherit.non.standard</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Add manufacturing_site in the form view -->
+            <xpath expr="//form/sheet/group/group[1]" position="inside">
+                <field name="manufacturing_site" readonly="1" string="Manufacturing Site"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

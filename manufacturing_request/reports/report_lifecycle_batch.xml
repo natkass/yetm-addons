@@ -1,0 +1,78 @@
+<odoo>
+    <template id="report_lifecycle_batch">
+        <t t-call="web.external_layout">
+            <t t-set="title">Batch Lifecycle Report</t>
+
+            <!--  wrap everything with <main>  -->
+            <main>
+                <div class="page">
+                    <h2>Batch Lifecycle Report</h2>
+
+                    <!-- KPI Summary  -->
+                    <t t-set="kpis" t-value="data and data.get('kpis', {}) or {}"/>
+                    <h3 t-if="kpis">Summary KPIs</h3>
+                    <table class="table table-sm table-bordered" t-if="kpis">
+                        <tr>
+                            <td>Total Requests</td>
+                            <td><t t-esc="kpis.get('total_requests', 0)"/></td>
+                        </tr>
+                        <tr>
+                            <td>Delayed Requests</td>
+                            <td><t t-esc="kpis.get('delayed_requests', 0)"/></td>
+                        </tr>
+                        <t t-foreach="kpis.get('avg_stage_hours', {}).items()" t-as="item">
+                            <tr>
+                                <td>Average Hours - <t t-esc="item[0].capitalize()"/></td>
+                                <td><t t-esc="round(item[1],2)"/></td>
+                            </tr>
+                        </t>
+                    </table>
+
+                    <!-- Individual Request Timelines -->
+                    <h3>Request Timelines</h3>
+                    <t t-foreach="docs" t-as="doc">
+                        <div t-att-style="'margin-bottom:15px; padding:5px; border:1px solid #ccc; background-color: %s' % ('#f8d7da' if doc.is_overdue else 'white')">
+                            <h4>Request: <t t-esc="doc.name"/> - Customer: <t t-esc="doc.partner_id.name"/></h4>
+                            <table class="table table-bordered table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Stage</th>
+                                        <th>Timestamp</th>
+                                        <th>Hours Spent</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.get_stage_durations()" t-as="stage">
+                                        <tr>
+                                            <td><t t-esc="stage['stage'].capitalize()"/></td>
+                                            <td>
+                                                <t t-if="stage.get('timestamp')">
+                                                    <t t-esc="stage.get('timestamp')"/>
+                                                </t>
+                                                <t t-else="">-</t>
+                                            </td>
+                                            <td><t t-esc="round(stage['hours'],2)"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </div>
+            </main>
+        </t>
+    </template>
+
+    <!-- Report Action -->
+    <record id="action_report_lifecycle_batch" model="ir.actions.report">
+        <field name="name">Lifecycle Batch Report</field>
+        <field name="model">manufacturing.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">manufacturing_request.report_lifecycle_batch</field>
+        <field name="report_file">manufacturing_request.report_lifecycle_batch</field>
+        <field name="print_report_name">'Lifecycle Batch Report'</field>
+        <!--  do NOT show in normal print menu  -->
+         <field name="binding_model_id" ref="model_manufacturing_request"/> 
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action Window -->
+    <record id="card_payment_form" model="ir.actions.act_window">
+        <field name="name">Card Payment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cardpay.payment.status</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No Card Payment Found
+            </p>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="card_payment_tree" model="ir.ui.view">
+        <field name="name">cardpay.payment.tree</field>
+        <field name="model">cardpay.payment.status</field>
+        <field name="arch" type="xml">
+            <tree string="Card Payment Report" create="0" sample="1">
+                <field name="date"/>
+                <field name="trace_number"/>
+                <field name="price"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="card_payment_form_view" model="ir.ui.view">
+        <field name="name">cardpay.payment.form</field>
+        <field name="model">cardpay.payment.status</field>
+        <field name="arch" type="xml">
+            <form string="Card Payment">
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                        <field name="trace_number"/>
+                        <field name="price"/>
+                        <field name="status"/>
+                        <field name="otp"/>
+                        <field name="pos_order_id"/>
+                        <field name="card_payment_receipt_data" string="Receipt Data"/>
+                        <field name="signature" widget="image" class="oe_avatar" string="Signature"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="cardpay_payment" name="Card Payment Report"
+              parent="point_of_sale.menu_point_rep"
+              action="card_payment_form"
+              sequence="11"/>
+
+    <!-- Inherit POS Order Form View to add card payment fields -->
+    <record id="view_pos_order_form_inherit_cardpay" model="ir.ui.view">
+        <field name="name">pos.order.form.inherit.cardpay</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tracking_number']" position="after">
+                <field name="card_payment_receipt_data" readonly="1"/>
+                <field name="signature" widget="image" class="oe_avatar" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

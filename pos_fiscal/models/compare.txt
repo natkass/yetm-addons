@@ -1,0 +1,34 @@
+from odoo import models, api, fields
+import logging
+
+_logger = logging.getLogger(__name__)
+
+class PosOrder(models.Model):
+    _inherit = 'pos.order'
+
+    @api.model
+    def reconcile_pos_orders_with_zreports(self, date, device_id):
+        """
+        Reconcile pos.order with pos.z.report for a given date and device_id.
+        Handles two scenarios:
+        1. Canceled pos.orders with fs_no: Update lines from pos.invoice, set to paid, and post.
+        2. Paid/posted pos.orders missing fs_no: Match with pos.invoice and update fiscal data.
+        """
+        # Fetch Z Reports for the device and date
+        z_reports = self.env['pos.z.report'].search([
+            ('device_id', '=', device_id),
+            ('date', '=', date),
+        ])
+        zreport_total = sum(z.salesTotal for z in z_reports)
+
+        # Fetch POS Orders for the device (fiscal_mrc) and date
+        pos_orders = self.env['pos.order'].search([
+            ('fiscal_mrc', '=', z_reports[0].device_id.mrc if z_reports else False),
+            ('date_order', '=', date),
+        ])
+        pos_order_total = sum(o.amount_total for o in pos_orders if o.state in ['paid', 'done', 'invoiced'])
+
+        if abs(zreport_total - pos_order_total) > 0.01:  # Allow small float differences
+            _logger.info(f"Mismatch detected for device {device_id} on {date}: Z-Report total {zreport_total}, POS Order total {pos_order_total}")
+
+        return True

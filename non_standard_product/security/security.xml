@@ -1,0 +1,13 @@
+<odoo>
+    <!-- Parent group -->
+    <record id="group_non_standard_user" model="res.groups">
+        <field name="name">Non-Standard User</field>
+        <field name="category_id" ref="base.module_category_sales"/>
+    </record>
+
+    <record id="group_non_standard_manager" model="res.groups">
+        <field name="name">Non-Standard Manager</field>
+        <field name="implied_ids" eval="[(4, ref('group_non_standard_user'))]"/>
+        <field name="category_id" ref="base.module_category_sales"/>
+    </record>
+</odoo>

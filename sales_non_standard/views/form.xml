@@ -1,0 +1,119 @@
+<odoo>
+    <record id="sale_form_non_standard_inhirit" model="ir.ui.view">
+        <field name="name">Non Standard Order Form</field>
+        <field name="model">sale.order</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="non_standard" id='12345678'  string="Non Standard" class="checcc" event="onchange(event)"/>
+                <field name="manufacturing_site" invisible="not non_standard" required="non_standard" options="{'no_create': True}"/>
+                <!-- <field name="picking_type_id" invisible="not non_standard" readonly="1" string="Operation Type"/> -->
+            </xpath>
+            <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+                <!--                    <field name="non_standard" string="Non Standard"/>-->
+                <page string="Non Standard Order 2" name="page"  autofocus="autofocus"  class='papiiii'
+                      invisible="not non_standard">
+                    <group name="studio_group_1tRnj">
+                        <group name="studio_group_1tRnj_left">
+                            <!-- <h3>Foam</h3> -->
+                            <field name="value" string="Foam Type" style='border: solid 2px'
+                                    options="{'required':[['non_standard','=',True]]}"/>
+                            <field name="parent_product" string="Parent Product"
+                                    options="{'required':[['non_standard','=',True]]}"/>
+                            <!-- <h3>Parameters</h3> -->
+                            <field name="length" string="Length(cm)" style='border: solid 2px' onchange="1"/>
+                            <field name="r_length" string="Rounded Length" style='width: 50px' readonly="1"/>
+                            <field name="width" string="Width(cm)" style='border: solid 2px' onchange="1"/>
+                            <field name="r_width" string="Rounded Width" style='width: 50px' readonly="1"/>
+                            <field name="height" string="Height(cm)" style='border: solid 2px'/>
+                            <field name="packrise" string="Packrise"/>
+                            <field name="packrise_height" string="Packrise Height" style='border: solid 2px'
+                                   options="{&quot;invisible&quot;: [[&quot;packrise&quot;,&quot;=&quot;,False]]}"/>
+                            <!--                            <field name="foam_type" string="Foam Type"/>-->
+
+                            <field name="volume" string="Volume" digits="[4,4]"/>
+                            <field name="foam_unit_price" string="Unit Price"/>
+                            <field name="volume_price" string="Foam Total"/>
+                            <field name="shape" string="Foam shape"/>
+                     
+                            <!--                            <field name="image_id" nolabel="1" string="Image Foam" widget="image" class="oe_right oe_avatar"/>-->
+                        </group>
+                        <group name="studio_group_1tRnj_right">
+                            <!-- <h3>Fabric</h3> -->
+                            <field name="fabric" string="Fabric"/>
+                            <field name="fabric_1" string="Fabric" style='border: solid 2px'
+                                   options="{&quot;invisible&quot;: [[&quot;fabric&quot;,&quot;=&quot;,False]],'required':[['fabric','=',True]]}"/>
+                            <field name="fabric_unit_price" string="Fabric Price"
+                                   options="{&quot;invisible&quot;: [[&quot;fabric&quot;,&quot;=&quot;,False]]}"/>
+                            <field name="fabric_size_1" string="Fabric Size"
+                                   options="{&quot;invisible&quot;: [[&quot;fabric&quot;,&quot;=&quot;,False]]}"/>
+                            <field name="fabric_total_1" string="Fabric Total" digits="[4,4]"
+                                   options="{&quot;invisible&quot;: [[&quot;fabric&quot;,&quot;=&quot;,False]]}"/>
+                            <!-- <h3>Fasha</h3> -->
+                            <field name="fabric_2" string="Fasha" style='border: solid 2px'
+                                   options="{&quot;invisible&quot;: [[&quot;fabric&quot;,&quot;=&quot;,False]]}"/>
+                            <field name="corner" string="Corner"
+                                   options="{&quot;invisible&quot;: [[&quot;fabric&quot;,&quot;=&quot;,False]]}"/>
+                            <field name="fabric_unit_price_2" string="Fasha Unit Price"
+                                   options="{&quot;invisible&quot;: [[&quot;fabric&quot;,&quot;=&quot;,False]]}"/>
+                            <field name="fabric_size_2" string="Fasha Size"
+                                   options="{&quot;invisible&quot;: [[&quot;fabric&quot;,&quot;=&quot;,False]]}"/>
+                            <field name="fabric_total_2" string="Fasha Total" digits="[4,4]"
+                                   options="{&quot;invisible&quot;: [[&quot;fabric&quot;,&quot;=&quot;,False]]}"/>
+                            <!-- <h3>Glue</h3> -->
+                            <field name="glue" string="Glue"/>
+                            <field name="glue_double" string="Double Faced"
+                                   options="{&quot;invisible&quot;: [[&quot;glue&quot;,&quot;=&quot;,False]]}"/>
+                            <field name="glue_unit_price" string="Glue Unit Price"
+                                   options="{&quot;invisible&quot;: [[&quot;glue&quot;,&quot;=&quot;,False]]}"/>
+                            <field name="glue_qty" string="Quantity"
+                                   options="{&quot;invisible&quot;: [[&quot;glue&quot;,&quot;=&quot;,False]]}"/>
+                            <field name="glu_total" string="Total" digits="[4,4]"
+                                   options="{&quot;invisible&quot;: [[&quot;glue&quot;,&quot;=&quot;,False]]}"/>
+                        </group>
+                        <group>
+                            <!-- <h3>Seal</h3> -->
+                            <field name="Seal" string="Seal"/>
+                            <field name="seal_type" string="Seal Type"
+                                   options="{&quot;invisible&quot;: [[&quot;Seal&quot;,&quot;=&quot;,False]],'required':[['Seal','=',True]]}"/>
+                            <field name="seal_unit_price" string="Seal Unit Price"
+                                   options="{&quot;invisible&quot;: [[&quot;Seal&quot;,&quot;=&quot;,False]]}"/>
+                            <field name="seal_qty" string="Quantity"
+                                   options="{&quot;invisible&quot;: [[&quot;Seal&quot;,&quot;=&quot;,False]]}"/>
+                            <!--                            <field name="seal_side" string="Quantity"-->
+                            <!--                                   options="{&quot;invisible&quot;: [[&quot;Seal&quot;,&quot;=&quot;,False]]}"/>-->
+                            <field name="seal_total" string="Total" digits="[4,4]"
+                                   options="{&quot;invisible&quot;: [[&quot;Seal&quot;,&quot;=&quot;,False]]}"/>
+                        </group>
+                        <group>
+                            <!-- <h3>Tape Edge</h3> -->
+                            <field name="tape_edge" string="Tape edge" />
+                            <field name="tape_edge_unit_price" string="Tape Unit Price"
+                                   options="{&quot;invisible&quot;: [[&quot;tape_edge&quot;,&quot;=&quot;,False]]}"/>
+                            <field name="tape_edge_qty" string="Quantity"
+                                   options="{&quot;invisible&quot;: [[&quot;tape_edge&quot;,&quot;=&quot;,False]]}"/>
+                            <field name="tape_edge_total" string="Total" digits="[4,4]"
+                                   options="{&quot;invisible&quot;: [[&quot;tape_edge&quot;,&quot;=&quot;,False]]}"/>
+                        </group>
+                        <group>
+                        <field name="final_total_all" string="Final Total price"/>
+                        </group>
+                        <group>
+                        <field name="description" string="Description"/>
+                        </group>
+                        <button class="oe_stat_button btn-primary"
+                                options="{&quot;invisible&quot;: [[&quot;state&quot;,&quot;=&quot;,&quot;sent&quot;]]}"
+                                type="object" name="calculate_and_save">Calculate and
+                            Create Product
+                        </button>
+                        <button class="oe_stat_button btn-secondary"
+                                options="{&quot;invisible&quot;: [[&quot;state&quot;,&quot;=&quot;,&quot;sent&quot;]]}"
+                                type="object" name="clear">clear
+                        </button>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem id="menu_non_standard_root"
+              name="Non-Standards"
+              parent="sale.sale_menu_root" 
+              sequence="50"
+              groups="non_standard_product.group_non_standard_manager"/>
+
+    <!-- FOAM -->
+    <menuitem id="menu_non_standard_foam"
+              name="Foams"
+              parent="menu_non_standard_root"/>
+
+    <record id="view_non_standard_foam_tree" model="ir.ui.view">
+        <field name="name">non.standard.foam.tree</field>
+        <field name="model">non.standard.foam</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_non_standard_foam_form" model="ir.ui.view">
+        <field name="name">non.standard.foam.form</field>
+        <field name="model">non.standard.foam</field>
+        <field name="arch" type="xml">
+        <form>
+            <header>
+                <button name="action_verify" type="object" string="Verify"
+                        invisible= "state != 'draft'" 
+                        groups="non_standard_product.group_non_standard_manager"/>
+                        
+                <button name="action_lock" type="object" string="Lock"
+                        invisible= "state != 'verify'" 
+                        groups="non_standard_product.group_non_standard_manager"/>
+
+                <button name="action_cancel" type="object" string="Cancel"
+                        invisible="state in ['draft', 'cancel']"
+                        groups="non_standard_product.group_non_standard_manager"/>
+
+                <button name="action_draft" type="object" string="Set to Draft"
+                        invisible="state in ['draft', 'verify', 'lock']"
+                        groups="non_standard_product.group_non_standard_manager"/>
+                
+                <field name="state" widget="statusbar"
+                    statusbar_visible="draft,verify,lock"
+                    statusbar_colors="{'refused':'red', 'cancelled':'orange'}" />
+            </header>
+            
+                <sheet>
+                    <group>
+                        <field name="name" readonly="state not in ['draft', 'verify']"/>
+                        
+                    </group>
+                    <notebook>
+                        <page string="Values">
+                            <field name="value_ids" readonly="state not in ['draft', 'verify']">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="unit_price"/>
+                                </tree>
+                            </field>    
+                        </page>
+                                
+                        <page string="BOM Products">
+                            <field name="product_ids" readonly="state not in ['draft', 'verify']">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="bom_factor"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                                    
+                    
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+        </form>
+        </field>
+    </record>
+
+    <record id="action_non_standard_foam" model="ir.actions.act_window">
+        <field name="name">Foams</field>
+        <field name="res_model">non.standard.foam</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_non_standard_foam_action"
+              parent="menu_non_standard_root"
+              action="action_non_standard_foam"/>
+
+    <!--  SHAPE  -->
+    <menuitem id="menu_non_standard_shape"
+              name="Shapes"
+              parent="menu_non_standard_root"/>
+
+    <record id="view_non_standard_shape_tree" model="ir.ui.view">
+        <field name="name">non.standard.shape.tree</field>
+        <field name="model">non.standard.shape</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_non_standard_foam_shape" model="ir.ui.view">
+        <field name="name">non.standard.shape.form</field>
+        <field name="model">non.standard.shape</field>
+        <field name="arch" type="xml">
+        <form>
+            <header>
+                <button name="action_verify" type="object" string="Verify"
+                        invisible= "state != 'draft'" 
+                        groups="non_standard_product.group_non_standard_manager"/>
+                        
+                <button name="action_lock" type="object" string="Lock"
+                        invisible= "state != 'verify'" 
+                        groups="non_standard_product.group_non_standard_manager"/>
+
+                <button name="action_cancel" type="object" string="Cancel"
+                        invisible="state in ['draft', 'cancel']"
+                        groups="non_standard_product.group_non_standard_manager"/>
+
+                <button name="action_draft" type="object" string="Set to Draft"
+                        invisible="state in ['draft', 'verify', 'lock']"
+                        groups="non_standard_product.group_non_standard_manager"/>
+                
+                <field name="state" widget="statusbar"
+                    statusbar_visible="draft,verify,lock"
+                    statusbar_colors="{'refused':'red', 'cancelled':'orange'}" />
+            </header>
+
+                <sheet>
+                
+                    <group>
+                        <field name="name" readonly="state not in ['draft', 'verify']"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+        </form>
+        </field>
+    </record>
+    
+
+    <record id="action_non_standard_shape" model="ir.actions.act_window">
+        <field name="name">Shapes</field>
+        <field name="res_model">non.standard.shape</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_non_standard_shape_action"
+              parent="menu_non_standard_root"
+              action="action_non_standard_shape"/>
+
+
+    <!-- FABRIC  -->
+    <menuitem id="menu_non_standard_fabric"
+              name="Fabrics"
+              parent="menu_non_standard_root"/>
+
+    <record id="view_non_standard_fabric_tree" model="ir.ui.view">
+        <field name="name">non.standard.fabric.tree</field>
+        <field name="model">non.standard.fabric</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="unit_price"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_non_standard_fabric_form" model="ir.ui.view">
+        <field name="name">non.standard.fabric.form</field>
+        <field name="model">non.standard.fabric</field>
+        <field name="arch" type="xml">
+        <form>
+            <header>
+                <button name="action_verify" type="object" string="Verify"
+                        invisible= "state != 'draft'" 
+                        groups="non_standard_product.group_non_standard_manager"/>
+                        
+                <button name="action_lock" type="object" string="Lock"
+                        invisible= "state != 'verify'" 
+                        groups="non_standard_product.group_non_standard_manager"/>
+
+                <button name="action_cancel" type="object" string="Cancel"
+                        invisible="state in ['draft', 'cancel']"
+                        groups="non_standard_product.group_non_standard_manager"/>
+
+                <button name="action_draft" type="object" string="Set to Draft"
+                        invisible="state in ['draft', 'verify', 'lock']"
+                        groups="non_standard_product.group_non_standard_manager"/>
+                
+                <field name="state" widget="statusbar"
+                    statusbar_visible="draft,verify,lock"
+                    statusbar_colors="{'refused':'red', 'cancelled':'orange'}" />
+            </header>
+            
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="state not in ['draft', 'verify']"/>
+                            
+                        </group>
+                        <group>
+                            
+                            <field name="unit_price" readonly="state not in ['draft', 'verify']"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Fasha">
+                            <field name="value_ids" readonly="state not in ['draft', 'verify']">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="bom_factor"/>
+                                    <field name="unit_price"/>
+                                </tree>
+                            </field>    
+                        </page>
+                                
+                        <page string="BOM Products">
+                            <field name="product_ids" readonly="state not in ['draft', 'verify']">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="bom_factor"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+        </form>
+        </field>
+    </record>
+
+    <record id="action_non_standard_fabric" model="ir.actions.act_window">
+        <field name="name">Fabrics</field>
+        <field name="res_model">non.standard.fabric</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_non_standard_fabric_action"
+              parent="menu_non_standard_root"
+              action="action_non_standard_fabric"/>
+
+    
+    
+    <!--  SEAL  -->
+    <menuitem id="menu_non_standard_seal"
+              name="Seals"
+              parent="menu_non_standard_root"/>
+    
+    <record id="view_non_standard_seal_tree" model="ir.ui.view">
+        <field name="name">non.standard.seal.tree</field>
+        <field name="model">non.standard.seal</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="unit_price"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_non_standard_seal_form" model="ir.ui.view">
+        <field name="name">non.standard.seal.form</field>
+        <field name="model">non.standard.seal</field>
+        <field name="arch" type="xml">
+        <form>
+            <header>
+                <button name="action_verify" type="object" string="Verify"
+                        invisible= "state != 'draft'" 
+                        groups="non_standard_product.group_non_standard_manager"/>
+                        
+                <button name="action_lock" type="object" string="Lock"
+                        invisible= "state != 'verify'" 
+                        groups="non_standard_product.group_non_standard_manager"/>
+
+                <button name="action_cancel" type="object" string="Cancel"
+                        invisible="state in ['draft', 'cancel']"
+                        groups="non_standard_product.group_non_standard_manager"/>
+
+                <button name="action_draft" type="object" string="Set to Draft"
+                        invisible="state in ['draft', 'verify', 'lock']"
+                        groups="non_standard_product.group_non_standard_manager"/>
+                
+                <field name="state" widget="statusbar"
+                    statusbar_visible="draft,verify,lock"
+                    statusbar_colors="{'refused':'red', 'cancelled':'orange'}" />
+            </header>
+            
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="state not in ['draft', 'verify']"/>
+                            
+                        </group>
+                        <group>
+                            
+                            <field name="unit_price" readonly="state not in ['draft', 'verify']"/>
+                        </group>
+                    </group>
+                    <notebook>
+                                                        
+                        <page string="BOM Products">
+                            <field name="product_ids" readonly="state not in ['draft', 'verify']">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="bom_factor"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+        </form>
+        </field>
+    </record>
+
+
+    <record id="action_non_standard_seal" model="ir.actions.act_window">
+        <field name="name">Seals</field>
+        <field name="res_model">non.standard.seal</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_non_standard_seal_action"
+              parent="menu_non_standard_root"
+              action="action_non_standard_seal"/>
+
+
+<!--  GLUE  -->
+    <menuitem id="menu_non_standard_glue"
+              name="Glues"
+              parent="menu_non_standard_root"/>
+    
+    <record id="view_non_standard_glue_tree" model="ir.ui.view">
+        <field name="name">non.standard.glue.tree</field>
+        <field name="model">non.standard.glue</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="unit_price"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_non_standard_glue_form" model="ir.ui.view">
+        <field name="name">non.standard.glue.form</field>
+        <field name="model">non.standard.glue</field>
+        <field name="arch" type="xml">
+        <form>
+            <header>
+                <button name="action_verify" type="object" string="Verify"
+                        invisible= "state != 'draft'" 
+                        groups="non_standard_product.group_non_standard_manager"/>
+                        
+                <button name="action_lock" type="object" string="Lock"
+                        invisible= "state != 'verify'" 
+                        groups="non_standard_product.group_non_standard_manager"/>
+
+                <button name="action_cancel" type="object" string="Cancel"
+                        invisible="state in ['draft', 'cancel']"
+                        groups="non_standard_product.group_non_standard_manager"/>
+
+                <button name="action_draft" type="object" string="Set to Draft"
+                        invisible="state in ['draft', 'verify', 'lock']"
+                        groups="non_standard_product.group_non_standard_manager"/>
+                
+                <field name="state" widget="statusbar"
+                    statusbar_visible="draft,verify,lock"
+                    statusbar_colors="{'refused':'red', 'cancelled':'orange'}" />
+            </header>
+            
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="state not in ['draft', 'verify']"/>
+                            
+                        </group>
+                        <group>
+                            
+                            <field name="unit_price" readonly="state not in ['draft', 'verify']"/>
+                        </group>
+                    </group>
+                    <notebook>
+                                                        
+                        <page string="BOM Products">
+                            <field name="product_ids" readonly="state not in ['draft', 'verify']">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="bom_factor"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+        </form>
+        </field>
+    </record>
+
+
+    <record id="action_non_standard_glue" model="ir.actions.act_window">
+        <field name="name">Glues</field>
+        <field name="res_model">non.standard.glue</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_non_standard_glue_action"
+              parent="menu_non_standard_root"
+              action="action_non_standard_glue"/>
+
+    
+    <!--  TAPE  -->
+    <menuitem id="menu_non_standard_tape"
+              name="Tapes"
+              parent="menu_non_standard_root"/>
+    
+    <record id="view_non_standard_tape_tree" model="ir.ui.view">
+        <field name="name">non.standard.tape.tree</field>
+        <field name="model">non.standard.tape</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="unit_price"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_non_standard_tape_form" model="ir.ui.view">
+        <field name="name">non.standard.tape.form</field>
+        <field name="model">non.standard.tape</field>
+        <field name="arch" type="xml">
+        <form>
+            <header>
+                <button name="action_verify" type="object" string="Verify"
+                        invisible= "state != 'draft'" 
+                        groups="non_standard_product.group_non_standard_manager"/>
+                        
+                <button name="action_lock" type="object" string="Lock"
+                        invisible= "state != 'verify'" 
+                        groups="non_standard_product.group_non_standard_manager"/>
+
+                <button name="action_cancel" type="object" string="Cancel"
+                        invisible="state in ['draft', 'cancel']"
+                        groups="non_standard_product.group_non_standard_manager"/>
+
+                <button name="action_draft" type="object" string="Set to Draft"
+                        invisible="state in ['draft', 'verify', 'lock']"
+                        groups="non_standard_product.group_non_standard_manager"/>
+                
+                <field name="state" widget="statusbar"
+                    statusbar_visible="draft,verify,lock"
+                    statusbar_colors="{'refused':'red', 'cancelled':'orange'}" />
+            </header>
+            
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="state not in ['draft', 'verify']"/>
+                            
+                        </group>
+                        <group>
+                            
+                            <field name="unit_price" readonly="state not in ['draft', 'verify']"/>
+                        </group>
+                    </group>
+                    <notebook>
+                                                        
+                        <page string="BOM Products">
+                            <field name="product_ids" readonly="state not in ['draft', 'verify']">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="bom_factor"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+        </form>
+        </field>
+    </record>
+
+
+    <record id="action_non_standard_tape" model="ir.actions.act_window">
+        <field name="name">Tapes</field>
+        <field name="res_model">non.standard.tape</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_non_standard_tape_action"
+              parent="menu_non_standard_root"
+              action="action_non_standard_tape"/>
+
+    
+
+</odoo>

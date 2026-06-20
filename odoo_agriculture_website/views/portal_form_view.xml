@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    
+   <template id="crop_request" name="Crop Request" customize_show="True">
+       <t t-call="website.layout">
+        <div class="container mt-2">
+        <div class="row">
+        <div class ="col-lg-8">
+            <form action="/create_crop_request" method="post" class="s_website_form container-fluid mt32" enctype="multipart/form-data" data-editable-form="false">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <h3 style="text-align: center;">Crop Request</h3>
+                <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                    <label class="col-lg-3 col-md-4 col-form-label" for="customer_id">Customer</label>
+                        <div class="col-lg-7 col-md-8">
+                            <input type="text" class="form-control o_website_form_input" name="customer_id" t-attf-value="#{user_id.partner_id.name}" required="True"/>
+                        </div>
+                </div>
+                
+                <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                    <label class="col-lg-3 col-md-4 col-form-label" for="phone">Phone</label>
+                    <div class="col-lg-7 col-md-8">
+                        <input type="int" class="form-control o_website_form_input" name="phone" t-attf-value="#{user_id.partner_id.phone}" required="True"/>
+                    </div>
+                </div>
+
+                <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                    <label class="col-lg-3 col-md-4 col-form-label" for="email">Email</label>
+                    <div class="col-lg-7 col-md-8">
+                        <input type="text" class="form-control o_website_form_input" name="email" t-attf-value="#{user_id.partner_id.email}" required="True"/>
+                    </div>
+                </div>
+
+                <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                    <label class="col-lg-3 col-md-4 col-form-label" for="crop_ids">Crop</label>
+                    <div class="col-lg-7 col-md-8">
+                        <select name="crop_id" class="form-control o_website_form_input" required="required">
+                            <option value="" class="form-control o_website_form_input" required="True">Crop...</option>
+                            <t t-foreach="crops" t-as="crop">
+                                <option t-att-value="crop.id">
+                                    <t t-esc="crop.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                    <label class="col-lg-3 col-md-4 col-form-label" for="name">Request</label>
+                    <div class="col-lg-7 col-md-8">
+                        <input type="text" class="form-control o_website_form_input" name="name" required="True"/>
+                    </div>
+                </div>
+
+                <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                    <label class="col-lg-3 col-md-4 col-form-label" for="description">Request Details</label>
+                    <div class="col-lg-7 col-md-4">
+                        <textarea cols="60" rows="5" class="form-control" name="description" required="True"/>
+                    </div>
+                </div>
+
+                <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                    <label class="col-lg-3 col-md-4 col-form-label" for="date">Start Date</label>
+                    <div class="col-lg-7 col-md-8">
+                        <input type="date" class="form-control o_website_form_input" name="start_date" required="True"/>
+                    </div>
+                </div>
+
+                <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                    <label class="col-lg-3 col-md-4 col-form-label" for="date">End Date</label>
+                    <div class="col-lg-7 col-md-8">
+                        <input type="date" class="form-control o_website_form_input" name="end_date" required="True"/>
+                    </div>
+                </div>
+
+                <div class="mb-0 py-2 form-group row form-field o_website_form_required_custom">
+                    <div class="offset-lg-3 offset-md-4 col-md-8 col-lg-7">
+                        <button class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+        </div>
+    </t>
+    </template>
+
+    <template id="thanks_mail_sent" name="Thanks">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="oe_structure" id="oe_structure_website_form_contact_us_thanks_1"/>
+                <div class="container mt-4">
+                    <div class="row">
+                        <div class="col-lg-7 col-xl-6 mr-lg-auto oe_structure">
+                            <section class="pt40 s_text_block pb40 o_colored_level o_cc o_cc1" data-snippet="s_text_block" data-name="Text">
+                                <div class="container">
+                                    <span class="d-block fa fa-4x fa-thumbs-up mx-auto rounded-circle bg-primary"/><br/>
+                                    <h1 class="text-center">Thank You!</h1>
+                                    <div class="pb16 pt16 s_hr" data-snippet="s_hr" data-name="Separator">
+                                        <hr class="mx-auto border-top w-50 border-dark text-center"/>
+                                    </div>
+                                    <h5 class="text-center">
+                                        <span class="fa fa-check-circle"/>
+                                        <span>We have received your Crop request.</span>
+                                    </h5>
+                                    <p class="text-center">Your Crop Request Number is .
+                                        <t t-esc="number"/>.
+                                        please note it for further communication and you will also receive email from our
+                                        crop team shortly, Please reply to that email for feature conversation.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </t>
+        </template>
+        
+<!--     <template id="thanks_mail_sent" name="Thanks">
+        <t t-call="website.layout">
+          <div id="wrap">
+            <div class="oe_structure"/>
+            <div class="container">
+                <h2>Thanks.</h2>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="alert alert-success">
+                             <button type="button" class="close" data-dismiss="alert">&amp;times;</button>
+                             <h5>We have received your Crop request.Your Crop Request Number is 
+                                <t t-esc="number"/>
+                                <br/></h5>  
+                        </div>
+                    </div>
+                </div>
+                 <a href="/page/crop_request" class="btn btn-success mr64" role="button"> <i class="fa fa-chevron-left"></i> Back</a>
+            </div>
+            <div class="oe_structure"/>
+          </div>
+        </t>
+    </template> -->
+        
+    <record id="crop_request_add" model="website.menu">
+      <field name="name">Crop Request</field>
+      <field name="url">/page/crop_request</field>
+      <field name="parent_id" ref="website.main_menu"/>
+      <field name="sequence" type="int">12</field>
+    </record>
+   
+</odoo>
+

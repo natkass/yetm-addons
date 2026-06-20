@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="wizard_target_achieve_report_view_form" model="ir.ui.view">
+        <field name="name">wizard.target.achieve.report.form</field>
+        <field name="model">wizard.target.achieve.report</field>
+        <field name="arch" type="xml">
+            <form string="Export Target vs Achievement">
+                <group>
+                    <field name="time_span"/>
+                    <field name="selected_date"/>
+                </group>
+
+                
+                <group string="Download File" invisible="1">
+                    <field name="file_name" invisible="1"/>
+                    <field name="file_data" filename="file_name" readonly="1"/>
+                </group>
+
+                <footer>
+                    <button name="action_export_excel" type="object"
+                            string="Generate Excel" class="btn-primary"
+                            />
+                    <button special="cancel" string="Close"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wizard_target_achieve_report" model="ir.actions.act_window">
+        <field name="name">Franchisee Target Report</field>
+        <field name="res_model">wizard.target.achieve.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_wizard_target_achieve_report"
+              name="Franchisee Target Report"
+              parent="target_achieve_menu_sales_target"
+              action="action_wizard_target_achieve_report"
+              sequence="20"/>
+</odoo>

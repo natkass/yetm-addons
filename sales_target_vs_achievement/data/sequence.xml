@@ -1,0 +1,30 @@
+<odoo>
+  <data noupdate="1">
+    <record id="seq_account_manager" model="ir.sequence">
+      <field name="name">Account Manager</field>
+      <field name="code">account.manager</field>
+      <field name="prefix">AMC/</field>
+      <field name="padding">4</field>
+    </record>
+  </data> 
+
+  <data noupdate="0">
+        <record id="seq_sales_request" model="ir.sequence">
+            <field name="name">Sales Request</field>
+            <field name="code">sales.request</field>
+            <field name="prefix">REQ</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+
+  <data noupdate="0">
+        <record id="seq_category" model="ir.sequence">
+            <field name="name">Franchise Product Category</field>
+            <field name="code">franchise.product.category</field>
+            <field name="prefix">PC-</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

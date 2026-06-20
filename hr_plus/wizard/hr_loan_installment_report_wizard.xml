@@ -1,0 +1,40 @@
+<odoo>
+    <record id="view_hr_loan_installment_report_wizard_form" model="ir.ui.view">
+        <field name="name">hr.loan.installment.report.wizard.form</field>
+        <field name="model">hr.loan.installment.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate Loan Installment Report">
+                <group>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </group>
+                <footer>
+                    <button string="Generate Report"
+                            name="action_generate_report"
+                            type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    
+
+    <record id="action_hr_loan_installment_report_wizard" model="ir.actions.act_window">
+        <field name="name">Loan Report</field>
+        <field name="res_model">hr.loan.installment.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_hr_loan_installment_report"
+              name="Loan Report"
+              parent="hr_plus.menu_hr_loan"
+              action="action_hr_loan_installment_report_wizard"
+              groups="group_hr_plus_loan_approve"
+              sequence="20"/>
+
+    
+</odoo>

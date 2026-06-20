@@ -1,0 +1,452 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!-- <report
+            id="report_agriculture_weather"
+            string="Agriculture Weather"
+            model="farmer.cropping.accuweather"
+            report_type="qweb-pdf"
+            name="agriculture_weather_records.template_report_agriculture_weather"
+            file="agriculture_weather_records.template_report_agriculture_weather"
+        /> -->
+
+        <record id="report_agriculture_weather" model="ir.actions.report">
+            <field name="name">Agriculture Weather</field>
+            <field name="model">farmer.cropping.accuweather</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">agriculture_weather_records.template_report_agriculture_weather</field>
+            <field name="report_file">agriculture_weather_records.template_report_agriculture_weather</field>
+            <field name="binding_model_id" ref="model_farmer_cropping_accuweather"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="template_report_agriculture_weather">
+            <t t-foreach="docs" t-as="doc">
+             <t t-call="web.html_container">
+              <t t-call="web.internal_layout">
+                <!-- <t t-set="address"> -->
+                    
+                <!-- </t> -->
+                <div class="page">
+                <div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td style="text-align: center;" colspan="4">
+                                    <strong><h3><span t-field="doc.number"/></h3></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;" colspan="3">
+                                    <span t-field="doc.location_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                                    <div t-if="doc.location_id.vat" class="mt16"><t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.location_id.vat"/></div>
+                                </td>
+                                <td style="text-align: right;">
+                                    <strong>Created By :</strong>
+                                    <span t-field="doc.create_uid"/><br/>
+                                    <strong>Created Date :</strong>
+                                    <span t-field="doc.create_date"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Date</strong>
+                                </td>
+                                <td>
+                                     <span t-field="doc.epoch_date"/>
+                                </td>
+                                <td>
+                                    <strong>Day Forecast</strong>
+                                </td>
+                                <td>
+                                     <span t-field="doc.day_forcast"/>
+                                </td>
+                            <tr>
+                                <td>
+                                    <strong>Company</strong>
+                                </td>
+                                <td>
+                                     <span t-field="doc.company_id"/>
+                                </td>
+                                <td>
+                                    <strong>Minimum Temperature(in F)</strong>
+                                </td>
+                                <td>
+                                     <span t-field="doc.min_temp"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Maximum Temperature(in F)</strong>
+                                </td>
+                                <td>
+                                     <span t-field="doc.max_temp"/>
+                                </td>
+                            </tr>
+                        </tr>
+                    </thead>
+                    </table>
+                            <tr>
+                                <td style="text-align: left;" colspan="4">
+                                    <strong><h3>Daily</h3></strong>
+                                </td>
+                            </tr>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>
+                                    <strong>Day Temperature</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.tempurature"/>
+                                </td>
+                                <td>
+                                    <strong>Night Temperature</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.night_tempurature"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Day Precipitation</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.precipitation"/>
+                                </td>
+                                <td>
+                                    <strong>Night Temperature</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.night_precipitation"/>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <strong>Day Internal Note</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.day_internal_note"/>
+                                </td>
+                                <td>
+                                    <strong>Night Internal Note</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.night_internal_note"/>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <p style="page-break-after:always"/>
+                    <tr>
+                        <td style="text-align: left;" colspan="4">
+                            <strong><h3>Hourly</h3></strong>
+                        </td>
+                    <t t-set="first_eight_hour" t-value="doc.first_eight_hour_ids"/>
+                            <tr>
+                                <td style="text-align: left;" colspan="4">
+                                    <strong><h3>First Eight Hours</h3></strong>
+                                </td>
+                            </tr>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Forecast</th>
+                                <th>1am</th>
+                                <th>2am</th>
+                                <th>3am</th>
+                                <th>4am</th>
+                                <th>5am</th>
+                                <th>6am</th>
+                                <th>7am</th>
+                                <th>8am</th>
+                            </tr>
+                        </thead>
+                        <tbody class="first_eight_hour_tbody">
+                            <tr t-foreach="doc.first_eight_hour_ids" t-as="first_eight_hour">
+                                <td><span t-field="first_eight_hour.forecast_id"/></td>
+                                <td><span t-field="first_eight_hour.col_1"/></td>
+                                <td><span t-field="first_eight_hour.col_2"/></td>
+                                <td><span t-field="first_eight_hour.col_3"/></td>
+                                <td><span t-field="first_eight_hour.col_4"/></td>
+                                <td><span t-field="first_eight_hour.col_5"/></td>
+                                <td><span t-field="first_eight_hour.col_6"/></td>
+                                <td><span t-field="first_eight_hour.col_7"/></td>
+                                <td><span t-field="first_eight_hour.col_8"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="page-break-after:always"/>
+                    <t t-set="second_eight_hour" t-value="doc.second_eight_hour_ids"/>
+                            <tr>
+                                <td style="text-align: left;" colspan="4">
+                                    <strong><h3>Second Eight Hours</h3></strong>
+                                </td>
+                            </tr>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Forecast</th>
+                                <th>9am</th>
+                                <th>10am</th>
+                                <th>11am</th>
+                                <th>12am</th>
+                                <th>1pm</th>
+                                <th>2pm</th>
+                                <th>3pm</th>
+                                <th>4pm</th>
+                            </tr>
+                        </thead>
+                        <tbody class="second_eight_hour_tbody">
+                            <tr t-foreach="doc.second_eight_hour_ids" t-as="second_eight_hour">
+                                <td><span t-field="second_eight_hour.forecast_id"/></td>
+                                <td><span t-field="second_eight_hour.col_1"/></td>
+                                <td><span t-field="second_eight_hour.col_2"/></td>
+                                <td><span t-field="second_eight_hour.col_3"/></td>
+                                <td><span t-field="second_eight_hour.col_4"/></td>
+                                <td><span t-field="second_eight_hour.col_5"/></td>
+                                <td><span t-field="second_eight_hour.col_6"/></td>
+                                <td><span t-field="second_eight_hour.col_7"/></td>
+                                <td><span t-field="second_eight_hour.col_8"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="page-break-after:always"/>
+                    <t t-set="third_eight_hour" t-value="doc.third_eight_hour_ids"/>
+                            <tr>
+                                <td style="text-align: left;" colspan="4">
+                                    <strong><h3>Third Eight Hours</h3></strong>
+                                </td>
+                            </tr>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Forecast</th>
+                                <th>5pm</th>
+                                <th>6pm</th>
+                                <th>7pm</th>
+                                <th>8pm</th>
+                                <th>9pm</th>
+                                <th>10pm</th>
+                                <th>11pm</th>
+                                <th>12pm</th>
+                            </tr>
+                        </thead>
+                        <tbody class="third_eight_hour_tbody">
+                            <tr t-foreach="doc.third_eight_hour_ids" t-as="third_eight_hour">
+                                <td><span t-field="third_eight_hour.forecast_id"/></td>
+                                <td><span t-field="third_eight_hour.col_1"/></td>
+                                <td><span t-field="third_eight_hour.col_2"/></td>
+                                <td><span t-field="third_eight_hour.col_3"/></td>
+                                <td><span t-field="third_eight_hour.col_4"/></td>
+                                <td><span t-field="third_eight_hour.col_5"/></td>
+                                <td><span t-field="third_eight_hour.col_6"/></td>
+                                <td><span t-field="third_eight_hour.col_7"/></td>
+                                <td><span t-field="third_eight_hour.col_8"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </tr>
+                            <tr>
+                                <td style="text-align: left;" colspan="4">
+                                    <strong><h3>Morning</h3></strong>
+                                </td>
+                            </tr>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Temp Type</th>
+                                <th>Tempurature</th>
+                                <th>Precipitation</th>
+                                <th>Internal Note</th>
+                            </tr>
+                        </thead>
+                        <tbody class="morning_weather_tbody">
+                                <td><span t-field="doc.temp_type"/></td>
+                                <td><span t-field="doc.tempurature"/></td>
+                                <td><span t-field="doc.precipitation"/></td>
+                                <td><span t-field="doc.morning_internal_note"/></td>
+                        </tbody>
+                    </table>
+                            <tr>
+                                <td style="text-align: left;" colspan="4">
+                                    <strong><h3>Afternoon</h3></strong>
+                                </td>
+                            </tr>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Temp Type</th>
+                                <th>Tempurature</th>
+                                <th>Precipitation</th>
+                                <th>Internal Note</th>
+                            </tr>
+                        </thead>
+                        <tbody class="afternoon_weather_tbody">
+                                <td><span t-field="doc.afternoon_temp_type"/></td>
+                                <td><span t-field="doc.afternoon_tempurature"/></td>
+                                <td><span t-field="doc.afternoon_precipitation"/></td>
+                                <td><span t-field="doc.afternoon_internal_note"/></td>
+
+                        </tbody>
+                    </table>
+                            <tr>
+                                <td style="text-align: left;" colspan="4">
+                                    <strong><h3>Evening</h3></strong>
+                                </td>
+                            </tr>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Temp Type</th>
+                                <th>Tempurature</th>
+                                <th>Precipitation</th>
+                                <th>Internal Note</th>
+                            </tr>
+                        </thead>
+                        <tbody class="evening_weather_tbody">
+                                <td><span t-field="doc.evening_temp_type"/></td>
+                                <td><span t-field="doc.evening_tempurature"/></td>
+                                <td><span t-field="doc.evening_precipitation"/></td>
+                                <td><span t-field="doc.evening_internal_note"/></td>
+                        </tbody>
+                    </table>
+                            <tr>
+                                <td style="text-align: left;" colspan="4">
+                                    <strong><h3>Overnight</h3></strong>
+                                </td>
+                            </tr>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Temp Type</th>
+                                <th>Tempurature</th>
+                                <th>Precipitation</th>
+                                <th>Internal Note</th>
+                            </tr>
+                        </thead>
+                        <tbody class="overnight_weather_tbody">
+                                <td><span t-field="doc.overnight_temp_type"/></td>
+                                <td><span t-field="doc.overnight_tempurature"/></td>
+                                <td><span t-field="doc.overnight_precipitation"/></td>
+                                <td><span t-field="doc.overnight_internal_note"/></td>
+                        </tbody>
+                    </table>
+                    <p style="page-break-after:always"/>
+                    <t t-set="climate_impact" t-value="doc.climate_impact_ids"/>
+                            <tr>
+                                <td style="text-align: left;" colspan="4">
+                                    <strong><h3>Climate Impacts</h3></strong>
+                                </td>
+                            </tr>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Human Health</th>
+                                <th>Climate Driver</th>
+                                <th>Exposure</th>
+                                <th>Health Outcome</th>
+                                <th>Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody class="climate_impact_tbody">
+                            <tr t-foreach="doc.climate_impact_ids" t-as="climate_impact">
+                                <td><span t-field="climate_impact.health_id.name"/></td>
+                                <td><span t-field="climate_impact.climate_driver"/></td>
+                                <td><span t-field="climate_impact.exposure"/></td>
+                                <td><span t-field="climate_impact.health_outcome"/></td>
+                                <td><span t-field="climate_impact.impact"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <t t-set="crops" t-value="doc.crop_ids"/>
+                            <tr>
+                                <td style="text-align: left;" colspan="4">
+                                    <strong><h3>Crops</h3></strong>
+                                </td>
+                            </tr>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Crop Period Start</th>
+                                <th>Crop Period End</th>
+                                <th>Warehouse</th>
+                                <th>Stock Location</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="daily_weather_tbody">
+                            <tr t-foreach="doc.crop_ids" t-as="crops">
+                                <td><span t-field="crops.name"/></td>
+                                <td><span t-field="crops.crop_period_start"/></td>
+                                <td><span t-field="crops.crop_period_end"/></td>
+                                <td><span t-field="crops.warehouse_id"/></td>
+                                <td><span t-field="crops.location_id"/></td>
+                                <td><span t-field="crops.description"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <t t-set="crop_request" t-value="doc.crop_request_ids"/>
+                            <tr>
+                                <td style="text-align: left;" colspan="4">
+                                    <strong><h3>Crop Requests</h3></strong>
+                                </td>
+                            </tr>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Name</th>
+                                <th>Crop</th>
+                                <th>Project</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Supervisor</th>
+                                <th>Responsible User</th>
+                                <th>Company</th>
+                                <th>State</th>
+                            </tr>
+                        </thead>
+                        <tbody class="daily_weather_tbody">
+                            <tr t-foreach="doc.crop_request_ids" t-as="crop_request">
+                                <td><span t-field="crop_request.number"/></td>
+                                <td><span t-field="crop_request.crop_ids"/></td>
+                                <td><span t-field="crop_request.name"/></td>
+                                <td><span t-field="crop_request.project_id"/></td>
+                                <td><span t-field="crop_request.start_date"/></td>
+                                <td><span t-field="crop_request.end_date"/></td>
+                                <td><span t-field="crop_request.user_id"/></td>
+                                <td><span t-field="crop_request.responsible_user_id"/></td>
+                                <td><span t-field="crop_request.company_id"/></td>
+                                <td><span t-field="crop_request.state"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <td><span t-field="doc.description"/></td>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>Internal Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <td><span t-field="doc.internal_notes"/></td>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                </t>
+            </t>
+            </t>
+        </template>
+        </data>
+</odoo>

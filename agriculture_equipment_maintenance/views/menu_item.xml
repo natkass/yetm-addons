@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <menuitem
+        id="custom_equipment_menu"
+        name="Equipments"
+        action="maintenance.hr_equipment_action"
+        parent="odoo_agriculture.configuration_topmenu"/>
+
+    <menuitem
+        id="custom_maintenance_checklist_menu"
+        name="Maintenance Checklists"
+        action="asset_mro_maintenance_management.action_equipment_checklist"
+        parent="odoo_agriculture.configuration_topmenu"/>
+
+</odoo>

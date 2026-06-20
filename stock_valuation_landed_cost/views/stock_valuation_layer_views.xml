@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherit stock valuation layer tree view to add landed_cost_amount -->
+    <record id="stock_valuation_layer_tree_inherit" model="ir.ui.view">
+        <field name="name">stock.valuation.layer.tree.inherit.landed.cost</field>
+        <field name="model">stock.valuation.layer</field>
+        <field name="inherit_id" ref="stock_account.stock_valuation_layer_tree"/>
+        <field name="arch" type="xml">
+            <field name="value" position="after">
+                <field name="landed_cost_amount" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Inherit stock valuation layer form view to add landed_cost_amount -->
+    <record id="stock_valuation_layer_form_inherit" model="ir.ui.view">
+        <field name="name">stock.valuation.layer.form.inherit.landed.cost</field>
+        <field name="model">stock.valuation.layer</field>
+        <field name="inherit_id" ref="stock_account.stock_valuation_layer_form"/>
+        <field name="arch" type="xml">
+            <field name="value" position="after">
+                <field name="landed_cost_amount"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

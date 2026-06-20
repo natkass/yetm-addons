@@ -1,0 +1,13 @@
+<odoo>
+    <record id="approvals_approval_category_view_form" model="ir.ui.view">
+        <field name="name">approval.category.form</field>
+        <field name="model">approval.category</field>
+        <field name="inherit_id" ref="approvals.approval_category_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                <field name="to_be_billed"/>
+                <field name="advance"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

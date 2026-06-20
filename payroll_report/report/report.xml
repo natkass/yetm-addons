@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="report_payroll_document1" model="ir.actions.report">
+            <field name="name">payroll report Excell</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">payroll_report.report_payroll_document</field>
+            <field name="report_file">payroll_report.report_payroll_document</field>
+            <field name="print_report_name">'Pay roll - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="hr_payroll.model_hr_payslip_run"/>
+        </record>
+
+       
+
+   <record id="payroll_report_pdf" model="ir.actions.report">
+       <field name="name">Payroll report PDF</field>
+       <field name="model">hr.payslip.run</field>
+       <field name="report_type">qweb-pdf</field>
+       <field name="report_name">payroll_report.payroll_report_pdf1</field>
+       <field name="report_file">payroll_report.payroll_report_pdf1</field>
+       <field name="print_report_name">'Product Report - %s' % (object.name)</field>
+       <field name="binding_model_id" ref="hr_payroll.model_hr_payslip_run"/>
+       
+   </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem name="Currency rates" id="import_fees.taux_change" parent="stock.menu_stock_config_settings"
+                  groups="stock.group_stock_manager" sequence="11"
+                  action="base.action_currency_form"/>
+    </data>
+</odoo>

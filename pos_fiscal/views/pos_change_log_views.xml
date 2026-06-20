@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_pos_change_log" model="ir.actions.act_window">
+        <field name="name">POS Change Logs</field>
+        <field name="res_model">pos.change.log</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_pos_change_log_tree" model="ir.ui.view">
+        <field name="name">pos.change.log.tree</field>
+        <field name="model">pos.change.log</field>
+        <field name="arch" type="xml">
+            <tree string="POS Change Logs">
+                <field name="date"/>
+                <field name="pos_order_id"/>
+                <field name="fs_no"/>
+                <field name="fiscal_mrc"/>
+                <field name="change_type"/>
+                <field name="old_value"/>
+                <field name="new_value"/>
+                <field name="daily_report_id"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_pos_change_log_form" model="ir.ui.view">
+        <field name="name">pos.change.log.form</field>
+        <field name="model">pos.change.log</field>
+        <field name="arch" type="xml">
+            <form string="POS Change Log">
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                        <field name="pos_order_id"/>
+                        <field name="fs_no"/>
+                        <field name="fiscal_mrc"/>
+                        <field name="change_type"/>
+                        <field name="old_value"/>
+                        <field name="new_value"/>
+                        <field name="daily_report_id"/>
+                        <field name="company_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo> 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="telebirrqr_payment_form" model="ir.actions.act_window">
+        <field name="name">TelebirrQRPayment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">telebirrqr.payment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No Telebirr QR Payment Found
+            </p>
+        </field>
+    </record>
+    <record id="telebirr_payment_tree" model="ir.ui.view">
+        <field name="name">payment.telebirrqr.tree</field>
+        <field name="model">telebirrqr.payment</field>
+        <field name="arch" type="xml">
+            <tree string="Telebirr QR Report" create="0" sample="1">
+                <field name="date" />
+                <field name="txref" />
+                <field name="trace_no" />
+                <field name="price" />
+                <field name="status" />
+                <field name="session_id" />
+            </tree>
+        </field>
+    </record>
+    <menuitem id="telebirrqr_payment" name="Telebirr QR Report"
+        parent="point_of_sale.menu_point_rep"
+        action="telebirrqr_payment_form" sequence="11" />
+</odoo>

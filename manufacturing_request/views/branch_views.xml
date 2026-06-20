@@ -1,0 +1,56 @@
+<odoo>
+    <!-- Action -->
+        <record id="action_res_branch" model="ir.actions.act_window">
+            <field name="name">Branches</field>
+            <field name="res_model">res.branch</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new branch record.
+                </p>
+            </field>
+        </record>
+
+        
+        <!-- Tree View -->
+        <record id="view_res_branch_tree" model="ir.ui.view">
+            <field name="name">res.branch.tree</field>
+            <field name="model">res.branch</field>
+            <field name="arch" type="xml">
+                <tree string="Branches">
+                    <field name="name"/>
+                    <!-- <field name="create_date"/> -->
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_res_branch_form" model="ir.ui.view">
+            <field name="name">res.branch.form</field>
+            <field name="model">res.branch</field>
+            <field name="arch" type="xml">
+                <form string="Branch">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        
+        <menuitem id="menu_res_branch"
+                name="Branches"
+                parent="sale.menu_sale_config"
+                action="action_res_branch"
+                sequence="20"/>
+
+
+</odoo>

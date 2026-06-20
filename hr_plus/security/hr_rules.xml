@@ -1,0 +1,764 @@
+<odoo>
+  <!-- Everyone in the chain can READ all overtime records -->
+  <record id="rule_hr_plus_overtime_read_all" model="ir.rule">
+    <field name="name">OT read all</field>
+    <field name="model_id" ref="model_hr_overtime"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_overtime_submit')),
+                                (4, ref('hr_plus.group_hr_plus_overtime_verify')),
+                                (4, ref('hr_plus.group_hr_plus_overtime_approve')),
+                                (4, ref('hr_plus.group_hr_plus_user')),
+                                (4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Submitters: can write their own Draft/Submitted -->
+  <record id="rule_hr_plus_overtime_submit_write_own_draft" model="ir.rule">
+    <field name="name">OT submit write own draft/submitted</field>
+    <field name="model_id" ref="model_hr_overtime"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_user'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Verifiers: can write records in 'submitted'/'hr_verified' -->
+  <record id="rule_hr_plus_overtime_verify_write" model="ir.rule">
+    <field name="name">OT verify write</field>
+    <field name="model_id" ref="model_hr_overtime"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_user')),
+                                (4, ref('hr_plus.group_hr_plus_overtime_verify'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Approvers: can write records in 'hr_verified'/'approved' -->
+  <record id="rule_hr_plus_overtime_approve_write" model="ir.rule">
+    <field name="name">OT approve write</field>
+    <field name="model_id" ref="model_hr_overtime"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_user')),
+                                (4, ref('hr_plus.group_hr_plus_overtime_approve'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Manager: full access to everything -->
+  <record id="rule_hr_plus_overtime_manager_full" model="ir.rule">
+    <field name="name">OT manager full</field>
+    <field name="model_id" ref="model_hr_overtime"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+  </record>
+
+  <!-- ========= Same logic for hr.overtime.line ========= -->
+
+  <!-- Read all lines -->
+  <record id="rule_hr_plus_overtime_line_read_all" model="ir.rule">
+    <field name="name">OT line read all</field>
+    <field name="model_id" ref="model_hr_overtime_line"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_overtime_submit')),
+                                (4, ref('hr_plus.group_hr_plus_overtime_verify')),
+                                (4, ref('hr_plus.group_hr_plus_overtime_approve')),
+                                (4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Submitter: can edit their own lines while parent is draft/submitted -->
+  <record id="rule_hr_plus_overtime_line_submit_write_own" model="ir.rule">
+    <field name="name">OT line submit write own</field>
+    <field name="model_id" ref="model_hr_overtime_line"/>
+    
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_overtime_submit'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Verifier can edit lines while parent is submitted/hr_verified -->
+  <record id="rule_hr_plus_overtime_line_verify_write" model="ir.rule">
+    <field name="name">OT line verify write</field>
+    <field name="model_id" ref="model_hr_overtime_line"/>
+    
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_overtime_verify'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+  </record>
+
+  <!-- Approver can edit lines while parent is hr_verified/approved -->
+  <record id="rule_hr_plus_overtime_line_approve_write" model="ir.rule">
+    <field name="name">OT line approve write</field>
+    <field name="model_id" ref="model_hr_overtime_line"/>
+    
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_overtime_approve'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Manager full -->
+  <record id="rule_hr_plus_overtime_line_manager_full" model="ir.rule">
+    <field name="name">OT line manager full</field>
+    <field name="model_id" ref="model_hr_overtime_line"/>
+    
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+  </record>
+
+
+
+
+
+  <!-- Everyone in the chain can READ all incentive records -->
+  <record id="rule_hr_plus_incentive_read_all" model="ir.rule">
+    <field name="name">OT read all</field>
+    <field name="model_id" ref="model_hr_incentive"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_incentive_submit')),
+                                (4, ref('hr_plus.group_hr_plus_incentive_verify')),
+                                (4, ref('hr_plus.group_hr_plus_incentive_approve')),
+                                (4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Submitters: can write their own Draft/Submitted -->
+  <record id="rule_hr_plus_incentive_submit_write_own_draft" model="ir.rule">
+    <field name="name">OT submit write own draft/submitted</field>
+    <field name="model_id" ref="model_hr_incentive"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_incentive_submit'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Verifiers: can write records in 'submitted'/'hr_verified' -->
+  <record id="rule_hr_plus_incentive_verify_write" model="ir.rule">
+    <field name="name">OT verify write</field>
+    <field name="model_id" ref="model_hr_incentive"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_incentive_verify'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Approvers: can write records in 'hr_verified'/'approved' -->
+  <record id="rule_hr_plus_incentive_approve_write" model="ir.rule">
+    <field name="name">OT approve write</field>
+    <field name="model_id" ref="model_hr_incentive"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_incentive_approve'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Manager: full access to everything -->
+  <record id="rule_hr_plus_incentive_manager_full" model="ir.rule">
+    <field name="name">OT manager full</field>
+    <field name="model_id" ref="model_hr_incentive"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+  </record>
+
+  <!-- ========= Same logic for hr.incentive.line ========= -->
+
+  <!-- Read all lines -->
+  <record id="rule_hr_plus_incentive_line_read_all" model="ir.rule">
+    <field name="name">OT line read all</field>
+    <field name="model_id" ref="model_hr_incentive_line"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_incentive_submit')),
+                                (4, ref('hr_plus.group_hr_plus_incentive_verify')),
+                                (4, ref('hr_plus.group_hr_plus_incentive_approve')),
+                                (4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Submitter: can edit their own lines while parent is draft/submitted -->
+  <record id="rule_hr_plus_incentive_line_submit_write_own" model="ir.rule">
+    <field name="name">OT line submit write own</field>
+    <field name="model_id" ref="model_hr_incentive_line"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_incentive_submit'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Verifier can edit lines while parent is submitted/hr_verified -->
+  <record id="rule_hr_plus_incentive_line_verify_write" model="ir.rule">
+    <field name="name">OT line verify write</field>
+    <field name="model_id" ref="model_hr_incentive_line"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_incentive_verify'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Approver can edit lines while parent is hr_verified/approved -->
+  <record id="rule_hr_plus_incentive_line_approve_write" model="ir.rule">
+    <field name="name">OT line approve write</field>
+    <field name="model_id" ref="model_hr_incentive_line"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_incentive_approve'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Manager full -->
+  <record id="rule_hr_plus_incentive_line_manager_full" model="ir.rule">
+    <field name="name">OT line manager full</field>
+    <field name="model_id" ref="model_hr_incentive_line"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+  </record>
+
+
+<!-- Everyone in the chain can READ all daily_allowance records -->
+  <record id="rule_hr_plus_daily_allowance_read_all" model="ir.rule">
+    <field name="name">Daily allowance read all</field>
+    <field name="model_id" ref="model_hr_daily_allowance"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_daily_allowance_submit')),
+                                (4, ref('hr_plus.group_hr_plus_daily_allowance_verify')),
+                                (4, ref('hr_plus.group_hr_plus_daily_allowance_approve')),
+                                (4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Submitters: can write their own Draft/Submitted -->
+  <record id="rule_hr_plus_daily_allowance_submit_write_own_draft" model="ir.rule">
+    <field name="name">Daily allowance submit write own draft/submitted</field>
+    <field name="model_id" ref="model_hr_daily_allowance"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_daily_allowance_submit'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Verifiers: can write records in 'submitted'/'hr_verified' -->
+  <record id="rule_hr_plus_daily_allowance_verify_write" model="ir.rule">
+    <field name="name">Daily allowance verify write</field>
+    <field name="model_id" ref="model_hr_daily_allowance"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_daily_allowance_verify'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Approvers: can write records in 'hr_verified'/'approved' -->
+  <record id="rule_hr_plus_daily_allowance_approve_write" model="ir.rule">
+    <field name="name">Daily allowance approve write</field>
+    <field name="model_id" ref="model_hr_daily_allowance"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_daily_allowance_approve'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Manager: full access to everything -->
+  <record id="rule_hr_plus_daily_allowance_manager_full" model="ir.rule">
+    <field name="name">Daily allowance manager full</field>
+    <field name="model_id" ref="model_hr_daily_allowance"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+  </record>
+
+  <!-- ========= Same logic for hr.daily_allowance.line ========= -->
+
+  <!-- Read all lines -->
+  <record id="rule_hr_plus_daily_allowance_line_read_all" model="ir.rule">
+    <field name="name">Daily allowance line read all</field>
+    <field name="model_id" ref="model_hr_daily_allowance_line"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_daily_allowance_submit')),
+                                (4, ref('hr_plus.group_hr_plus_daily_allowance_verify')),
+                                (4, ref('hr_plus.group_hr_plus_daily_allowance_approve')),
+                                (4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Submitter: can edit their own lines while parent is draft/submitted -->
+  <record id="rule_hr_plus_daily_allowance_line_submit_write_own" model="ir.rule">
+    <field name="name">Daily allowance line submit write own</field>
+    <field name="model_id" ref="model_hr_daily_allowance_line"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_daily_allowance_submit'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Verifier can edit lines while parent is submitted/hr_verified -->
+  <record id="rule_hr_plus_daily_allowance_line_verify_write" model="ir.rule">
+    <field name="name">Daily allowance line verify write</field>
+    <field name="model_id" ref="model_hr_daily_allowance_line"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_daily_allowance_verify'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Approver can edit lines while parent is hr_verified/approved -->
+  <record id="rule_hr_plus_daily_allowance_line_approve_write" model="ir.rule">
+    <field name="name">Daily allowance line approve write</field>
+    <field name="model_id" ref="model_hr_daily_allowance_line"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_daily_allowance_approve'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Manager full -->
+  <record id="rule_hr_plus_daily_allowance_line_manager_full" model="ir.rule">
+    <field name="name">Daily allowance line manager full</field>
+    <field name="model_id" ref="model_hr_daily_allowance_line"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+  </record>
+
+
+
+<!-- Approvers: can write records in 'hr_verified'/'approved' -->
+  <record id="rule_hr_plus_driver_incentive_approve_write" model="ir.rule">
+    <field name="name">Driver incentive approve write</field>
+    <field name="model_id" ref="model_hr_driver_incentive"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_driver_incentive_approve'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Manager: full access to everything -->
+  <record id="rule_hr_plus_driver_incentive_manager_full" model="ir.rule">
+    <field name="name">Driver incentive manager full</field>
+    <field name="model_id" ref="model_hr_driver_incentive"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+  </record>
+
+  <!-- ========= Same logic for hr.driver_incentive.line ========= -->
+
+  <!-- Read all lines -->
+  <record id="rule_hr_plus_driver_incentive_line_read_all" model="ir.rule">
+    <field name="name">Driver incentive line read all</field>
+    <field name="model_id" ref="model_hr_driver_incentive_line"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_driver_incentive_submit')),
+                                (4, ref('hr_plus.group_hr_plus_driver_incentive_verify')),
+                                (4, ref('hr_plus.group_hr_plus_driver_incentive_approve')),
+                                (4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Submitter: can edit their own lines while parent is draft/submitted -->
+  <record id="rule_hr_plus_driver_incentive_line_submit_write_own" model="ir.rule">
+    <field name="name">Driver incentive line submit write own</field>
+    <field name="model_id" ref="model_hr_driver_incentive_line"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_driver_incentive_submit'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Verifier can edit lines while parent is submitted/hr_verified -->
+  <record id="rule_hr_plus_driver_incentive_line_verify_write" model="ir.rule">
+    <field name="name">Driver incentive line verify write</field>
+    <field name="model_id" ref="model_hr_driver_incentive_line"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_driver_incentive_verify'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Approver can edit lines while parent is hr_verified/approved -->
+  <record id="rule_hr_plus_driver_incentive_line_approve_write" model="ir.rule">
+    <field name="name">Driver incentive line approve write</field>
+    <field name="model_id" ref="model_hr_driver_incentive_line"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_driver_incentive_approve'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Manager full -->
+  <record id="rule_hr_plus_driver_incentive_line_manager_full" model="ir.rule">
+    <field name="name">Driver incentive line manager full</field>
+    <field name="model_id" ref="model_hr_driver_incentive_line"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+  </record>
+
+  
+  <!-- Approvers: can write records in 'hr_verified'/'approved' -->
+  <record id="rule_hr_plus_penalty_approve_write" model="ir.rule">
+    <field name="name">Penalty approve write</field>
+    <field name="model_id" ref="model_hr_penalty"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_penalty_approve'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Manager: full access to everything -->
+  <record id="rule_hr_plus_penalty_manager_full" model="ir.rule">
+    <field name="name">Penalty manager full</field>
+    <field name="model_id" ref="model_hr_penalty"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+  </record>
+
+  <!-- ========= Same logic for hr.penalty.line ========= -->
+
+  <!-- Read all lines -->
+  <record id="rule_hr_plus_penalty_line_read_all" model="ir.rule">
+    <field name="name">Penalty line read all</field>
+    <field name="model_id" ref="model_hr_penalty_line"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_penalty_submit')),
+                                (4, ref('hr_plus.group_hr_plus_penalty_verify')),
+                                (4, ref('hr_plus.group_hr_plus_penalty_approve')),
+                                (4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Submitter: can edit their own lines while parent is draft/submitted -->
+  <record id="rule_hr_plus_penalty_line_submit_write_own" model="ir.rule">
+    <field name="name">Penalty line submit write own</field>
+    <field name="model_id" ref="model_hr_penalty_line"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_penalty_submit'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Verifier can edit lines while parent is submitted/hr_verified -->
+  <record id="rule_hr_plus_penalty_line_verify_write" model="ir.rule">
+    <field name="name">Penalty line verify write</field>
+    <field name="model_id" ref="model_hr_penalty_line"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_penalty_verify'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Approver can edit lines while parent is hr_verified/approved -->
+  <record id="rule_hr_plus_penalty_line_approve_write" model="ir.rule">
+    <field name="name">Penalty line approve write</field>
+    <field name="model_id" ref="model_hr_penalty_line"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_penalty_approve'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Manager full -->
+  <record id="rule_hr_plus_penalty_line_manager_full" model="ir.rule">
+    <field name="name">Penalty line manager full</field>
+    <field name="model_id" ref="model_hr_penalty_line"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+  </record>
+
+  <!-- Manager: full access to everything -->
+  <record id="rule_hr_plus_loan_manager_full" model="ir.rule">
+    <field name="name">Loan manager full</field>
+    <field name="model_id" ref="model_hr_loan"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+  </record>
+
+  <!-- ========= Same logic for hr.loan.line ========= -->
+
+  <!-- Read all lines -->
+  <record id="rule_hr_plus_loan_line_read_all" model="ir.rule">
+    <field name="name">Loan line read all</field>
+    <field name="model_id" ref="model_hr_loan_line"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_loan_submit')),
+                                (4, ref('hr_plus.group_hr_plus_loan_verify')),
+                                (4, ref('hr_plus.group_hr_plus_loan_approve')),
+                                (4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Submitter: can edit their own lines while parent is draft/submitted -->
+  <record id="rule_hr_plus_loan_line_submit_write_own" model="ir.rule">
+    <field name="name">Loan line submit write own</field>
+    <field name="model_id" ref="model_hr_loan_line"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_loan_submit'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Verifier can edit lines while parent is submitted/hr_verified -->
+  <record id="rule_hr_plus_loan_line_verify_write" model="ir.rule">
+    <field name="name">Loan line verify write</field>
+    <field name="model_id" ref="model_hr_loan_line"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_loan_verify'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Approver can edit lines while parent is hr_verified/approved -->
+  <record id="rule_hr_plus_loan_line_approve_write" model="ir.rule">
+    <field name="name">Loan line approve write</field>
+    <field name="model_id" ref="model_hr_loan_line"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_loan_approve'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Manager full -->
+  <record id="rule_hr_plus_loan_line_manager_full" model="ir.rule">
+    <field name="name">Loan line manager full</field>
+    <field name="model_id" ref="model_hr_loan_line"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+  </record>
+
+  <!-- <record id="rule_hr_plus_advance_manager_full" model="ir.rule">
+    <field name="name">Advance Manager Full Access</field>
+    <field name="model_id" ref="hr_plus.model_hr_advance"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+  </record>
+
+  <record id="rule_hr_plus_advance_submitter" model="ir.rule">
+    <field name="name">Advance Submitter - Own Records</field>
+    <field name="model_id" ref="hr_plus.model_hr_advance"/>
+    <field name="domain_force">[('employee_id.user_id', '=', user.id), ('state', 'in', ['draft', 'submitted'])]</field>
+    
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <record id="rule_hr_plus_advance_verifier" model="ir.rule">
+    <field name="name">Advance Verifier</field>
+    <field name="model_id" ref="hr_plus.model_hr_advance"/>
+    <field name="domain_force">[('state', '=', 'submitted')]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_advance_verify'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record> -->
+
+
+
+  <!-- Manager: full access to everything -->
+  <record id="rule_hr_plus_advance_manager_full" model="ir.rule">
+    <field name="name">Advance manager full</field>
+    <field name="model_id" ref="model_hr_advance"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+  </record>
+
+  <!-- ========= Same logic for hr.advance ========= -->
+
+  <!-- Read all lines -->
+  <record id="rule_hr_plus_advance_read_all" model="ir.rule">
+    <field name="name">Advance line read all</field>
+    <field name="model_id" ref="model_hr_advance"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_advance_submit')),
+                                (4, ref('hr_plus.group_hr_plus_advance_verify')),
+                                (4, ref('hr_plus.group_hr_plus_advance_approve')),
+                                (4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Submitter: can edit their own  while parent is draft/submitted -->
+  <record id="rule_hr_plus_advance_submit_write_own" model="ir.rule">
+    <field name="name">Advance line submit write own</field>
+    <field name="model_id" ref="model_hr_advance"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_advance_submit'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Verifier can edit  while parent is submitted/hr_verified -->
+  <record id="rule_hr_plus_advance_erify_write" model="ir.rule">
+    <field name="name">Advance line verify write</field>
+    <field name="model_id" ref="model_hr_advance"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_advance_verify'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Approver can edit while parent is hr_verified/approved -->
+  <record id="rule_hr_plus_advance_approve_write" model="ir.rule">
+    <field name="name">Advance approve write</field>
+    <field name="model_id" ref="model_hr_advance"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_advance_approve'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- Manager full -->
+  <record id="rule_hr_plus_advance_manager_full" model="ir.rule">
+    <field name="name">Advance manager full</field>
+    <field name="model_id" ref="model_hr_advance"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('hr_plus.group_hr_plus_manager'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+  </record>
+
+</odoo>

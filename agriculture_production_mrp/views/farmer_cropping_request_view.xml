@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_farmer_cropping_request_form_inherit_sale" model="ir.ui.view">
+        <field name="name">farmer.cropping.request.sale</field>
+        <field name="model">farmer.cropping.request</field>
+        <field name="inherit_id" ref="odoo_agriculture.view_farmer_cropping_request_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='project_id']" position="after">
+                <field name='production_id'/>
+                <field name='custom_bom_id'/>
+                <!-- <field name='routing_id'/> -->
+                <field name='manufacturing_quantity'/>
+                <field name='manufacturing_uom_id'/>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                     <button name="action_create_mrp"
+                        type="object"
+                        string="Create Manufacturing Order"
+                        class="btn-primary" invisible="state == 'new' and not production_id"/>
+                        <!-- class="btn-primary" attrs="{'invisible':['|',('state', '=', 'new'),('production_id', '!=', False)]}"/> -->
+            </xpath>
+            <xpath expr="//button[@name='view_project_request']" position="after">
+                    <button name="view_mrp_request"
+                    type="object" 
+                    string="Manufacturing Order"
+                    class="oe_stat_button" 
+                    icon="fa-pencil-square-o"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

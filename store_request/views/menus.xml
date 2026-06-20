@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_transfer_requester_tree" model="ir.ui.view">
+        <field name="name">transfer.request.form</field>
+        <field name="model">transfer.request</field>
+        <field name="arch" type="xml">
+            <form string="Transfer">
+
+                <header>
+                    <field name="has_unavailable_items" invisible="1"/>
+                    <field name="user_can_edit" invisible="1"/>
+                    <button name="action_submit"
+                            invisible="state != 'draft'"
+                            string="Request" type="object" class="oe_highlight"/>
+                    <button name="action_reset_to_draft"
+                            invisible="state != 'to_check' or purchase_request_id"
+                            string="Reset to Draft" type="object"/>
+                    <button name="action_create_purchase_request"
+                            string="Create Purchase Request"
+                            type="object"
+                            class="btn-primary"
+                            invisible="not has_unavailable_items or state not in ('to_check', 'partial') or purchase_request_id"/>
+                    <button name="action_confirm"
+                            invisible="state != 'to_check'"
+                            string="Confirm" type="object" class="oe_highlight"/>
+                    <button name="action_send_remaining"
+                            invisible="state != 'partial'"
+                            string="Send Remaining" type="object" class="oe_highlight"/>
+                    <button name="action_done"
+                            invisible="state != 'partial'"
+                            string="Done" type="object"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                            invisible="1"/>
+                    <button name="action_print"
+                            invisible="1"
+                            string="Print" type="object"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,to_check,approved,partial,done" nolabel="1"/>
+                </header>
+
+                <sheet>
+
+                    <!-- to be used -->
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"
+                                   invisible="name=='/'"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="picking_type_id" readonly="state != 'draft'" options="{'no_open': True}"/>
+                            <field name="location_id" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'"/>
+                            <field name="location_dest_id" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'"/>
+                            <field name="purchase_request_id" readonly="1" invisible="not purchase_request_id"/>
+                            <field name="stock_picking" readonly="1" string="Transfer" invisible="not stock_picking"/>
+                            <field name="stock_picking_remaining_id" readonly="1" string="Remaining Transfer" invisible="not stock_picking_remaining_id"/>
+                        </group>
+                        <group>
+                            <label for="scheduled_date"/>
+                            <div class="o_row">
+                                <field name="scheduled_date" readonly="state != 'draft'"/>
+                            </div>
+                            <field name="date" string="Effective Date" readonly="state != 'draft'"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Items" name="items">
+                            <field name="item_ids" mode="tree,kanban"
+                                   context="{'default_date': scheduled_date, 'default_picking_type_id': picking_type_id, 'default_location_id': location_id, 'default_location_dest_id': location_dest_id, 'parent_state': state, 'parent_user_can_edit': user_can_edit}">
+                                <tree string="Transfer Items" editable="bottom"
+                                      decoration-danger="available_in_store==False">
+                                    <control>
+                                        <create string="Add a product"/>
+                                        <button name="action_add_from_catalog" string="Catalog" type="object" class="px-4 btn-link" context="{'order_id': parent.id}"/>
+                                    </control>
+                                    <field name="available_in_store" column_invisible="True" invisible="1"/>
+                                    <field name="number" readonly="1" string="#"/>
+                                    <field name="user_can_receive" column_invisible="True" invisible="1"/>
+                                    <field name="user_can_send" column_invisible="True" invisible="1"/>
+                                    <field name="product_id" required="1" context="{'default_type': 'product'}" readonly="parent.state != 'draft'" options="{'no_open': True}"/>
+                                    <field name="products_availability" string="Available Amount In source"/>
+                                    <field name="is_transferred" string="Transferred" readonly="1"/>
+                                    <field name="demand" readonly="parent.state == 'to_check' or parent.state == 'approved' or parent.state == 'partial'"/>
+                                    <field name="sent" column_invisible="True" invisible="1"/>
+                                    <field name="received" column_invisible="True" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <group>
+                                <field name="user_id"/>
+                                <field name="approved_id"/>
+                                <field name="received_id" invisible="1"/>
+                                <field name="canceled_id" invisible="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <!-- ✅ Added chatter block -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="view_transfer_requester_list" model="ir.ui.view">
+        <field name="name">transfer.request.tree</field>
+        <field name="model">transfer.request</field>
+        <field name="arch" type="xml">
+            <tree string="Transfer Requests">
+                <field name="name"/>
+                <field name="location_id" string="Source"/>
+                <field name="location_dest_id" string="Destination"/>
+                <field name="scheduled_date"/>
+                <field name="user_id" string="Requested By"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'to_check'" decoration-success="state == 'approved'" decoration-primary="state == 'partial'" decoration-muted="state in ('done', 'cancel')"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_transfer_requester" model="ir.actions.act_window">
+        <field name="name">Internal Transfer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">transfer.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Your Transfer Request Here!
+            </p>
+        </field>
+    </record>
+
+    <record id="view_picking_type_form_inherit_transfer_request" model="ir.ui.view">
+        <field name="name">stock.picking.type.form.inherit.transfer.request</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='create_backorder']" position="after">
+                <field name="allow_confirm_without_qty"/>
+            </xpath>
+        </field>
+    </record>
+
+    <data>
+        <record id="view_res_users_inherit" model="ir.ui.view">
+            <field name="name">res.users.form.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="x_studio_locations" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+
+    <menuitem name="Store Request"
+              id="transfer_request_menu_root"
+              web_icon="store_request,static/description/icon.png"
+              sequence="50"/>
+
+    <menuitem action="action_transfer_requester"
+              name="Store Requests"
+              id="transfer_request_menu"
+              parent="transfer_request_menu_root"
+              sequence="1"/>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_flex_bank_reconcile_user" model="res.groups">
+        <field name="name">Flex Bank Reconcile</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+    <data noupdate="1">
+        <record id="flex_bank_reconcile_own_record_rule" model="ir.rule">
+            <field name="name">Flex Bank Reconcile: Company Records Only</field>
+            <field name="model_id" ref="model_flex_bank_reconcile"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="first_eight_hour_form_view">
+            <field name="name">first.eight.hours.form</field>
+            <field name="model">first.eight.hours</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="forecast_id"/>
+                                <field name='col_1'/>
+                                <field name='col_2'/>
+                                <field name='col_3'/>
+                                <field name='col_4'/>
+                            </group>
+                            <group>
+                                <field name='col_5'/>
+                                <field name='col_6'/>
+                                <field name='col_7'/>
+                                <field name='col_8'/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="first_eight_hour_tree_view">
+            <field name="name">first.eight.hours.tree</field>
+            <field name="model">first.eight.hours</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="forecast_id"/>
+                    <field name='col_1'/>
+                    <field name='col_2'/>
+                    <field name='col_3'/>
+                    <field name='col_4'/>
+                    <field name='col_5'/>
+                    <field name='col_6'/>
+                    <field name='col_7'/>
+                    <field name='col_8'/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_first_eight_hour_weather" model="ir.actions.act_window">
+            <field name="name">first.eight.hours</field>
+            <field name="res_model">first.eight.hours</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">form,tree</field>
+        </record>
+        
+    </data>
+</odoo>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_pos_daily_report" model="ir.actions.act_window">
+        <field name="name">POS Daily Report</field>
+        <field name="res_model">pos.daily.report</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_pos_daily_report_tree" model="ir.ui.view">
+        <field name="name">pos.daily.report.tree</field>
+        <field name="model">pos.daily.report</field>
+        <field name="arch" type="xml">
+            <tree string="POS Daily Reports">
+                <field name="date"/>
+                <field name="fiscal_mrc"/>
+                <field name="company_id"/>
+                <field name="pos_order_count"/>
+                <field name="invoice_count"/>
+                <field name="refund_count"/>
+                <field name="unmatched_fs_count"/>
+                <field name="session_total"/>
+                <field name="refund_total"/>
+                <field name="net_order_total"/>
+                <field name="net_invoice_total"/>
+                <field name="z_report_total"/>
+                <field name="zreport_sales_total"/>
+                <field name="zreport_refund_total"/>
+                <field name="net_zreport_total"/>
+                <field name="total_mismatch"/>
+                <field name="updated_orders"/>
+                <field name="recreated_orders"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_pos_daily_report_form" model="ir.ui.view">
+        <field name="name">pos.daily.report.form</field>
+        <field name="model">pos.daily.report</field>
+        <field name="arch" type="xml">
+            <form string="POS Daily Report">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="fiscal_mrc"/>
+                            <field name="company_id"/>
+                        </group>
+                        <group string="Summary">
+                            <field name="pos_order_count"/>
+                            <field name="invoice_count"/>
+                            <field name="refund_count"/>
+                            <field name="unmatched_fs_count"/>
+                            <field name="updated_orders"/>
+                            <field name="recreated_orders"/>
+                        </group>
+                        <group string="Totals">
+                            <field name="session_total"/>
+                            <field name="refund_total"/>
+                            <field name="net_order_total"/>
+                            <field name="net_invoice_total"/>
+                            <field name="z_report_total"/>
+                            <field name="zreport_sales_total"/>
+                            <field name="zreport_refund_total"/>
+                            <field name="net_zreport_total"/>
+                            <field name="total_mismatch"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Change Logs">
+                            <field name="change_log_ids">
+                                <tree>
+                                    <field name="date"/>
+                                    <field name="pos_order_id"/>
+                                    <field name="fs_no"/>
+                                    <field name="fiscal_mrc"/>
+                                    <field name="change_type"/>
+                                    <field name="old_value"/>
+                                    <field name="new_value"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button string="Close" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo> 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="pos_device_sync_templates" xml:space="preserve">
+    <t t-name="pos_device_sync.widget" owl="1">
+        <div>
+            <button type="button" class="btn btn-primary" t-on-click="syncDevice">Sync POS Device</button>
+        </div>
+    </t>
+</templates>

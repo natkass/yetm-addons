@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_mrp_order_creator" model="res.groups">
+        <field name="name">MRP Order Creator</field>
+        <field name="category_id" ref="mrp.module_category_manufacturing"/>
+        <field name="implied_ids" eval="[(4, ref('mrp.group_mrp_manager'))]"/>
+    </record>
+</odoo>

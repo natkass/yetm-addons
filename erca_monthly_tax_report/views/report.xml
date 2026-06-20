@@ -1,0 +1,20 @@
+<odoo>
+  <data>
+    <record id="report_erca_tax_xlsx" model="ir.actions.report">
+      <field name="name">ERCA Monthly Tax Excel Report</field>
+      <field name="model">erca.monthly.tax.wizard</field>
+      <field name="report_type">xlsx</field>
+      <field name="report_name">erca_monthly_tax_report.template</field>
+      <field name="report_file">erca_monthly_tax_report.template</field>
+      <field name="print_report_name">'ERCA Monthly Tax Report - %s' % (object.year)</field>
+    </record>
+    <record id="report_customer_tax_xlsx" model="ir.actions.report">
+      <field name="name">Customer Invoice Tax Report Excel</field>
+      <field name="model">customer.tax.wizard</field>
+      <field name="report_type">xlsx</field>
+      <field name="report_name">erca_monthly_tax_report.customer_template</field>
+      <field name="report_file">erca_monthly_tax_report.customer_template</field>
+      <field name="print_report_name">'Customer_Tax_Report_%s' % (object.year)</field>
+    </record>
+  </data>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Server Action for Testing Reconciliation -->
+        <record id="action_test_daily_reconciliation" model="ir.actions.server">
+            <field name="name">Test Daily Reconciliation</field>
+            <field name="model_id" ref="model_pos_order"/>
+            <field name="binding_model_id" ref="model_pos_order"/>
+            <field name="state">code</field>
+            <field name="code">
+# Run daily reconciliation
+result = model.queue_daily_reconciliation_all_companies()
+
+# Show notification
+action = {
+    'type': 'ir.actions.client',
+    'tag': 'display_notification',
+    'params': {
+        'title': 'Daily Reconciliation',
+        'message': f'Reconciliation started. Check Daily Reports for results.',
+        'type': 'success',
+        'sticky': False,
+    }
+}
+            </field>
+        </record>
+
+    </data>
+</odoo>

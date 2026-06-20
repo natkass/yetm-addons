@@ -1,0 +1,31 @@
+<odoo>
+  <record id="view_customer_tax_wizard_form" model="ir.ui.view">
+    <field name="name">customer.tax.wizard.form</field>
+    <field name="model">customer.tax.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Customer Invoice Tax Report">
+        <group>
+          <field name="date_from"/>
+          <field name="date_to"/>
+        </group>
+        <footer>
+          <button name="generate_report" type="object" string="Export Excel" class="btn-primary"/>
+          <button string="Cancel" special="cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_customer_tax_wizard" model="ir.actions.act_window">
+    <field name="name">Customer Tax Report</field>
+    <field name="res_model">customer.tax.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+
+  <menuitem id="menu_customer_tax_report"
+            name="Customer Invoice Tax Report"
+            parent="account.menu_finance_reports"
+            action="action_customer_tax_wizard"
+            sequence="21"/>
+</odoo>

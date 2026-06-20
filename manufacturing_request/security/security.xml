@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Security groups for Manufacturing Requests -->
+    <record id="group_manufacturing_request_user" model="res.groups">
+        <field name="name">Manufacturing Request User</field>
+        <field name="category_id" ref="base.module_category_manufacturing"/>
+    </record>
+
+    <record id="group_manufacturing_request_manager" model="res.groups">
+        <field name="name">Manufacturing Request Manager</field>
+        <field name="category_id" ref="base.module_category_manufacturing"/>
+        <field name="implied_ids" eval="[(4, ref('group_manufacturing_request_user'))]"/>
+    </record>
+</odoo>

@@ -1,0 +1,139 @@
+ <odoo>
+<record id="crv_format_view_form" model="ir.ui.view">
+<field name="name">crv.format.form</field>
+<field name="model">crv.format</field>
+<field name="arch" type="xml">
+<form string="CRV Format">
+<sheet>
+<div>
+<h1 class="mt0">
+<field name="name" placeholder="Name"/>
+</h1>
+</div>
+<group>
+<field name="font_size"/>
+<field name="font_css" invisible="1"/>
+</group>
+<group>
+<group>
+<separator string="Date"/>
+<field name="date_margin_top"/>
+<field name="date_margin_left"/>
+<field name="date_letter_space"/>
+<field name="date_css" invisible="1"/>
+</group>
+<group>
+<separator string="Name"/>
+<field name="name_margin_top"/>
+<field name="name_margin_left"/>
+<field name="name_letter_space"/>
+<field name="name_css" invisible="1"/>
+</group>
+<group>
+<separator string="TIN NO"/>
+<field name="tin_margin_top" string="Top Margin"/>
+<field name="tin_margin_left" string="Left Margin"/>
+<field name="tin_letter_space" string="Letter Spacing"/>
+<field name="tin_css" invisible="1"/>
+</group>
+<group>
+<separator string="Doc Ref"/>
+<field name="reason_margin_top" string="Top Margin"/>
+<field name="reason_margin_left" string="Left Margin"/>
+<field name="reason_letter_space" string="Letter Spacing"/>
+<field name="reason_css" invisible="1"/>
+</group>
+<group>
+<separator string="Amount in Word"/>
+<field name="amount_word_top" string="Top Margin"/>
+<field name="amount_word_left" string="Left Margin"/>
+<field name="amount_word_letter_space" string="Letter Spacing"/>
+<field name="amount_word_css" invisible="1"/>
+</group>
+<group>
+<separator string="VAT"/>
+<field name="amount_vat_top" string="Top Margin"/>
+<field name="amount_vat_left" string="Left Margin"/>
+<field name="amount_vat_space" string="Letter Spacing"/>
+<field name="amount_vat_css" invisible="1"/>
+</group>
+<group>
+<separator string="Doc Ref"/>
+<field name="amount_total_amount_top" string="Top Margin"/>
+<field name="amount_total_amount_left" string="Left Margin"/>
+<field name="amount_total_amount_space" string="Letter Spacing"/>
+<field name="amount_total_amount_css" invisible="1"/>
+</group>
+<group>
+<separator string="Amount In Digit"/>
+<field name="amount_digit_top" string="Top Margin"/>
+<field name="amount_digit_left" string="Left Margin"/>
+<field name="amount_digit_letter_space" string="Letter Spacing"/>
+<field name="amount_digit_css" invisible="1"/>
+</group>
+<group>
+<separator string="WHT"/>
+<field name="whtamount_top" string="Top Margin"/>
+<field name="whtamount_left" string="Left Margin"/>
+<field name="whtamount_letter_space" string="Letter Spacing"/>
+<field name="whtamount_css" invisible="1"/>
+</group>
+<group>
+<separator string="Payment Mode"/>
+<field name="payment_mode_margin_top"/>
+<field name="payment_mode_margin_left"/>
+<field name="payment_mode_letter_space"/>
+<field name="payment_mode_css" invisible="1"/>
+</group>
+<group>
+<separator string="Document"/>
+<field name="document_margin_top"/>
+<field name="document_margin_left"/>
+<field name="document_letter_space"/>
+<field name="document_css" invisible="1"/>
+</group>
+<group>
+<separator string="user"/>
+<field name="user_margin_top"/>
+<field name="user_margin_left"/>
+<field name="user_letter_space"/>
+<field name="user_css" invisible="1"/>
+</group>
+</group>
+</sheet>
+</form>
+</field>
+</record>
+<record id="crv_format_view_tree" model="ir.ui.view">
+<field name="name">crv.format.tree</field>
+<field name="model">crv.format</field>
+<field name="arch" type="xml">
+<tree string="CRV Print">
+<field name="name"/>
+<field name="font_size"/>
+</tree>
+</field>
+</record>
+<record id="crv_format_action" model="ir.actions.act_window">
+<field name="name">CRV Print</field>
+<field name="res_model">crv.format</field>
+<field name="view_mode">tree,form</field>
+<field name="help" type="html">
+<p class="oe_view_nocontent_create"> Click to create a new CRV printing configuration </p>
+</field>
+</record>
+<menuitem name="CRV Print" id="root_crv_format" parent="account.menu_finance_configuration" sequence="10"/>
+<menuitem name="CRV Print" id="crv_format_menu" parent="root_crv_format" action="crv_format_action"/>
+<record id="view_account_payment_form_inherit" model="ir.ui.view">
+<field name="name">account.journal.inherit.form</field>
+<field name="model">account.payment</field>
+<field name="inherit_id" ref="account.view_account_payment_form"/>
+<field name="arch" type="xml">
+<data>
+<xpath expr="//field[@name='ref']" position="after">
+<field name="crv_format" invisible="payment_type != 'inbound'"/>
+</xpath>
+</data>
+</field>
+</record>
+</odoo>

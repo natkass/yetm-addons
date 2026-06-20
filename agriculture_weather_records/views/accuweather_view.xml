@@ -1,0 +1,304 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="cropping_accuweather_form_view">
+            <field name="name">farmer.cropping.accuweather.form</field>
+            <field name="model">farmer.cropping.accuweather</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="number" placeholder="Number..."/>
+                            </h1>
+                            <group>
+                                <field name="location_id" placeholder="Location..."  context="{'search_default_customer':1, 'show_address': 1, 'default_is_company': True, 'show_vat': True}" widget="res_partner_many2one" options="{&quot;always_reload&quot;: True, &quot;no_quick_create&quot;: True}"/>
+                            </group>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="epoch_date"/>
+                                <field name='company_id' groups="base.group_multi_company"/>
+                                <field name='create_uid' readonly='1' string='Created By'/>
+                                <field name='create_date' readonly='1' string='Created Date'/>
+                            </group>
+                            <group>
+                                <field name="day_forcast"/>
+                                <field name="min_temp"/>
+                                <field name="max_temp"/>
+                            </group>
+                        </group>
+                        <notebook>
+                        <page string="Daily">
+                            <group>
+                                <group>
+                                    <field name="day_temperature"/>
+                                    <field name="day_precipitation"/>
+                                    <field name="day_internal_note"/>
+                                </group>
+                                <group>
+                                    <field name="night_tempurature"/>
+                                    <field name="night_precipitation"/>
+                                    <field name="night_internal_note"/>
+                                </group>
+                            </group>
+                            <group string='Description'>
+                                <field name="description" placeholder="Description..." nolabel="1" colspan="2"/>
+                            </group>
+                            <group string='Internal Notes'>
+                                <field name="internal_notes" placeholder="Internal Notes..." nolabel="1" colspan="2"/>
+                            </group>
+                        </page>
+                        <page string="Hourly">
+                        <group string='First Eight Hours'>
+                                    <field name="first_eight_hour_ids" widget="section_and_note_one2many" mode="tree" nolabel="1" colspan="2">
+                                        <form>
+                                            <sheet>
+                                                <group>
+                                                    <group>
+                                                            <field name="forecast_id"/>
+                                                            <field name='col_1'/>
+                                                            <field name='col_2'/>
+                                                            <field name='col_3'/>
+                                                            <field name='col_4'/>
+                                                    </group>
+                                                    <group>
+                                                            <field name='col_5'/>
+                                                            <field name='col_6'/>
+                                                            <field name='col_7'/>
+                                                            <field name='col_8'/>
+                                                    </group>
+                                                </group>
+                                            </sheet>
+                                        </form>
+                                        <tree string="First Eight Hours" editable="bottom"> 
+                                            <field name="forecast_id"/>
+                                            <field name='col_1'/>
+                                            <field name='col_2'/>
+                                            <field name='col_3'/>
+                                            <field name='col_4'/>
+                                            <field name='col_5'/>
+                                            <field name='col_6'/>
+                                            <field name='col_7'/>
+                                            <field name='col_8'/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group string='Second Eight Hours'>
+                                    <field name="second_eight_hour_ids" widget="section_and_note_one2many" mode="tree" nolabel="1" colspan="2">
+                                        <form>
+                                            <sheet>
+                                                <group>
+                                                    <group>
+                                                            <field name="forecast_id"/>
+                                                            <field name='col_1'/>
+                                                            <field name='col_2'/>
+                                                            <field name='col_3'/>
+                                                            <field name='col_4'/>
+                                                    </group>
+                                                    <group>
+                                                            <field name='col_5'/>
+                                                            <field name='col_6'/>
+                                                            <field name='col_7'/>
+                                                            <field name='col_8'/>
+                                                    </group>
+                                                </group>
+                                            </sheet>
+                                        </form>
+                                        <tree string="Second Eight Hours" editable="bottom"> 
+                                            <field name="forecast_id"/>
+                                            <field name='col_1'/>
+                                            <field name='col_2'/>
+                                            <field name='col_3'/>
+                                            <field name='col_4'/>
+                                            <field name='col_5'/>
+                                            <field name='col_6'/>
+                                            <field name='col_7'/>
+                                            <field name='col_8'/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group string='Third Eight Hours'>
+                                <field name="third_eight_hour_ids" widget="section_and_note_one2many" mode="tree" nolabel="1" colspan="2">
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                        <field name="forecast_id"/>
+                                                        <field name='col_1'/>
+                                                        <field name='col_2'/>
+                                                        <field name='col_3'/>
+                                                        <field name='col_4'/>
+                                                </group>
+                                                <group>
+                                                        <field name='col_5'/>
+                                                        <field name='col_6'/>
+                                                        <field name='col_7'/>
+                                                        <field name='col_8'/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    <tree string="Third Eight Hours" editable="bottom"> 
+                                        <field name="forecast_id"/>
+                                        <field name='col_1'/>
+                                        <field name='col_2'/>
+                                        <field name='col_3'/>
+                                        <field name='col_4'/>
+                                        <field name='col_5'/>
+                                        <field name='col_6'/>
+                                        <field name='col_7'/>
+                                        <field name='col_8'/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                            <page string="Morning">
+                                <group>
+                                    <group>
+                                        <field name="temp_type"/>
+                                        <field name="tempurature"/>
+                                    </group>
+                                    <group>
+                                        <field name="precipitation"/>
+                                        <field name="morning_internal_note"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Afternoon">
+                                <group>
+                                    <group>
+                                        <field name="afternoon_temp_type"/>
+                                        <field name="afternoon_tempurature"/>
+                                    </group>
+                                    <group>
+                                        <field name="afternoon_precipitation"/>
+                                        <field name="afternoon_internal_note"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Evening">
+                                <group>
+                                    <group>
+                                        <field name="evening_temp_type"/>
+                                        <field name="evening_tempurature"/>
+                                    </group>
+                                    <group>
+                                        <field name="evening_precipitation"/>
+                                        <field name="evening_internal_note"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Overnight">
+                                <group>
+                                    <group>
+                                        <field name="overnight_temp_type"/>
+                                        <field name="overnight_tempurature"/>
+                                    </group>
+                                    <group>
+                                        <field name="overnight_precipitation"/>
+                                        <field name="overnight_internal_note"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Climate Impacts">
+                                <field name="climate_impact_ids">
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="health_id"/>
+                                                    <field name="climate_driver"/>
+                                                    <field name="exposure"/>
+                                                </group>
+                                                <group>
+                                                    <field name="health_outcome"/>
+                                                    <field name="impact"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    <tree editable="bottom">
+                                        <field name='health_id' widget="selection"/>
+                                        <field name="climate_driver"/>
+                                        <field name="exposure"/>
+                                        <field name="health_outcome"/>
+                                        <field name="impact"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Crops">
+                                <group string='Crops'>
+                                    <field name='crop_ids' nolabel="1" colspan="2"/>
+                                </group>
+                                <group string='Crop Requests'>
+                                    <field name='crop_request_ids' nolabel="1" colspan="2"/>
+                                </group>
+                            </page>
+                    </notebook>
+                            
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="cropping_accuweather_tree_view">
+            <field name="name">farmer.cropping.accuweather.tree</field>
+            <field name="model">farmer.cropping.accuweather</field>
+            <field name="arch" type ="xml">
+                <tree>
+                    <field name="number"/>
+                    <field name="location_id"/>
+                    <field name="day_forcast"/>
+                    <field name="epoch_date"/>
+                    <field name="create_uid"/>
+                    <field name="create_date"/>
+                    <field name="min_temp"/>
+                    <field name="max_temp"/>
+                    <field name='company_id' groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="cropping_accuweather_search_view">
+            <field name="name">farmer.cropping.accuweather.search</field>
+            <field name="model">farmer.cropping.accuweather</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="number"/>
+                    <field name="location_id"/>
+                    <field name="epoch_date"/>
+                    <field name="create_uid"/>
+                    <field name="create_date"/>
+                    <field name='company_id' groups="base.group_multi_company"/>
+                    <field name="day_forcast"/>
+                    <field name="min_temp"/>
+                    <field name="max_temp"/>
+                    <group expand="0" string="Group By">
+                            <filter name="Location" context="{'group_by':'location_id'}"/>
+                            <filter name="Date" context="{'group_by':'epoch_date'}"/>
+                            <filter name="Created Date" context="{'group_by':'create_date'}"/>
+                            <filter name="Company" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
+                            <filter name="Day Forecast" context="{'group_by':'day_forcast'}"/>
+                            <filter name="Minimum Temperature(in F)" context="{'group_by':'min_temp'}"/>
+                            <filter name="Maximum Temperature(in F)" context="{'group_by':'max_temp'}"/>
+                        </group>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_farmer_cropping_accuweather" model="ir.actions.act_window">
+            <field name="name">Weather Records</field>
+            <field name="res_model">farmer.cropping.accuweather</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem name="Weather" id="menu_cropping_accuweather" parent="odoo_agriculture.agricultural_management_topmenu" sequence="7"/>
+        <menuitem name="Weather Records" id="sub_menu_cropping_accuweather" parent="menu_cropping_accuweather" sequence="1" action="action_farmer_cropping_accuweather"/>
+    </data>
+</odoo>

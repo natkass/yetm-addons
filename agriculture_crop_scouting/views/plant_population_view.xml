@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_croping_plantpopulation_form" model="ir.ui.view">
+            <field name="name">Crops Plantpopulation View</field>
+            <field name="model">cropping.plantpopulation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='name'/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+                       
+        <record id="view_croping_plantpopulation_tree" model="ir.ui.view">
+                <field name="name">Crops Plantpopulation Tree View</field>
+                <field name="model">cropping.plantpopulation</field>
+                <field name="arch" type="xml">
+                    <tree>
+                        <field name='name'/>
+                    </tree>
+                </field>
+        </record>
+
+        <record id="view_croping_plantpopulation_search" model="ir.ui.view">
+                <field name="name">Crops Plantpopulation Search View</field>
+                <field name="model">cropping.plantpopulation</field>
+                <field name="arch" type="xml">
+                    <search>
+                        <field name='name'/>
+                    </search>
+                </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_cropping_plantpopulation">
+            <field name="name">Scouting Plant Population</field>
+            <field name="res_model">cropping.plantpopulation</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+    </data>
+</odoo>
+
+

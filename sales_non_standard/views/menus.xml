@@ -1,0 +1,98 @@
+<odoo>
+    <record id="variant_tree" model="ir.ui.view">
+        <field name="name">Size Variants</field>
+        <field name="model">non_standard.fasha.variance</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="size" />
+                <field name="price"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="view_expense_sr">
+        <field name="name">sprogroup.expense.add.sr</field>
+        <field name="model">hr.expense</field>
+        <field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+        <xpath expr="//field[@name='tax_ids']" position="replace">
+            <field name="tax_ids" string="Tax"/>
+        </xpath>
+        </field>
+    </record>
+    
+    <record id="non_standard_foam_action" model="ir.actions.act_window">
+        <field name="name">Foams</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">non_standard.value</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Foam product
+            </p>
+        </field>
+    </record>
+        <record id="non_standard_fasha_action" model="ir.actions.act_window">
+        <field name="name">Fasha </field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">non_standard.fasha</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Fasha product
+            </p>
+        </field>
+    </record>
+
+        <record id="non_standard_fabric_action" model="ir.actions.act_window">
+        <field name="name">Fabrics </field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">non_standard.fabric</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Fabric product
+            </p>
+        </field>
+    </record>
+        <record id="non_standard_seal_action" model="ir.actions.act_window">
+        <field name="name">Seals</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">non_standard.seal</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Seal product
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem
+            id="non_standard_foams"
+            name="Foam Types"
+            parent="sale.menu_sales_config"
+            action="sales_non_standard.non_standard_foam_action"
+            sequence="10"/>
+
+    <menuitem
+            id="non_standard_fabrics"
+            name="Fabric Types"
+            parent="sale.menu_sales_config"
+            action="sales_non_standard.non_standard_fabric_action"
+            sequence="11"/>
+
+    <menuitem
+            id="non_standard_fashas"
+            name="Fasha Types"
+            parent="sale.menu_sales_config"
+            action="sales_non_standard.non_standard_fasha_action"
+            sequence="12"/>
+        <menuitem
+            id="non_standard_seals"
+            name="Seal Types"
+            parent="sale.menu_sales_config"
+            action="sales_non_standard.non_standard_seal_action"
+            sequence="12"/>
+</odoo>

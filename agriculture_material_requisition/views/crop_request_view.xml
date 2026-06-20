@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_farmer_cropping_request_form_inherited" model="ir.ui.view">
+        <field name="name">Crop Request Form View</field>
+        <field name="model">farmer.cropping.request</field>
+        <field name="inherit_id" ref="odoo_agriculture.view_farmer_cropping_request_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='view_project_request']" position="after">
+                     <button name="view_material_requistions"
+                           type="object"
+                           class="oe_stat_button"
+                           icon="fa-tasks"
+                           string="Material Requsitions"
+                           widget="statinfo"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

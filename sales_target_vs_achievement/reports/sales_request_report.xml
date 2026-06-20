@@ -1,0 +1,10 @@
+<odoo>
+    <record id="report_sales_request_pdf" model="ir.actions.report">
+        <field name="name">Sales Request</field>
+        <field name="model">sales.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sales_target_vs_achievement.report_sales_request_pdf_template</field>
+        <field name="report_file">sales_target_vs_achievement.report_sales_request_pdf_template</field>
+        <field name="print_report_name">'SalesRequest-' + object.name</field>
+    </record>
+</odoo>

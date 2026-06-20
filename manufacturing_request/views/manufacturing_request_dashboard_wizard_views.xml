@@ -1,0 +1,32 @@
+<odoo>
+    <record id="view_manufacturing_request_dashboard_wizard_form" model="ir.ui.view">
+        <field name="name">manufacturing.request.dashboard.wizard.form</field>
+        <field name="model">manufacturing.request.dashboard.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Manufacturing Dashboard Filter">
+                <group>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="branch_id"/>
+                </group>
+                <footer>
+                    <button name="action_view_dashboard" type="object" string="View Dashboard" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_manufacturing_request_dashboard_wizard" model="ir.actions.act_window">
+        <field name="name">Manufacturing Dashboard</field>
+        <field name="res_model">manufacturing.request.dashboard.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_manufacturing_dashboard"
+              name="Manufacturing Dashboard"
+              parent="manufacturing_request.menu_manufacturing_root"
+              action="action_manufacturing_request_dashboard_wizard"
+              sequence="10"/>
+</odoo>

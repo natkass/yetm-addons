@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_crops_scoting_form" model="ir.ui.view">
+            <field name="name">Crops Scouting View</field>
+            <field name="model">farmer.cropping.scoting</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="new,confirmed,processed,done"/>
+                         <button name="action_confirmed" type="object" string="Confirm" 
+                            states="new" class="btn-primary"/>
+                         <button name="action_processed" type="object" string="Process" 
+                            states="confirmed" class="btn-primary"/>
+                         <button name="action_done" type="object" string="Done" 
+                            states="processed" class="btn-primary"/>
+                        <!--  <button name="action_new" type="object" string="Reset to Draft" 
+                            states="cancel" class="btn-primary"/> -->
+                         <button name="action_cancel" type="object" string="Cancel" 
+                            states="new,confirmed"/>
+                         <button name="action_reset_to_draft" type="object" string="Reset to Draft" 
+                            states="done,cancel" class="btn-primary"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="number" placeholder="Number..."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name='custom_crop_id' attrs="{'readonly':[('state','=','done')]}"/>
+                                <field name='custom_crop_request_id' domain="[('crop_ids', '=', custom_crop_id),('state','in', ('confirm','in_progress'))]" attrs="{'readonly':[('state','=','done')]}"/> 
+                                <field name='start_date' attrs="{'readonly':[('state','=','done')]}"/>
+                                <field name='end_date' attrs="{'readonly':[('state','=','done')]}"/>
+                                <field name='user_id' attrs="{'readonly':[('state','=','done')]}"/>
+                                <field name='create_uid' readonly='1' string='Created By'/>
+                                <field name='create_date' readonly='1' string='Created Date'/>
+                            </group>
+                            <group>
+                                <field name='plant_height' attrs="{'readonly':[('state','=','done')]}"/>
+                                <!-- <field name='soil_temperature_id' attrs="{'readonly':[('state','=','done')]}"/> -->
+                                <field name='soil_temp_id' attrs="{'readonly':[('state','=','done')]}"/>
+                                <label for="temperature" string="Temperature"/>
+                                <div class="o_row">
+                                    <field name="temperature" attrs="{'readonly':[('state','=','done')]}"/>
+                                    <field name="temp_uom_id" attrs="{'readonly':[('state','=','done')]}"/>
+                                </div>
+                                <field name='soil_condition_id' attrs="{'readonly':[('state','=','done')]}"/>
+                                <field name='air_temp_id' attrs="{'readonly':[('state','=','done')]}"/>
+                                <!-- <field name='air_temperature_id' attrs="{'readonly':[('state','=','done')]}"/> -->
+                                <!-- <field name='wind_id' attrs="{'readonly':[('state','=','done')]}"/> -->
+                                <field name='crop_wind_id' attrs="{'readonly':[('state','=','done')]}"/>
+                                <!-- <field name='cloud_cover_id' attrs="{'readonly':[('state','=','done')]}"/> -->
+                                <field name='crop_cloud_cover_id' attrs="{'readonly':[('state','=','done')]}"/>
+                                <field name='project_id' attrs="{'readonly':[('state','=','done')]}"/>
+                            </group>
+                        </group>
+                            <notebook>
+                                <page name="crops_insects" string="Crop Scouting Details">
+                                <group string='Crop Insects'>
+                                    <field name="crop_insects_ids" widget="section_and_note_one2many" mode="tree" nolabel="1" attrs="{'readonly':[('state','=','done')]}" colspan='2'>
+                                        <form>
+                                            <sheet>
+                                                <group>
+                                                    <group>
+                                                        <!-- <field name='name'/> -->
+                                                        <field name='insect_id'/>
+                                                        <field name='description'/>
+                                                        <field name='causing_damage'/>
+                                                        <field name='no_of_area_scouted' readonly='1'/> 
+                                                        <field name='insect_col_1'/>
+                                                        <field name='insect_col_2'/>
+                                                        <field name='insect_col_3'/>
+                                                    </group>
+                                                    <group>
+                                                        <field name='insect_col_4'/>
+                                                        <field name='insect_col_5'/>
+                                                        <field name='total'/>
+                                                        <field name='percentage'/>
+                                                    </group>
+                                                </group>
+                                            </sheet>
+                                        </form>
+                                        <tree string="Crop Insects" editable="bottom"> 
+                                            <!-- <field name='name'/> -->
+                                            <field name='insect_id'/>
+                                            <field name='description'/>
+                                            <field name='causing_damage'/>
+                                            <field name='no_of_area_scouted' readonly='1'/> 
+                                            <field name='insect_col_1'/>
+                                            <field name='insect_col_2'/>
+                                            <field name='insect_col_3'/>
+                                            <field name='insect_col_4'/>
+                                            <field name='insect_col_5'/>
+                                            <field name='total'/>
+                                            <field name='percentage'/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <!-- <page name="crops_dieases" string="Crop Dieases"> -->
+                                <group string='Crop Dieases'>
+                                    <field name="crop_dieases_ids" widget="section_and_note_one2many" mode="tree" nolabel="1" attrs="{'readonly':[('state','=','done')]}" colspan='2'>
+                                        <form>
+                                            <sheet>
+                                                <group>
+                                                    <group>
+                                                        <!-- <field name='name'/> -->
+                                                        <field name='dieases_id'/>
+                                                        <field name='description'/>
+                                                        <field name='no_of_plant_affected' readonly='1'/>
+                                                        <field name='dieases_col_1'/>
+                                                        <field name='dieases_col_2'/>
+                                                        <field name='dieases_col_3'/>
+                                                        <field name='dieases_col_4'/>
+                                                        <field name='dieases_col_5'/>
+                                                    </group>
+                                                </group>
+                                            </sheet>
+                                        </form>
+                                        <tree string="Crop Dieases" editable="bottom"> 
+                                            <!-- <field name='name'/> -->
+                                            <field name='dieases_id'/>
+                                            <field name='description'/>
+                                            <field name='no_of_plant_affected' readonly='1'/>
+                                            <field name='dieases_col_1'/>
+                                            <field name='dieases_col_2'/>
+                                            <field name='dieases_col_3'/>
+                                            <field name='dieases_col_4'/>
+                                            <field name='dieases_col_5'/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <!-- <page name="crops_weeds" string="Crop Weeds"> -->
+                                <group string='Crop Weeds'>
+                                    <field name="crop_weeds_ids" widget="section_and_note_one2many" mode="tree" nolabel="1" attrs="{'readonly':[('state','=','done')]}" colspan='2'>
+                                        <form>
+                                            <sheet>
+                                                <group>
+                                                    <group>
+                                                        <!-- <field name='name'/> -->
+                                                        <field name='weed_id'/>
+                                                        <field name='description'/>
+                                                        <field name='no_per_square_yard' readonly='1'/>
+                                                        <field name='weed_col_1'/>
+                                                        <field name='weed_col_2'/>
+                                                        <field name='weed_col_3'/>
+                                                        <field name='weed_col_4'/>
+                                                        <field name='weed_col_5'/>
+                                                        <field name='avg_number'/>
+                                                    </group>
+                                                </group>
+                                            </sheet>
+                                        </form>
+                                        <tree string="Crop Weeds" editable="bottom"> 
+                                            <!-- <field name='name'/> -->
+                                            <field name='weed_id'/>
+                                            <field name='description'/>
+                                            <field name='no_per_square_yard' readonly='1'/>
+                                            <field name='weed_col_1'/>
+                                            <field name='weed_col_2'/>
+                                            <field name='weed_col_3'/>
+                                            <field name='weed_col_4'/>
+                                            <field name='weed_col_5'/>
+                                            <field name='avg_number'/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <!-- <page name="crops_plant_population" string="Crop Plant Population"> -->
+                                <group string='Crop Plant Population'>
+                                    <field name="crop_plant_population_ids" widget="section_and_note_one2many" mode="tree" nolabel="1" attrs="{'readonly':[('state','=','done')]}" colspan='2'>
+                                        <form>
+                                            <sheet>
+                                                <group>
+                                                    <group>
+                                                        <!-- <field name='name'/> -->
+                                                        <field name='plant_population_id'/>
+                                                        <field name='description'/>
+                                                        <field name='no_of_good_plants' readonly='1'/>
+                                                        <field name='plant_population_col_1'/>
+                                                        <field name='plant_population_col_2'/>
+                                                        <field name='plant_population_col_3'/>
+                                                        <field name='plant_population_col_4'/>
+                                                        <field name='plant_population_col_5'/> 
+                                                        <field name='avg_populations'/>
+                                                    </group>
+                                                </group>
+                                            </sheet>
+                                        </form>
+                                        <tree string="Crop Plant Population" editable="bottom"> 
+                                            <!-- <field name='name'/> -->
+                                            <field name='plant_population_id'/>
+                                            <field name='description'/>
+                                            <field name='no_of_good_plants' readonly='1'/>
+                                            <field name='plant_population_col_1'/>
+                                            <field name='plant_population_col_2'/>
+                                            <field name='plant_population_col_3'/>
+                                            <field name='plant_population_col_4'/>
+                                            <field name='plant_population_col_5'/> 
+                                            <field name='avg_populations'/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group string="Description and Comments">
+                                <!-- <page string="Description and Comments"> -->
+                                    <field name='description' nolabel="1" attrs="{'readonly':[('state','=','done')]}" colspan='2'/>
+                                </group>
+                                </page>
+                                <page string="Other Information">
+                                        <group>
+                                            <group>
+                                                <field name='company_id' readonly='1' groups="base.group_multi_company"/>
+                                                <field name='responsible_user_id' readonly='1'/>
+                                               <!--  <field name='create_uid' readonly='1'/>
+                                                <field name='create_date' readonly='1'/> -->
+                                            </group>
+                                            <group>
+                                                <field name='process_uid' readonly='1'/>
+                                                <field name='processed_date' readonly='1'/>
+                                            </group>
+                                        </group>
+                                    </page>
+                                <page string="Internal Note">
+                                    <group>
+                                        <field name='internal_note' nolabel='1' colspan='2'/>
+                                    </group>
+                                </page>
+                            </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+                       
+        <record id="view_crops_scoting_tree" model="ir.ui.view">
+                <field name="name">Crops Scouting Tree View</field>
+                <field name="model">farmer.cropping.scoting</field>
+                <field name="arch" type="xml">
+                    <tree>
+                        <field name="number" attrs="{'readonly':[('state','=','done')]}"/>
+                        <field name='custom_crop_id' attrs="{'readonly':[('state','=','done')]}"/>
+                        <field name='custom_crop_request_id' attrs="{'readonly':[('state','=','done')]}"/>
+                        <field name='project_id' attrs="{'readonly':[('state','=','done')]}"/>
+                        <field name='create_date' attrs="{'readonly':[('state','=','done')]}" string='Created Date'/>
+                        <field name='start_date' attrs="{'readonly':[('state','=','done')]}"/>
+                        <field name='end_date' attrs="{'readonly':[('state','=','done')]}"/>
+                        <field name='company_id' attrs="{'readonly':[('state','=','done')]}" groups="base.group_multi_company"/>
+                        <!-- <field name='plant_height' attrs="{'readonly':[('state','=','done')]}"/>
+                        <field name='soil_temperature_id' attrs="{'readonly':[('state','=','done')]}"/>
+                        <field name='soil_condition_id' attrs="{'readonly':[('state','=','done')]}"/>
+                        <field name='air_temperature_id' attrs="{'readonly':[('state','=','done')]}"/>
+                        <field name='wind_id' attrs="{'readonly':[('state','=','done')]}"/>
+                        <field name='cloud_cover_id' attrs="{'readonly':[('state','=','done')]}"/>  --> 
+                        <field name='state' attrs="{'readonly':[('state','=','done')]}"/> 
+                    </tree>
+                </field>
+        </record>
+
+        <!-- <record id="view_crops_scouting_kanban" model="ir.ui.view">
+            <field name="name">Crops Scouting Kanban View</field>
+            <field name="model">farmer.cropping.scoting</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by='state'>
+                    <field name="number"/>
+                    <field name='custom_crop_id'/>
+                    <field name='custom_crop_request_id'/>
+                    <field name="user_id"/>
+                    <field name="responsible_user_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="o_kanban_record_top mb16">
+                                    <div class="o_kanban_record_headings mt4">
+                                        <strong class="o_kanban_record_title"><span><field name="number"/></span></strong>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban">
+                                        <span style="font-weight:bold">Crop:</span>
+                                            <field name="custom_crop_id"/>
+                                    </div>
+                                </div>
+
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban">
+                                        <span style="font-weight:bold">Crop Request:</span>
+                                            <field name="custom_crop_request_id"/>
+                                    </div>
+                                </div>
+
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban">
+                                        <span style="font-weight:bold">Responsible User:</span>
+                                            <field name="responsible_user_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                        <group expand="0" string="Group By">
+                            <filter name="Status" context="{'group_by':'state'}"/>
+                        </group>
+                    </templates>
+                </kanban>
+            </field>
+        </record> -->
+
+        <record id="view_crops_scoting_search" model="ir.ui.view">
+                <field name="name">Crops Scouting Search View</field>
+                <field name="model">farmer.cropping.scoting</field>
+                <field name="arch" type="xml">
+                    <search>
+                        <filter name="New"  domain="[('state','=','new')]"/>
+                        <filter name="Confirmed"  domain="[('state','=','confirmed')]"/>
+                        <filter name="Processed" domain="[('state','=','processed')]"/>
+                        <filter name="Done" domain="[('state','=','done')]"/>
+                        <filter name="Cancelled" domain="[('state','=','cancel')]"/>
+                        <field name='custom_crop_id'/>
+                        <field name="custom_crop_request_id"/>
+                        <field name='number'/>
+                        <field name='create_date'/>
+                        <field name='start_date'/>
+                        <field name='end_date'/>
+                        <field name='company_id' groups="base.group_multi_company"/>
+                        <field name='user_id'/>
+                        <field name='responsible_user_id'/>
+                        <field name='create_uid'/>
+                        <field name='process_uid'/>
+                        <field name='processed_date'/>
+                        <field name='plant_height'/>
+                        <field name='soil_temp_id'/>
+                        <field name='temperature'/>
+                        <field name='soil_condition_id'/>
+                        <field name='air_temp_id'/>
+                        <field name='crop_wind_id'/>
+                        <field name='crop_cloud_cover_id'/>
+                        <field name='project_id'/>
+                        <field name='state'/>   
+                        <group expand="0" string="Group By">
+                            <filter name="Crop" context="{'group_by':'custom_crop_id'}"/>
+                            <filter name="Crop Request" context="{'group_by':'custom_crop_request_id'}"/>
+                            <filter name="Created Date" context="{'group_by':'create_date'}"/>
+                            <filter name="Scouting Start Date" context="{'group_by':'start_date'}"/>
+                            <filter name="Scouting End Date" context="{'group_by':'end_date'}"/>
+                            <filter name="Company" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
+                            <filter name="Officer" context="{'group_by':'user_id'}"/>
+                            <filter name="Responsible User" context="{'group_by':'responsible_user_id'}"/>
+                            <filter name="Processed By" context="{'group_by':'process_uid'}"/>
+                            <filter name="Processed Date" context="{'group_by':'processed_date'}"/>
+                            <filter name="Temperature" context="{'group_by':'soil_temp_id'}"/>
+                            <filter name="Condition" context="{'group_by':'soil_condition_id'}"/>
+                            <filter name="Air Temperature" context="{'group_by':'air_temp_id'}"/>
+                            <filter name="Wind" context="{'group_by':'crop_wind_id'}"/>
+                            <filter name="Cloud Cover" context="{'group_by':'crop_cloud_cover_id'}"/>
+                            <filter name="Project" context="{'group_by':'project_id'}"/>
+                            <filter name="Status" context="{'group_by':'state'}"/>
+                        </group>
+                    </search>
+                </field>
+        </record>
+
+        <record id="view_crop_scoting_pivot" model="ir.ui.view">
+            <field name="name">Crop Scouting Pivot View</field>
+            <field name="model">farmer.cropping.scoting</field>
+            <field name="arch" type="xml">
+                <pivot string="Crop Scouting">
+                    <field name='custom_crop_id' type="row"/>
+                    <field name='custom_crop_request_id' type="row"/>
+                    <field name="state" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_crop_scoting_graph" model="ir.ui.view">
+            <field name="name">Crop Scouting Graph View</field>
+            <field name="model">farmer.cropping.scoting</field>
+            <field name="arch" type="xml">
+                 <graph>
+                    <field name='custom_crop_id'/>
+                    <field name='custom_crop_request_id'/>
+                    <field name="state"/>
+                 </graph>
+            </field>
+        </record>
+
+        <record id="view_crop_scoting_calendar" model="ir.ui.view">
+           <field name="name">Crop Scouting Calender View</field>
+           <field name="model">farmer.cropping.scoting</field>
+           <field name="arch" type="xml">
+               <calendar color="custom_crop_id" date_start="start_date">
+                    <field name="number"/>
+                    <field name="custom_crop_id"/>
+                    <field name="custom_crop_request_id"/>
+               </calendar>
+           </field>
+       </record>
+
+        <record model="ir.actions.act_window" id="action_crops_scoting">
+            <field name="name">Crop Scoutings</field>
+            <field name="res_model">farmer.cropping.scoting</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">tree,form,calendar,pivot,graph</field>
+        </record>
+        
+    </data>
+</odoo>
+
+

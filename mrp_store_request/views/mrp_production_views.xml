@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Add smart button + Create Store Request button to MO form -->
+    <record id="view_mrp_production_form_inherit_store_request" model="ir.ui.view">
+        <field name="name">mrp.production.form.inherit.store.request</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+
+            <!-- Smart button -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_store_requests"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-exchange"
+                        invisible="store_request_count == 0">
+                    <field name="store_request_count" widget="statinfo" string="Store Requests"/>
+                </button>
+            </xpath>
+
+            <!-- Create Store Request button in header -->
+            <xpath expr="//header" position="inside">
+                <button name="action_open_store_request_wizard"
+                        string="Create Store Request"
+                        type="object"
+                        class="btn-secondary"
+                        invisible="state in ('draft', 'done', 'cancel')"/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_fs_check_wizard_form" model="ir.ui.view">
+        <field name="name">pos.fs.check.wizard.form</field>
+        <field name="model">pos.fs.check.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Run POS FS Check">
+                <group>
+                    <field name="company_id"/>
+                    <field name="allowed_device_ids"/>
+                    <field name="target_mrc_id" domain="[('id', 'in', allowed_device_ids)]"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </group>
+                <footer>
+                    <button name="action_run_fs_check" string="Run Check" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pos_fs_check_wizard" model="ir.actions.act_window">
+        <field name="name">Run POS FS Check</field>
+        <field name="res_model">pos.fs.check.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

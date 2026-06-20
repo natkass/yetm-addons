@@ -1,0 +1,9 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_import_fees_harmonized_code_user","import_fees.harmonized_code","model_import_fees_harmonized_code","base.group_user",1,1,1,1
+"access_import_fees_harmonized_code_admin","import_fees.harmonized_code","model_import_fees_harmonized_code","base.group_erp_manager",1,1,1,1
+"access_import_fees_customs_fees_user","import_fees.customs_fees","model_import_fees_customs_fees","base.group_user",1,1,1,1
+"access_import_fees_customs_fees_admin","import_fees.customs_fees","model_import_fees_customs_fees","base.group_erp_manager",1,1,1,1
+"access_import_fees_received_product_line_user","import_fees.received_product_line","model_import_fees_received_product_line","base.group_user",1,1,1,1
+"access_import_fees_received_product_line_admin","import_fees.received_product_line","model_import_fees_received_product_line","base.group_erp_manager",1,1,1,1
+"access_landed_cost_analysis_report","access_landed_cost_analysis_report","model_landed_cost_analysis_report","base.group_user",1,0,0,0
+"access_import_fees_recalculate_wizard","access.import.fees.recalculate.wizard","model_import_fees_recalculate_wizard","base.group_user",1,1,1,1

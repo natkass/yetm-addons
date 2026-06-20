@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Groups -->
+        <record id="group_sales_request_account_manager" model="res.groups">
+            <field name="name">Franchisee Request / Account Manager</field>
+            <field name="category_id" ref="module_sales_target"/>
+            
+        </record>
+
+        <record id="group_sales_request_sales_manager" model="res.groups">
+            <field name="name">Franchisee Request / Sales Manager</field>
+            <field name="category_id" ref="module_sales_target"/>
+            
+        </record>
+
+        <record id="group_sales_request_marketing_manager" model="res.groups">
+            <field name="name">Franchisee Request / Marketing Manager</field>
+            <field name="category_id" ref="module_sales_target"/>
+            
+        </record>
+
+        <record id="group_sales_request_dispatcher" model="res.groups">
+            <field name="name">Franchisee Request / Dispatcher</field>
+            <field name="category_id" ref="module_sales_target"/>
+            
+        </record>
+    </data>
+</odoo>

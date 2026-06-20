@@ -1,0 +1,59 @@
+<odoo>
+    <template id="report_lifecycle_request">
+        <t t-call="web.external_layout">
+            <t t-set="title">Lifecycle Report - <t t-esc="docs[0].name"/></t>
+
+            <main>          <!--  PDF renderer looks for this -->
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <h2>Lifecycle Report - <t t-esc="doc.name"/></h2>
+                        <p>Customer: <t t-esc="doc.partner_id.name or ''"/></p>
+                        <p>Responsible: <t t-esc="doc.responsible_id.name or ''"/></p>
+                        <p>Created On: <t t-esc="doc.create_date"/></p>
+                        <br/>
+
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Stage</th>
+                                    <th>Timestamp</th>
+                                    <th>Hours Spent</th>
+                                    <th>Done By</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.get_stage_durations()" t-as="stage">
+                                    <tr>
+                                        <td><t t-esc="stage['stage'].capitalize()"/></td>
+                                        <td>
+                                            <t t-if="stage.get('timestamp')">
+                                                <t t-esc="stage.get('timestamp')"/>
+                                            </t>
+                                            <t t-else="">-</t>
+                                        </td>
+                                        <td><t t-esc="round(stage['hours'],2)"/></td>
+                                        <td><t t-esc="stage['user']"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <div style="page-break-after: always;" t-if="not doc_last"/>
+                    </div>
+                </t>
+            </main>
+        </t>
+    </template>
+
+    <!-- Report Action -->
+    <record id="action_report_lifecycle_request" model="ir.actions.report">
+        <field name="name">Lifecycle Request Report</field>
+        <field name="model">manufacturing.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">manufacturing_request.report_lifecycle_request</field>
+        <field name="report_file">manufacturing_request.report_lifecycle_request</field>
+        <field name="print_report_name">'Lifecycle Report - %s' % object.name</field>
+        <field name="binding_model_id" ref="model_manufacturing_request"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

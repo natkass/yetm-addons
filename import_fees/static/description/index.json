@@ -1,0 +1,203 @@
+{
+  "hook": "A tool at the heart of your import business",
+  "pitch": "Accurate customs duties valuation and improved landed costs workflow for your imported goods, with unique features.",
+  "supported_versions": [
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18"
+  ],
+  "feature_matrix": [
+    {
+      "name": "HS Codes definition per Product or Product Category",
+      "versions": [
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18"
+      ]
+    },
+    {
+      "name": "Customs Duties calculation",
+      "versions": [
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18"
+      ]
+    },
+    {
+      "name": "CIF value calculation",
+      "versions": [
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18"
+      ]
+    },
+    {
+      "name": "New Split Method : Customs Duties by HS Code in inventory valuation",
+      "versions": [
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18"
+      ]
+    },
+    {
+      "name": "Manual CIF value update for each HS Code",
+      "versions": [
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18"
+      ]
+    },
+    {
+      "name": "Preview all transfered products in Landed Costs",
+      "versions": [
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18"
+      ]
+    },
+    {
+      "name": "Common Shipping Costs Easy Input",
+      "versions": [
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18"
+      ]
+    },
+    {
+      "name": "Customs & Shipping Bills Generation from Landed Costs",
+      "versions": [
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18"
+      ]
+    },
+    {
+      "name": "Customizable Duties Fields (in Odoo Configuration)",
+      "versions": [
+        "17",
+        "18"
+      ]
+    },
+    {
+      "name": "Editable Customs Duties amounts per HS Code in Landed Costs (sometimes required to match customs bills)",
+      "versions": [
+        "13",
+        "17",
+        "18"
+      ]
+    },
+    {
+      "name": "Multiple vendor Bills per Landed Cost (with multiple currencies support)",
+      "versions": [
+        "17",
+        "18"
+      ]
+    },
+    {
+      "name": "Multi-company support : HS Codes configuration for Products and Categpries per company",
+      "versions": [
+        "17",
+        "18"
+      ]
+    },
+    {
+      "name": "Landed Costs Analysis Report",
+      "versions": [
+        "17",
+        "18"
+      ]
+    },
+    {
+      "name": "Configuration option : Add 10% CIF in VAT, CESS LEVY and SSCL",
+      "versions": [
+        "17",
+        "18"
+      ]
+    }
+  ],
+  "benefits": [
+    {
+      "title": "\uD83D\uDCB2 Save weeks of implementation",
+      "description": "Customs duties calculation and landed costs valuation is a complex subject, Our tool helps you save lots of time and energy, so you don't have to spend forever planning and building stuff.\nIt's all set up and tested, ready to make your work easier"
+    },
+    {
+      "title": "\uD83D\uDD0D Avoid mistakes in Landed Costs Valuation",
+      "description": "Get rid of mistakes in figuring out Landed Costs!. Our tool helps you avoid mistakes in landed costs valuation, so you can be sure that you're always getting the right numbers."
+    },
+    {
+      "title": "\uD83D\uDD52 Save Time on Landed Costs",
+      "description": "Our tool helps you save time on landed costs, so you can focus on what really matters: growing your business."
+    }
+  ],
+  "overview": [
+    {
+      "title": "Customs duties calculation, to save you time",
+      "description": "No need for tedious Excel Sheet formulas and macros, customs duties are calculated for each <strong>HS (Harmonized System) Code</strong>",
+      "image": "get-customs-fees-calculation-for-each-hs-code.png",
+      "image_description": "Customs duties automated calculation"
+    },
+    {
+      "title": "Improvements in the Landed Costs form, to make your life easier",
+      "description": "You can attach as many vendor bills as you need. Typically useful for freight consolidation, when one freight forwarder imports all the products from multiple vendors.\n Details about related products from transfers are displayed as soon as they are selected.\n You can generate shipping bills with one click",
+      "image": "landedcosts.png",
+      "image_description": "Freight Consolidation and Product details and Shipping Bills generation in Landed Costs form"
+    },
+    {
+      "title": "Easy Shipping Costs input, to improve your workflow",
+      "description": "No more tedious landed cost product definition, we defined all the common shipping costs and made them available directly in the form and tree view, for easier input and filtering",
+      "image": "easy-input-for-all-common-fees.png",
+      "image_description": "Easy input of all shipping costs"
+    }
+  ],
+  "videos": [
+    {
+      "title": "Introduction",
+      "url": "https://www.youtube.com/watch?v=H3IkiB_oxkU",
+      "thumbnail": "youtube-why.png"
+    },
+    {
+      "title": "Demo / Screencast",
+      "url": "https://www.youtube.com/watch?v=x7vyZh5Yqig",
+      "thumbnail": "youtube-demo.png"
+    }
+  ],
+  "setup": [
+    {
+      "title": "HS Codes setup (added by this module)",
+      "description": "This allows you to input various import rates and taxes. The feature is available in <strong>Inventory &gt; Configuration &gt; HS Codes</strong>To enable customs duties calculation, the new<strong>Harmonized Code</strong> field should be defined either on <strong>Product</strong> or on <strong>Product Category</strong> hierarchy",
+      "image": "hs-code-list.png",
+      "image_description": "Harmonized codes list"
+    },
+    {
+      "title": "Related setup in standard Odoo Inventory Module",
+      "description": "For <strong>Landed Costs valuation</strong> to function properly, <strong>Product Categories</strong> need to have a <strong>Costing Method</strong> set on <strong>Average costs</strong> or <strong>FIFO</strong>For foreign currencies to be enabled in Odoo, you need to enable it in <strong>Settings &gt; Invoicing &gt; Currencies Section &gt; Multi Currencies </strong>"
+    }
+  ]
+}

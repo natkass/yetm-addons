@@ -1,0 +1,46 @@
+<!-- delivery_print_limit/views/stock_picking_views.xml -->
+<odoo>
+    <!-- Picking Type: add limit config -->
+    <record id="view_picking_type_form_delivery_print_limit" model="ir.ui.view">
+        <field name="name">stock.picking.type.form.delivery.print.limit</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Delivery Print Control">
+                    <field name="allowed_delivery_prints"/>
+                    <!-- Replace invalid <label> with a plain element -->
+                    <!-- <div class="o_form_label">0 = unlimited</div> -->
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+
+    <!-- Picking: show counters & reset button -->
+    <record id="view_picking_form_delivery_print_limit" model="ir.ui.view">
+        <field name="name">stock.picking.form.delivery.print.limit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_reset_delivery_print_count"
+                        string="Reset print counter"
+                        type="object"
+                        class="oe_highlight"
+                        groups="stock.group_stock_manager"/>
+            </xpath>
+
+            <xpath expr="//sheet/notebook" position="before">
+                <group string="Delivery Print Info" invisible="1">
+                    <group>
+                        <field name="delivery_print_count" readonly="1"/>
+                        <field name="delivery_last_print_user_id" readonly="1"/>
+                        <field name="delivery_last_print_date" readonly="1"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

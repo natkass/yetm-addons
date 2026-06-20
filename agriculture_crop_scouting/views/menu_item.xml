@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+      <menuitem
+          id="scoting_menu"
+          name="Scoutings"
+          sequence = '7'
+          action="agriculture_crop_scouting.action_crops_scoting"
+          parent="odoo_agriculture.agricultural_management_topmenu"/>
+
+    <menuitem
+        id="soil_menu"
+        name="Soil Temperatures"
+        sequence='7'
+        action="agriculture_crop_scouting.action_soil"
+        parent="odoo_agriculture.configuration_topmenu"/>
+
+    <menuitem 
+        id="weather_menu"
+        name="Soil Conditions"
+        sequence='8'
+        action="agriculture_crop_scouting.action_weather"
+        parent="odoo_agriculture.configuration_topmenu"/>
+
+    <menuitem
+        id="wind_menu"
+        name="Winds"
+        sequence='9'
+        action="agriculture_crop_scouting.action_wind"
+        parent="odoo_agriculture.configuration_topmenu"/>
+
+    <menuitem
+        id="air_temp_menu"
+        name="Air Temperatures"
+        sequence='10'
+        action="agriculture_crop_scouting.action_air_temperature"
+        parent="odoo_agriculture.configuration_topmenu"/>
+
+    <menuitem
+        id="cloud_cover_menu"
+        name="Cloud Covers"
+        sequence='11'
+        action="agriculture_crop_scouting.action_croping_cloud_cover"
+        parent="odoo_agriculture.configuration_topmenu"/>
+
+    <!-- <menuitem
+        id="plant_population_menu"
+        name="Plant Populations"
+        sequence='12'
+        action="agriculture_crop_scouting.action_crops_plant_population"
+        parent="odoo_agriculture.configuration_topmenu"/> -->
+
+    <menuitem
+        id="insect_menu"
+        name="Scouting Insects"
+        sequence='12'
+        action="agriculture_crop_scouting.action_cropping_insects"
+        parent="odoo_agriculture.configuration_topmenu"/>
+
+    <menuitem
+        id="scout_dieases_menu"
+        name="Scouting Dieases"
+        sequence='13'
+        action="agriculture_crop_scouting.action_croping_dieases"
+        parent="odoo_agriculture.configuration_topmenu"/>
+
+    <menuitem
+        id="scout_weeds_menu"
+        name="Scouting Weeds"
+        sequence='14'
+        action="agriculture_crop_scouting.action_cropping_weeds"
+        parent="odoo_agriculture.configuration_topmenu"/>
+
+      <menuitem
+          id="scout_plant_population_menu"
+          name="Scouting Plant Populations"
+          sequence='15'
+          action="agriculture_crop_scouting.action_cropping_plantpopulation"
+          parent="odoo_agriculture.configuration_topmenu"/>
+     
+</odoo>

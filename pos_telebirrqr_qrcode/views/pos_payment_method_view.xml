@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pos_payment_method_view_form_inherit_pos_telebirrqr" model="ir.ui.view">
+        <field name="name">pos.payment.method.form.inherit.telebirrqr</field>
+        <field name="model">pos.payment.method</field>
+        <field name="inherit_id" ref="point_of_sale.pos_payment_method_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='journal_id']" position="after">
+                <field name="screen_qr" invisible="use_payment_terminal != 'telebirrqr'" required="use_payment_terminal == 'telebirrqr'"/>                
+                <field name="aggregator_id" invisible="use_payment_terminal != 'telebirrqr'" required="use_payment_terminal == 'telebirrqr'"/>                
+                <field name="fabricAppId" invisible="use_payment_terminal != 'telebirrqr'" required="use_payment_terminal == 'telebirrqr'"/>                
+                <field name="appSecret" invisible="use_payment_terminal != 'telebirrqr'" required="use_payment_terminal == 'telebirrqr'"/>
+                <field name="merchantAppId" invisible="use_payment_terminal != 'telebirrqr'" required="use_payment_terminal == 'telebirrqr'"/>
+                <field name="merchantCode" invisible="use_payment_terminal != 'telebirrqr'" required="use_payment_terminal == 'telebirrqr'"/>
+                <field name="privateKey" invisible="use_payment_terminal != 'telebirrqr'" required="use_payment_terminal == 'telebirrqr'"/>
+                <field name="web_base_url" invisible="use_payment_terminal != 'telebirrqr'" required="use_payment_terminal == 'telebirrqr'"/>
+                <field name="base_url" invisible="use_payment_terminal != 'telebirrqr'" required="use_payment_terminal == 'telebirrqr'"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

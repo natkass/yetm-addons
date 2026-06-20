@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_crops_fleet_form" model="ir.ui.view">
+            <field name="name">Crops fleet View</field>
+            <field name="model">crops.fleet</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <!-- <field name='crops_tasks_template_id'/> -->
+                                <field name='vehicle_id'/>
+                                <field name='quantity'/>
+                            </group>
+                            <group>
+                                <field name='start_date'/>
+                                <field name='end_date'/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="description_page" string="Description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+                       
+        <record id="view_crops_fleet_tree" model="ir.ui.view">
+                <field name="name">Crops fleet Tree View</field>
+                <field name="model">crops.fleet</field>
+                <field name="arch" type="xml">
+                    <tree>
+                        <!-- <field name='crops_tasks_template_id'/> -->
+                        <field name='vehicle_id'/>
+                        <field name='quantity'/>
+                        <field name='start_date'/>
+                        <field name='end_date'/>
+                        <field name='description'/>
+                    </tree>
+                </field>
+        </record>
+
+        <record id="view_crops_fleet_search" model="ir.ui.view">
+                <field name="name">Crops fleet Search View</field>
+                <field name="model">crops.fleet</field>
+                <field name="arch" type="xml">
+                    <search>
+                        <!-- <field name='crops_tasks_template_id'/> -->
+                        <field name='vehicle_id'/>
+                        <field name='quantity'/>
+                        <field name='start_date'/>
+                        <field name='end_date'/>
+                        <field name='description'/>
+                        <group expand="0" string="Group By">
+                            <filter name="Vehicle" context="{'group_by':'vehicle_id'}"/>
+                            <filter name="Start Date" context="{'group_by':'start_date'}"/>
+                            <filter name="End Date" context="{'group_by':'end_date'}"/>
+                        </group>
+                    </search>
+                </field>
+        </record>
+         <record model="ir.actions.act_window" id="action_crops_fleet_act">
+            <field name="name">Crop Fleets</field>
+            <field name="res_model">crops.fleet</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">tree,form</field>
+        </record>
+      
+    </data>
+
+</odoo>
+
+

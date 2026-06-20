@@ -1,0 +1,35 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_non_standard_foam_user,non.standard.foam user,model_non_standard_foam,group_non_standard_user,1,0,0,0
+access_non_standard_foam_manager,non.standard.foam manager,model_non_standard_foam,group_non_standard_manager,1,1,1,1
+access_non_standard_foam_value_user,non.standard.foam.value user,model_non_standard_foam_value,group_non_standard_user,1,0,0,0
+access_non_standard_foam_value_manager,non.standard.foam.value manager,model_non_standard_foam_value,group_non_standard_manager,1,1,1,1
+access_non_standard_foam_product_user,non.standard.foam.product user,model_non_standard_foam_product,group_non_standard_user,1,0,0,0
+access_non_standard_foam_product_manager,non.standard.foam.product manager,model_non_standard_foam_product,group_non_standard_manager,1,1,1,1
+
+access_non_standard_fabric_user,non.standard.fabric user,model_non_standard_fabric,group_non_standard_user,1,0,0,0
+access_non_standard_fabric_manager,non.standard.fabric manager,model_non_standard_fabric,group_non_standard_manager,1,1,1,1
+access_non_standard_fabric_value_user,non.standard.fabric.value user,model_non_standard_fabric_value,group_non_standard_user,1,0,0,0
+access_non_standard_fabric_value_manager,non.standard.fabric.value manager,model_non_standard_fabric_value,group_non_standard_manager,1,1,1,1
+access_non_standard_fabric_product_user,non.standard.fabric.product user,model_non_standard_fabric_product,group_non_standard_user,1,0,0,0
+access_non_standard_fabric_product_manager,non.standard.fabric.product manager,model_non_standard_fabric_product,group_non_standard_manager,1,1,1,1
+
+access_non_standard_shape_user,non.standard.shape user,model_non_standard_shape,group_non_standard_user,1,0,0,0
+access_non_standard_shape_manager,non.standard.shape manager,model_non_standard_shape,group_non_standard_manager,1,1,1,1
+
+
+access_non_standard_seal_user,non.standard.seal user,model_non_standard_seal,group_non_standard_user,1,0,0,0
+access_non_standard_seal_manager,non.standard.seal manager,model_non_standard_seal,group_non_standard_manager,1,1,1,1
+access_non_standard_seal_product_user,non.standard.seal.product user,model_non_standard_seal_product,group_non_standard_user,1,0,0,0
+access_non_standard_seal_product_manager,non.standard.seal.product manager,model_non_standard_seal_product,group_non_standard_manager,1,1,1,1
+
+access_non_standard_glue_user,non.standard.glue user,model_non_standard_glue,group_non_standard_user,1,0,0,0
+access_non_standard_glue_manager,non.standard.glue manager,model_non_standard_glue,group_non_standard_manager,1,1,1,1
+access_non_standard_glue_product_user,non.standard.glue.product user,model_non_standard_glue_product,group_non_standard_user,1,0,0,0
+access_non_standard_glue_product_manager,non.standard.glue.product manager,model_non_standard_glue_product,group_non_standard_manager,1,1,1,1
+
+access_non_standard_tape_user,non.standard.tape.user,model_non_standard_tape,group_non_standard_user,1,0,0,0
+access_non_standard_tape_manager,non.standard.tape.manager,model_non_standard_tape,group_non_standard_manager,1,1,1,1
+access_non_standard_tape_product_user,non.standard.tape.product user,model_non_standard_tape_product,group_non_standard_user,1,0,0,0
+access_non_standard_tape_product_manager,non.standard.tape.product manager,model_non_standard_tape_product,group_non_standard_manager,1,1,1,1
+
+access_non_standard_wizard,access.non.standard.wizard,model_non_standard_wizard,,1,1,1,1

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_croping_wind_form" model="ir.ui.view">
+            <field name="name">Crops wind View</field>
+            <field name="model">farmer.cropping.wind</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='name'/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+                       
+        <record id="view_croping_wind_tree" model="ir.ui.view">
+                <field name="name">Crops Wind Tree View</field>
+                <field name="model">farmer.cropping.wind</field>
+                <field name="arch" type="xml">
+                    <tree>
+                        <field name='name'/>
+                    </tree>
+                </field>
+        </record>
+
+        <record id="view_croping_wind_search" model="ir.ui.view">
+                <field name="name">Crops wind Search View</field>
+                <field name="model">farmer.cropping.wind</field>
+                <field name="arch" type="xml">
+                    <search>
+                        <field name='name'/>
+                    </search>
+                </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_wind">
+            <field name="name">Winds</field>
+            <field name="res_model">farmer.cropping.wind</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+    </data>
+</odoo>
+
+

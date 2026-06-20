@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <template id="report_flex_bank_un_reconciliation_content">
+            <style type='text/css'>
+                ul.leaders {
+                list-style: none;
+                margin-top: -0.3em;
+                }
+                ul.leaders li {
+                height: 1.2em;
+                display: block;
+                border-bottom: 1px dotted #000;
+                }
+                ul.leaders .description,
+                ul.leaders .value {
+                display: block;
+                margin: 0.3em 0 -0.3em 0;
+                background: #fff;
+                }
+                ul.leaders .description {
+                float: left;
+                padding-right: 0.2em;
+                }
+                ul.leaders .value {
+                float: right;
+                padding-left: 0.2em;
+                }
+            </style>
+            <div class="text-center" id="basic_information">
+                <h6 t-field="o.company_id.name"/>
+                <div>
+                    <h6>
+                        <span t-field="o.account_id.code"/>
+                        <span t-field="o.account_id.name"/>
+                        <span t-field="o.account_id.currency_id.name"/>, Period Ending
+                        <span t-field="o.ending_date"/>
+                    </h6>
+                </div>
+                <h6>RECONCILIATION REPORT (UnMatched Statements)</h6>
+                <div>
+                    <h6>
+                        Reconciled on :
+                        <span t-field="o.reconcile_date"/>
+                    </h6>
+                </div>
+                <div>
+                    <h6>
+                        Reconciled by :
+                        <span t-field="o.reconcile_user_id"/>
+                    </h6>
+                </div>
+            </div>
+            <div>
+                <div class="w-100 border-bottom border-dark mt-5">
+                    Any changes made to transactions after this date aren't included in this report
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                    <table class="table">
+                        <tr>
+                            <th class="text-start">
+                                Summary
+                            </th>
+                            <th class="text-end">
+                                <span t-field="o.account_id.currency_id"/>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="example">
+                    <ul class="leaders">
+                        <li>
+                            <span class="description">Statement beginning balance</span>
+                            <span class="value" t-field="o.beginning_balance"/>
+                        </li>
+                        <br/>
+                        <!--                        <li>-->
+                        <!--                            <span class="description">Service charges</span>-->
+                        <!--                            <span class="value" t-field="o.service_charges"/>-->
+                        <!--                        </li>-->
+                        <!--                        <br/>-->
+                        <li>
+                            <span class="description">Cheques and payments cleared (
+                                <span t-field="o.len_bank_debits_unmatched"/>
+                                )
+                            </span>
+                            <span class="value" t-field="o.sum_bank_debits_unmatched"/>
+                        </li>
+                        <br/>
+                        <li>
+                            <span class="description">Deposits and other credits cleared (<span
+                                    t-field="o.len_bank_credits_unmatched"/>)
+                            </span>
+                            <span class="value" t-field="o.sum_bank_credits_unmatched"/>
+                        </li>
+                        <br/>
+                        <li>
+                            <span class="description">Statement ending balance</span>
+                            <span class="value" t-field="o.ending_balance"/>
+                        </li>
+                        <br/>
+                        <li>
+                            <span class="description">Register balance as of
+                                <span t-field="o.ending_date"/>
+                            </span>
+                            <span class="value" t-field="o.ending_balance"/>
+                        </li>
+                        <br/>
+                    </ul>
+                </div>
+                <div t-if="o.len_bank_debits_unmatched">
+                    <div class="d-flex justify-content-between mt-3">
+                        <table class="table">
+                            <tr>
+                                <th class="text-start">
+                                    Debits
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="margin-left: 30px;">
+                        <h6>
+
+                            <span class="description">Cheques and payments cleared (
+                                <span t-field="o.len_bank_debits_unmatched"/>
+                                )
+                            </span>
+                        </h6>
+                        <table class="table table-sm border-dark">
+                            <tr>
+                                <th scope="col" class="text-start">DATE</th>
+                                <th scope="col">TYPE</th>
+                                <th scope="col">REF NO.</th>
+                                <th scope="col">PAYEE</th>
+                                <th scope="col" class="text-end">AMOUNT (<span t-field="o.account_id.currency_id"/>)
+                                </th>
+                            </tr>
+                            <t t-foreach="o.account_move_line_copy_ids" t-as="line">
+                                <t t-if="line.credit and not line.flex_compute">
+                                    <tr>
+                                        <td class="text-start">
+                                            <span t-field="line.date"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.move_name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.partner_id"/>
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-field="line.amount_currency"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                            <tr>
+                                <th scope="col" class="text-start fw-bold" colspan="4">Total</th>
+                                <th scope="col" class="text-end fw-bold">
+
+                                    <span class="value fw-bold" t-field="o.sum_bank_debits_unmatched"/>
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div t-if="o.len_bank_credits_unmatched">
+                    <div class="d-flex justify-content-between mt-3">
+                        <table class="table">
+                            <tr>
+                                <th class="text-start">
+                                    Credits
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="margin-left: 30px;">
+                        <h6>
+                            <span class="description">Deposits and other credits cleared (<span
+                                    t-field="o.len_bank_credits_unmatched"/>)
+                            </span>
+
+                        </h6>
+                        <table class="table table-sm border-dark">
+                            <tr>
+                                <th scope="col" class="text-start">DATE</th>
+                                <th scope="col">TYPE</th>
+                                <th scope="col">REF NO.</th>
+                                <th scope="col">PAYEE</th>
+                                <th scope="col" class="text-end">AMOUNT (<span t-field="o.account_id.currency_id"/>)
+                                </th>
+                            </tr>
+                            <t t-foreach="o.account_move_line_copy_ids" t-as="line">
+                                <t t-if="line.debit and not line.flex_compute">
+                                    <tr>
+                                        <td class="text-start">
+                                            <span t-field="line.date"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.move_name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.partner_id"/>
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-field="line.amount_currency"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                            <tr>
+                                <th scope="col" class="text-start fw-bold" colspan="4">Total</th>
+                                <th scope="col" class="text-end fw-bold">
+                                    <span class="value fw-bold" t-field="o.sum_bank_credits_unmatched"/>
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="report_flex_bank_un_reconciliation">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+                         t-att-data-oe-lang="o and o.env.context.get('lang')">
+                        <t t-call="flex_bank_reconciliation.report_flex_bank_un_reconciliation_content"/>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <!--        Paper Format-->
+        <record id="paperformat_flex_bank_reconciliation" model="report.paperformat">
+            <field name="name">A4</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">3</field>
+            <field name="margin_bottom">3</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- QWeb Reports -->
+        <record id="flex_bank_reconcile_unmatch_report" model="ir.actions.report">
+            <field name="name">Bank Reconciliations (UnMatched Statements)</field>
+            <field name="model">flex.bank.reconcile</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">flex_bank_reconciliation.report_flex_bank_un_reconciliation</field>
+            <field name="report_file">flex_bank_reconciliation.report_flex_bank_un_reconciliation</field>
+            <field name="print_report_name">'Flex Bank Reconcile Report '</field>
+            <field name="attachment">(object.state == 'done') and (object.name.replace('/','_')+'.pdf')</field>
+            <field name="binding_model_id" ref="model_flex_bank_reconcile"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="paperformat_flex_bank_reconciliation"/>
+            <field name="groups_id" eval="[]"/>
+        </record>
+    </data>
+</odoo>

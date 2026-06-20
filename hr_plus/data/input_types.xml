@@ -1,0 +1,49 @@
+<odoo>
+    <record id="input_type_overtime_regular" model="hr.payslip.input.type">
+        <field name="name">Regular OT</field>
+        <field name="code">OT_REGULAR</field>
+    </record>
+    <record id="input_type_overtime_late" model="hr.payslip.input.type">
+        <field name="name">Late Night OT</field>
+        <field name="code">OT_LATE_NIGHT</field>
+    </record>
+    <record id="input_type_overtime_weekend" model="hr.payslip.input.type">
+        <field name="name">Weekend OT</field>
+        <field name="code">OT_WEEKEND</field>
+    </record>
+    <record id="input_type_overtime_holiday" model="hr.payslip.input.type">
+        <field name="name">Holiday OT</field>
+        <field name="code">OT_HOLIDAY</field>
+    </record>
+
+    <record id="input_type_incentive" model="hr.payslip.input.type">
+        <field name="name">Incentive</field>
+        <field name="code">INCENTIVE</field>
+    </record>
+
+    <record id="input_type_daily_allowance" model="hr.payslip.input.type">
+        <field name="name">Daily Allowance</field>
+        <field name="code">DAILY_ALLOWANCE</field>
+    </record>
+
+    <record id="input_type_driver_incentive" model="hr.payslip.input.type">
+        <field name="name">Driver Incentive</field>
+        <field name="code">DRIVER_INCENTIVE</field>
+    </record>
+
+    <record id="input_type_penalty" model="hr.payslip.input.type">
+        <field name="name">Penalty</field>
+        <field name="code">PENALTY</field>
+    </record>
+
+    <record id="input_type_loan" model="hr.payslip.input.type">
+        <field name="name">Loan</field>
+        <field name="code">LOAN</field>
+    </record>
+
+    <record id="input_type_advance" model="hr.payslip.input.type">
+        <field name="name">Advance</field>
+        <field name="code">ADVANCE</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_landed_cost_analysis_report_tree" model="ir.ui.view">
+        <field name="name">landed.cost.analysis.report.tree</field>
+        <field name="model">landed.cost.analysis.report</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+                <field name="landed_cost_id"/>
+                <field name="product_id"/>
+                <field name="product_category_id"/>
+                <field name="base_purchase_price" sum="Total Base Price"/>
+                <field name="shipping_cost" sum="Total Shipping"/>
+                <field name="customs_duties" sum="Total Duties"/>
+                <field name="additional_landed_costs" sum="Total Additional"/>
+                <field name="other_fees" sum="Total Other Fees"/>
+                <field name="specific_tariffs" sum="Total Tariffs"/>
+                <field name="miscellaneous_costs" sum="Total Misc"/>
+                <field name="total_landed_cost" sum="Total Landed Cost"/>
+                <field name="quantity" sum="Total Quantity"/>
+                <field name="landed_cost_per_unit" avg="Avg Cost per Unit"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_landed_cost_analysis_report_pivot" model="ir.ui.view">
+        <field name="name">landed.cost.analysis.report.pivot</field>
+        <field name="model">landed.cost.analysis.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Landed Cost Analysis" display_quantity="true">
+                <field name="product_id" type="row"/>
+                <field name="date" type="col" interval="month"/>
+                <field name="additional_landed_costs" type="measure"/>
+                <field name="base_purchase_price" type="measure"/>
+                <field name="customs_duties" type="measure"/>
+                <field name="miscellaneous_costs" type="measure"/>
+                <field name="shipping_cost" type="measure"/>
+                <field name="specific_tariffs" type="measure"/>
+                <field name="total_landed_cost" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_landed_cost_analysis_report_graph" model="ir.ui.view">
+        <field name="name">landed.cost.analysis.report.graph</field>
+        <field name="model">landed.cost.analysis.report</field>
+        <field name="arch" type="xml">
+            <graph string="Landed Cost Analysis" type="bar" stacked="True">
+                <field name="date" interval="month"/>
+                <field name="total_landed_cost" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_landed_cost_analysis_report_search" model="ir.ui.view">
+        <field name="name">landed.cost.analysis.report.search</field>
+        <field name="model">landed.cost.analysis.report</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="date"/>
+                <field name="landed_cost_id"/>
+                <field name="product_id"/>
+                <field name="product_category_id"/>
+                <filter string="This Month" name="this_month" domain="[('date','&gt;=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d')),('date','&lt;=', context_today().strftime('%Y-%m-%d'))]"/>
+                <group expand="1" string="Group By">
+                    <filter string="Landed Cost" name="group_by_landed_cost" context="{'group_by':'landed_cost_id'}"/>
+                    <filter string="Product" name="group_by_product" context="{'group_by':'product_id'}"/>
+                    <filter string="Product Category" name="group_by_category" context="{'group_by':'product_category_id'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by':'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_landed_cost_analysis_report" model="ir.actions.act_window">
+        <field name="name">Landed Cost Analysis</field>
+        <field name="res_model">landed.cost.analysis.report</field>
+        <field name="view_mode">pivot,graph,tree</field>
+        <field name="search_view_id" ref="view_landed_cost_analysis_report_search"/>
+        <field name="context">{
+            'search_default_group_by_date': 1,
+            'pivot_measures': ['additional_landed_costs', 'base_purchase_price', 'customs_duties', 'miscellaneous_costs', 'shipping_cost', 'specific_tariffs', 'total_landed_cost'],
+            'pivot_column_groupby': ['date:month'],
+            'pivot_row_groupby': ['product_id']
+        }</field>
+    </record>
+
+    <menuitem id="menu_landed_cost_analysis_report"
+              name="Landed Cost Analysis"
+              action="action_landed_cost_analysis_report"
+              parent="stock.menu_warehouse_report"
+              sequence="100"/>
+</odoo>

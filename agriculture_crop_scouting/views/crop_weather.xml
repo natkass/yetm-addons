@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_crops_weather_form" model="ir.ui.view">
+            <field name="name">Crops Weature View</field>
+            <field name="model">farmer.cropping.weature</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='name'/>
+                                <!-- <field name='air_temperature'/> -->
+                            </group>
+                            <group>
+                                <!-- <field name='wind'/> -->
+                                <!-- <field name='cloud_cover'/> -->
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+                       
+        <record id="view_crops_weather_tree" model="ir.ui.view">
+                <field name="name">Crops Weature Tree View</field>
+                <field name="model">farmer.cropping.weature</field>
+                <field name="arch" type="xml">
+                    <tree>
+                        <field name='name'/>
+                        <!-- <field name='air_temperature'/>
+                        <field name='wind'/>
+                        <field name='cloud_cover'/> -->
+                    </tree>
+                </field>
+        </record>
+
+        <record id="view_crops_weather_search" model="ir.ui.view">
+                <field name="name">Crops Weature Search View</field>
+                <field name="model">farmer.cropping.weature</field>
+                <field name="arch" type="xml">
+                    <search>
+                        <field name='name'/>
+                       <!--  <field name='air_temperature'/>
+                        <field name='wind'/>
+                        <field name='cloud_cover'/> -->
+                    </search>
+                </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_weather">
+            <field name="name">Soil Conditions</field>
+            <field name="res_model">farmer.cropping.weature</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+    </data>
+</odoo>
+
+

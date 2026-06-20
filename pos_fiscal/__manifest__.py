@@ -1,0 +1,45 @@
+{
+    'name': 'POS Fiscal',
+    'version': '2.0',
+    'category': 'Point of Sale',
+    'summary': 'Enhanced fiscal management for POS with auto-reconciliation and invoicing',
+    'author': 'Your Company',
+    'website': 'https://www.yourcompany.com',
+    'license': 'LGPL-3',
+    'depends': [
+        'base',
+        'point_of_sale',
+        'web',
+        'mail',
+    ],
+    'external_dependencies': {
+        'python': [],
+    },
+    'data': [
+        'security/ir.model.access.csv',
+        # 'data/cron_data.xml',
+        # 'data/server_action.xml',
+        'views/pos_device_views.xml',
+        'views/pos_invoice_views.xml',
+        'views/pos_refund_views.xml',
+        'views/pos_zreport_views.xml',
+        'views/res_config_settings_views.xml',
+        'views/pos_fiscal_config_views.xml',
+        'views/pos_fs_check_wizard.xml',
+        'views/pos_fs_check_wizard_enhanced.xml',
+        'views/pos_daily_report_views.xml',
+        'views/pos_change_log_views.xml',
+        'views/pos_fiscal_menus.xml',
+    ],
+    'assets': {
+        'web.assets_backend': [
+            'pos_fiscal/static/src/js/pos_device_sync.js',
+            'pos_fiscal/static/src/js/pos_invoice_sync.js',
+            'pos_fiscal/static/src/js/pos_refund_sync.js',
+            "pos_fiscal/static/src/xml/pos_device_sync_template.xml",
+        ],
+    },
+    'installable': True,
+    'auto_install': False,
+}
+

@@ -1,0 +1,599 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* import_fees
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0-20220919\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-30 15:20+0000\n"
+"PO-Revision-Date: 2022-12-30 15:20+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: import_fees
+#: model_terms:ir.ui.view,arch_db:import_fees.harmonized_code_form
+msgid "<span class=\"o_stat_text\">Product Categories</span>"
+msgstr ""
+
+#. module: import_fees
+#: model_terms:ir.ui.view,arch_db:import_fees.harmonized_code_form
+msgid "<span class=\"o_stat_text\">Products</span>"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__stevedoring
+#: model:product.product,name:import_fees.aconage
+#: model:product.product,name:import_fees.stevedoring
+#: model:product.template,name:import_fees.aconage_product_template
+#: model:product.template,name:import_fees.stevedoring_product_template
+msgid "Aconage"
+msgstr ""
+
+#. module: import_fees
+#: model_terms:ir.ui.view,arch_db:import_fees.stock_landed_cost_form
+msgid "Articles réceptionnés"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__insurance
+#: model:product.product,name:import_fees.assurance
+#: model:product.product,name:import_fees.insurance
+#: model:product.template,name:import_fees.assurance_product_template
+#: model:product.template,name:import_fees.insurance_product_template
+msgid "Assurance"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__other
+#: model:product.product,name:import_fees.autres
+#: model:product.product,name:import_fees.other
+#: model:product.template,name:import_fees.autres_product_template
+#: model:product.template,name:import_fees.other_product_template
+msgid "Autres"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__bank
+#: model:product.product,name:import_fees.bank
+#: model:product.product,name:import_fees.banque
+#: model:product.template,name:import_fees.bank_product_template
+#: model:product.template,name:import_fees.banque_product_template
+msgid "Banque"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields.selection,name:import_fees.selection__product_template__split_method_landed_cost__by_hscode
+#: model:ir.model.fields.selection,name:import_fees.selection__stock_landed_cost_lines__split_method__by_hscode
+msgid "By HS Code"
+msgstr "Par HS Code"
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__currency_rate
+msgid "Cours de devise"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_customs_fees__create_uid
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code__create_uid
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_received_product_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_customs_fees__create_date
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code__create_date
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_received_product_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_customs_fees__local_currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__customs_fees_ids
+msgid "Customs Fees"
+msgstr ""
+
+#. module: import_fees
+#: model_terms:ir.ui.view,arch_db:import_fees.product_category_form_view
+msgid "Customs Info"
+msgstr ""
+
+#. module: import_fees
+#: model:product.product,name:import_fees.dhl_fedex_ups
+#: model:product.product,name:import_fees.shipping
+#: model:product.template,name:import_fees.dhl_fedex_ups_product_template
+#: model:product.template,name:import_fees.shipping_product_template
+msgid "DHL/Fedex/UPS"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__shipping
+msgid "DHL/Fedex/UPS..."
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_product_product__split_method_landed_cost
+#: model:ir.model.fields,field_description:import_fees.field_product_template__split_method_landed_cost
+msgid "Default Split Method"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,help:import_fees.field_product_product__split_method_landed_cost
+#: model:ir.model.fields,help:import_fees.field_product_template__split_method_landed_cost
+msgid "Default Split Method when used for Landed Cost"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,help:import_fees.field_stock_landed_cost__bill_currency_id
+msgid "Device facture"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_received_product_line__currency_id
+msgid "Devise"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__bill_currency_id
+msgid "Devise Facture"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_customs_fees__display_name
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code__display_name
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_received_product_line__display_name
+#: model:ir.model.fields,field_description:import_fees.field_product_category__display_name
+#: model:ir.model.fields,field_description:import_fees.field_product_product__display_name
+#: model:ir.model.fields,field_description:import_fees.field_product_template__display_name
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__display_name
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost_lines__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__miscellaneous
+#: model:product.product,name:import_fees.divers
+#: model:product.product,name:import_fees.miscellaneous
+#: model:product.template,name:import_fees.divers_product_template
+#: model:product.template,name:import_fees.miscellaneous_product_template
+msgid "Divers"
+msgstr ""
+
+#. module: import_fees
+#: model_terms:ir.ui.view,arch_db:import_fees.stock_landed_cost_form
+msgid "Document"
+msgstr ""
+
+#. module: import_fees
+#: model:product.product,name:import_fees.customs
+#: model:product.product,name:import_fees.douane
+#: model:product.template,name:import_fees.customs_product_template
+#: model:product.template,name:import_fees.douane_product_template
+#: model_terms:ir.ui.view,arch_db:import_fees.stock_landed_cost_form
+msgid "Douane"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__transport_cfr
+msgid "En DH"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,help:import_fees.field_stock_landed_cost_lines__split_method
+msgid ""
+"Equal : Cost will be equally divided.\n"
+"By Quantity : Cost will be divided according to product's quantity.\n"
+"By Current cost : Cost will be divided according to product's current cost.\n"
+"By Weight : Cost will be divided depending on its weight.\n"
+"By Volume : Cost will be divided depending on its volume.\n"
+"By HS Code : Cost will be divided depending on its Harmonized System Code."
+msgstr ""
+
+#. module: import_fees
+#: model_terms:ir.ui.view,arch_db:import_fees.customs_fees_form
+#: model_terms:ir.ui.view,arch_db:import_fees.harmonized_code_form
+msgid "Ex. 0123456789"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.ui.menu,name:import_fees.landed_costs
+#: model_terms:ir.ui.view,arch_db:import_fees.stock_landed_cost_form
+msgid "Frais d'approche"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.actions.act_window,name:import_fees.customs_fees_action_window
+msgid "Frais douanes"
+msgstr ""
+
+#. module: import_fees
+#: model_terms:ir.ui.view,arch_db:import_fees.stock_landed_cost_form
+msgid "Frais à saisir"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__freight
+#: model:product.product,name:import_fees.freight
+#: model:product.product,name:import_fees.fret
+#: model:product.template,name:import_fees.freight_product_template
+#: model:product.template,name:import_fees.fret_product_template
+msgid "Fret"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_product_category__harmonized_code_id
+#: model:ir.model.fields,field_description:import_fees.field_product_product__harmonized_code_id
+#: model:ir.model.fields,field_description:import_fees.field_product_template__harmonized_code_id
+#: model_terms:ir.ui.view,arch_db:import_fees.product_template_search_view
+msgid "Harmonized Code"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_customs_fees__id
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code__id
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_received_product_line__id
+#: model:ir.model.fields,field_description:import_fees.field_product_category__id
+#: model:ir.model.fields,field_description:import_fees.field_product_product__id
+#: model:ir.model.fields,field_description:import_fees.field_product_template__id
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__id
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost_lines__id
+msgid "ID"
+msgstr ""
+
+#. module: import_fees
+#: model_terms:ir.ui.view,arch_db:import_fees.stock_landed_cost_form
+msgid "Initialiser"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_received_product_line__landed_costs_id
+msgid "Landed Cost"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_customs_fees__landed_costs_id
+msgid "Landed Costs"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_customs_fees____last_update
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code____last_update
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_received_product_line____last_update
+#: model:ir.model.fields,field_description:import_fees.field_product_category____last_update
+#: model:ir.model.fields,field_description:import_fees.field_product_product____last_update
+#: model:ir.model.fields,field_description:import_fees.field_product_template____last_update
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost____last_update
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost_lines____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_customs_fees__write_uid
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code__write_uid
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_received_product_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_customs_fees__write_date
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code__write_date
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_received_product_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.ui.menu,name:import_fees.harmonized_codes
+msgid "Liste Nomenclatures"
+msgstr "Liste Nomenclatures Douane"
+
+#. module: import_fees
+#: model:ir.actions.act_window,name:import_fees.harmonized_code_action_window
+msgid "Liste nomenclatures"
+msgstr "Liste Nomenclatures Douane"
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__storage
+#: model:product.product,name:import_fees.magasinage
+#: model:product.product,name:import_fees.storage
+#: model:product.template,name:import_fees.magasinage_product_template
+#: model:product.template,name:import_fees.storage_product_template
+msgid "Magasinage"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_customs_fees__amount
+msgid "Montant"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_customs_fees__harmonized_code_id
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code__name
+msgid "Nomenclature"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_received_product_line__price_unit
+msgid "Prix unitaire"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model,name:import_fees.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.actions.act_window,name:import_fees.product_category_harmonized_system_code_action
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code__product_category_ids
+msgid "Product Categories"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model,name:import_fees.model_product_category
+msgid "Product Category"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code__product_category_count
+msgid "Product Category Count"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model,name:import_fees.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code__product_template_count
+msgid "Product Template Count"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.actions.act_window,name:import_fees.product_template_hs_code_action
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code__product_template_ids
+msgid "Products"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_received_product_line__product_id
+msgid "Produit"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_received_product_line__quantity
+msgid "Quantité"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__received_products_ids
+msgid "Received Products"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__royalty_fee
+#: model:product.product,name:import_fees.redevance_a
+#: model:product.product,name:import_fees.royalty_fee
+#: model:product.template,name:import_fees.redevance_a_product_template
+#: model:product.template,name:import_fees.royalty_fee_product_template
+msgid "Redevance A"
+msgstr ""
+
+#. module: import_fees
+#: model:product.product,name:import_fees.redevance_info
+#: model:product.product,name:import_fees.royalty_fee_info
+#: model:product.template,name:import_fees.redevance_info_product_template
+#: model:product.template,name:import_fees.royalty_fee_info_product_template
+msgid "Redevance Info"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__royalty_fee_info
+msgid "Redevance Infos"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__regime_select
+msgid "Regime"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code__regime
+msgid "Régime"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost_lines__split_method
+msgid "Split Method"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model,name:import_fees.model_stock_landed_cost
+msgid "Stock Landed Cost"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model,name:import_fees.model_stock_landed_cost_lines
+msgid "Stock Landed Cost Line"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_received_product_line__move_id
+msgid "Stock Move"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__demurrage
+#: model:product.product,name:import_fees.demurrage
+#: model:product.product,name:import_fees.surestaries
+#: model:product.template,name:import_fees.demurrage_product_template
+#: model:product.template,name:import_fees.surestaries_product_template
+msgid "Surestaries"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code__tva_import
+msgid "TVA Import"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_customs_fees__rate
+msgid "Taux"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code__taux_dts
+msgid "Taux DTS"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code__taux_fds
+msgid "Taux FDS"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_harmonized_code__taxe_fpei
+msgid "Taxe F.P.E.I"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_received_product_line__price_total
+msgid "Total"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__transit
+#: model:product.product,name:import_fees.transit
+#: model:product.template,name:import_fees.transit_product_template
+msgid "Transit"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__transport
+#: model:product.product,name:import_fees.transport
+#: model:product.template,name:import_fees.transport_product_template
+msgid "Transport"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__transport_cfr_foreign_currency
+#: model:product.product,name:import_fees.transport_cfr
+#: model:product.template,name:import_fees.transport_cfr_product_template
+msgid "Transport CFR"
+msgstr ""
+
+#. module: import_fees
+#: model:product.product,uom_name:import_fees.aconage
+#: model:product.product,uom_name:import_fees.assurance
+#: model:product.product,uom_name:import_fees.autres
+#: model:product.product,uom_name:import_fees.bank
+#: model:product.product,uom_name:import_fees.banque
+#: model:product.product,uom_name:import_fees.customs
+#: model:product.product,uom_name:import_fees.demurrage
+#: model:product.product,uom_name:import_fees.dhl_fedex_ups
+#: model:product.product,uom_name:import_fees.divers
+#: model:product.product,uom_name:import_fees.douane
+#: model:product.product,uom_name:import_fees.freight
+#: model:product.product,uom_name:import_fees.fret
+#: model:product.product,uom_name:import_fees.insurance
+#: model:product.product,uom_name:import_fees.magasinage
+#: model:product.product,uom_name:import_fees.miscellaneous
+#: model:product.product,uom_name:import_fees.other
+#: model:product.product,uom_name:import_fees.redevance_a
+#: model:product.product,uom_name:import_fees.redevance_info
+#: model:product.product,uom_name:import_fees.royalty_fee_info
+#: model:product.product,uom_name:import_fees.royalty_fee
+#: model:product.product,uom_name:import_fees.shipping
+#: model:product.product,uom_name:import_fees.stevedoring
+#: model:product.product,uom_name:import_fees.storage
+#: model:product.product,uom_name:import_fees.surestaries
+#: model:product.product,uom_name:import_fees.transit
+#: model:product.product,uom_name:import_fees.transport
+#: model:product.product,uom_name:import_fees.transport_cfr
+#: model:product.template,uom_name:import_fees.aconage_product_template
+#: model:product.template,uom_name:import_fees.assurance_product_template
+#: model:product.template,uom_name:import_fees.autres_product_template
+#: model:product.template,uom_name:import_fees.bank_product_template
+#: model:product.template,uom_name:import_fees.banque_product_template
+#: model:product.template,uom_name:import_fees.customs_product_template
+#: model:product.template,uom_name:import_fees.demurrage_product_template
+#: model:product.template,uom_name:import_fees.dhl_fedex_ups_product_template
+#: model:product.template,uom_name:import_fees.divers_product_template
+#: model:product.template,uom_name:import_fees.douane_product_template
+#: model:product.template,uom_name:import_fees.freight_product_template
+#: model:product.template,uom_name:import_fees.fret_product_template
+#: model:product.template,uom_name:import_fees.insurance_product_template
+#: model:product.template,uom_name:import_fees.magasinage_product_template
+#: model:product.template,uom_name:import_fees.miscellaneous_product_template
+#: model:product.template,uom_name:import_fees.other_product_template
+#: model:product.template,uom_name:import_fees.redevance_a_product_template
+#: model:product.template,uom_name:import_fees.redevance_info_product_template
+#: model:product.template,uom_name:import_fees.royalty_fee_info_product_template
+#: model:product.template,uom_name:import_fees.royalty_fee_product_template
+#: model:product.template,uom_name:import_fees.shipping_product_template
+#: model:product.template,uom_name:import_fees.stevedoring_product_template
+#: model:product.template,uom_name:import_fees.storage_product_template
+#: model:product.template,uom_name:import_fees.surestaries_product_template
+#: model:product.template,uom_name:import_fees.transit_product_template
+#: model:product.template,uom_name:import_fees.transport_cfr_product_template
+#: model:product.template,uom_name:import_fees.transport_product_template
+msgid "Units"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_import_fees_customs_fees__value
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__amount_foreign_currency
+msgid "Valeur"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__value_declared
+msgid "Valeur declaree"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__value_customs
+msgid "Valeur douane"
+msgstr ""
+
+#. module: import_fees
+#: model_terms:ir.ui.view,arch_db:import_fees.stock_landed_cost_form
+msgid "Valeur déclarée"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_landed_cost__amount_local_currency
+msgid "Valeur en DH"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model,name:import_fees.model_import_fees_customs_fees
+msgid "import_fees.customs_fees"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model,name:import_fees.model_import_fees_harmonized_code
+msgid "import_fees.harmonized_code"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model,name:import_fees.model_import_fees_received_product_line
+msgid "import_fees.received.product.line"
+msgstr ""
+
+#. module: import_fees
+#: model:ir.model.fields,field_description:import_fees.field_stock_valuation_adjustment_lines__cost_line_product_id
+msgid "Cost"
+msgstr "Coût logistique"
+
+#. module: import_fees
+#: code:addons/import_fees/models/stock_landed_cost.py:0
+#, python-format
+msgid "Frais de Douane"
+msgstr "Frais de Douane"

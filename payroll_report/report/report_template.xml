@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Define the QWeb template for the PDF report -->
+    <template id="payroll_report_pdf1">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <!-- Sort slip_ids by employee name before processing -->
+                    <t t-set="sorted_slips" t-value="doc.slip_ids.sorted(key=lambda r: (r.employee_id.name or '').lower())"/>
+
+                    <!-- Iterate over each bank to generate a single table -->
+                    <t t-set="banks" t-value="{}"/>
+                    <t t-foreach="sorted_slips" t-as="slip">
+                        <t t-set="bank_account" t-value="slip.employee_id.bank_account_id"/>
+                        <t t-if="bank_account">
+                            <t t-set="bank_key" t-value="bank_account.bank_id.id"/>
+                            <t t-if="not banks.get(bank_key)">
+                                <t t-set="bank_data" t-value="{'bank_name': bank_account.bank_id.name, 'employees': []}"/>
+                                <t t-set="banks" t-value="{**banks, **{bank_key: bank_data}}"/>
+                            </t>
+                            <t t-set="banks" t-value="{**banks, **{bank_key: {**banks[bank_key], 'employees': banks[bank_key]['employees'] + [slip]}}}"/>
+                        </t>
+                    </t>
+
+                    <!-- Iterate over banks and generate sections -->
+                    <t t-foreach="banks.items()" t-as="bank">
+                        <!-- Apply page break only for subsequent banks, not the first one -->
+                        <t t-if="bank_index == 0">
+                            <div/>
+                        </t>
+                        <t t-else="">
+                            <div class="page-break"/>
+                        </t>
+                        <h2>Payroll Report</h2>
+                        <h3>Bank: <t t-esc="bank[1]['bank_name']"/></h3>
+                        <style>
+                            .table-condensed {
+                                border-collapse: collapse;
+                                width: 100%;
+                            }
+                            .table-condensed th, .table-condensed td {
+                                border: 2px solid black; /* Adjust thickness and color as needed */
+                                padding: 8px; /* Adjust padding as needed */
+                                text-align: left;
+                            }
+                            .table-condensed th {
+                                background-color: #f2f2f2; /* Optional: Add background color to header */
+                                font-weight: bold; /* Optional: Make header text bold */
+                            }
+                            .page-break {
+                                page-break-before: always; /* Start each bank's section on a new page */
+                            }
+                            .total-net-salary {
+                                text-align: right; /* Right-align the total net salary */
+                                margin-top: 20px;
+                            }
+                        </style>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Si No</th>
+                                    <th>Employee Name</th>
+                                    <th>Bank Account No</th>
+                                    <th>Net Pay</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="si_no" t-value="0"/>
+                                <t t-set="total_net_pay" t-value="0.0"/> <!-- Reset total_net_pay for each bank -->
+                                <t t-foreach="bank[1]['employees']" t-as="slip">
+                                    <t t-foreach="slip.line_ids" t-as="line">
+                                        <t t-if="line.name == 'Net Salary'">
+                                            <tr>
+                                                <td><t t-esc="si_no + 1"/></td>
+                                                <t t-set="si_no" t-value="si_no + 1"/>
+                                                <td><t t-esc="slip.employee_id.name"/></td>
+                                                <td><t t-esc="slip.employee_id.bank_account_id.acc_number"/></td>
+                                                <td><t t-esc="line.amount" t-options="{'widget': 'float', 'precision': 2}"/></td>
+                                                <t t-set="amount" t-value="line.amount or 0.0"/>
+                                                <t t-set="total_net_pay" t-value="total_net_pay + float(amount)"/>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </t>
+                            </tbody>
+                        </table>
+                        <!-- Add the Prepared By, Checked By, Approved By section -->
+                        <div>
+                            <!-- <p><strong>Prepared By: ________________________ 
+                            Checked By: ________________________ 
+                            Approved By: ________________________</strong></p> -->
+                        </div>
+                        <!-- Display Total Net Salary at the end of each bank's section with right alignment -->
+                        <div class="total-net-salary">
+                            <p><strong>Total Net Salary <t t-esc="total_net_pay" t-options="{'widget': 'float', 'precision': 2}"/></strong></p>
+                        </div>
+                    </t> <!-- Closing t-foreach for banks -->
+                </t> <!-- Closing t-call for web.external_layout -->
+            </t> <!-- Closing t-foreach for docs -->
+        </t> <!-- Closing t-call for web.html_container -->
+    </template>
+</odoo>

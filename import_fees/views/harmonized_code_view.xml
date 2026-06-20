@@ -1,0 +1,167 @@
+<odoo>
+    <data>
+        <record id="product_category_harmonized_system_code_action" model="ir.actions.act_window">
+            <field name="name">Product Categories</field>
+            <field name="res_model">product.category</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('harmonized_code_id', '=', active_id)]</field>
+        </record>
+        <record id="product_template_hs_code_action" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('harmonized_code_id', '=', active_id)]</field>
+        </record>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="import_fees.harmonized_code_form">
+            <field name="name">import_fees.harmonized_code.form</field>
+            <field name="model">import_fees.harmonized_code</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button
+                                    class="oe_stat_button"
+                                    name="%(product_category_harmonized_system_code_action)d"
+                                    icon="fa-th-list"
+                                    type="action"
+                            >
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="product_category_count"/>
+                                    </span>
+                                    <span class="o_stat_text">Product Categories</span>
+                                </div>
+                            </button>
+                            <button
+                                    class="oe_stat_button"
+                                    name="%(product_template_hs_code_action)d"
+                                    icon="fa-th-list"
+                                    type="action"
+                            >
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="product_template_count"/>
+                                    </span>
+                                    <span class="o_stat_text">Products</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="Ex. 0123456789" class="oe_inline"/></h1>
+                        </div>
+                        <group>
+                            <group name="left_main_group">
+                                <field name="company_ids" 
+                                    widget="many2many_tags" 
+                                    groups="base.group_multi_company"
+                                    options="{'no_create': True}"/>
+                                <field name="is_com_visible" invisible="True"/>
+                                <field name="is_exm_visible" invisible="True"/>
+                                <field name="is_cid_visible" invisible="True"/>
+                                <field name="is_surcharge_visible" invisible="True"/>
+                                <field name="is_pal_visible" invisible="True"/>
+                                <field name="is_eic_visible" invisible="True"/>
+                                <field name="is_cess_levy_visible" invisible="True"/>
+                                <field name="is_excise_duty_visible" invisible="True"/>
+                                <field name="is_ridl_visible" invisible="True"/>
+                                <field name="is_srl_visible" invisible="True"/>
+                                <field name="is_sscl_visible" invisible="True"/>
+                                <field name="is_vat_visible" invisible="True"/>
+                                <field name="com_value" widget="monetary"
+                                       invisible="not is_com_visible"/>
+                                <field name="exm_value" widget="monetary"
+                                        invisible="not is_exm_visible"/>
+                                <field name="cid_rate" widget="percentage"
+                                        invisible="not is_cid_visible"/>
+                                <field name="surcharge_rate" widget="percentage"
+                                       invisible="not is_surcharge_visible"/>
+                                <field name="pal_rate" widget="percentage"
+                                        invisible="not is_pal_visible"/>
+                                <field name="eic_rate" widget="percentage"
+                                        invisible="not is_eic_visible"/>
+                            </group>
+                            <group name="right_main_group">
+                                <field name="srl_rate" widget="percentage"
+                                        invisible="not is_srl_visible"/>
+
+                                <field name="ridl_rate" widget="percentage"
+                                        invisible="not is_ridl_visible"/>
+                                <field name="sscl_rate" widget="percentage"
+                                        invisible="not is_sscl_visible"/>
+                                <field name="cess_levy_rate" widget="percentage"
+                                        invisible="not is_cess_levy_visible"/>
+                                <field name="excise_duty_rate" widget="percentage"
+                                        invisible="not is_excise_duty_visible"/>
+                                <field name="vat_rate" widget="percentage"
+                                    invisible="not is_vat_visible"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="import_fees.harmonized_code_tree">
+            <field name="name">import_fees.harmonized_code.tree</field>
+            <field name="model">import_fees.harmonized_code</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="is_com_visible" column_invisible="True"/>
+                    <field name="is_exm_visible" column_invisible="True"/>
+                    <field name="is_cid_visible" column_invisible="True"/>
+                    <field name="is_surcharge_visible" column_invisible="True"/>
+                    <field name="is_pal_visible" column_invisible="True"/>
+                    <field name="is_eic_visible" column_invisible="True"/>
+                    <field name="is_cess_levy_visible" column_invisible="True"/>
+                    <field name="is_excise_duty_visible" column_invisible="True"/>
+                    <field name="is_ridl_visible" column_invisible="True"/>
+                    <field name="is_srl_visible" column_invisible="True"/>
+                    <field name="is_sscl_visible" column_invisible="True"/>
+                    <field name="is_vat_visible" column_invisible="True"/>
+                    <field name="com_value" widget="monetary" column_invisible="context.get('is_com_visible', False)"
+                           optional="hide"/>
+                    <field name="exm_value" widget="monetary" column_invisible="context.get('is_exm_visible', False)"
+                           optional="hide"/>
+                    <field name="cid_rate" widget="percentage" column_invisible="context.get('is_cid_visible', False)"
+                           optional="show"/>
+                    <field name="surcharge_rate" widget="percentage"
+                           column_invisible="context.get('is_surcharge_visible', False)" optional="hide"/>
+                    <field name="pal_rate" widget="percentage" column_invisible="context.get('is_pal_visible', False)"
+                           optional="hide"/>
+                    <field name="eic_rate" widget="percentage" column_invisible="context.get('is_eic_visible', False)"
+                           optional="hide"/>
+                    <field name="srl_rate" widget="percentage" column_invisible="context.get('is_srl_visible', False)"
+                           optional="hide"/>
+                    <field name="ridl_rate" widget="percentage"
+                           column_invisible="context.get('is_ridl_visible', False)" optional="hide"/>
+                    <field name="sscl_rate" widget="percentage"
+                           column_invisible="context.get('is_sscl_visible', False)" optional="hide"/>
+                    <field name="cess_levy_rate" widget="percentage"
+                           column_invisible="context.get('is_cess_levy_visible', False)" optional="hide"/>
+                    <field name="excise_duty_rate" widget="percentage"
+                           column_invisible="context.get('is_excise_duty_visible', False)" optional="hide"/>
+                    <field name="vat_rate" widget="percentage" column_invisible="context.get('is_vat_visible', False)"
+                           optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="import_fees.harmonized_code_action_window">
+            <field name="name">HS Codes</field>
+            <field name="res_model">import_fees.harmonized_code</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- Top menu item -->
+        <!-- actions -->
+        <menuitem name="HS Codes" id="import_fees.harmonized_codes" parent="stock.menu_stock_config_settings"
+                  groups="stock.group_stock_manager" sequence="10"
+                  action="import_fees.harmonized_code_action_window"/>
+    </data>
+</odoo>

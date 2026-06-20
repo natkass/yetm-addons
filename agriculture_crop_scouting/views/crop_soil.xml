@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_crops_soil_form" model="ir.ui.view">
+            <field name="name">Crops Soil View</field>
+            <field name="model">farmer.cropping.soil</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='name'/>
+                                <!-- <field name='soil_temperature'/> -->
+                            </group>
+                            <group>
+                               <!-- <field name='soil_condition'/>  -->
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+                       
+        <record id="view_crops_soil_tree" model="ir.ui.view">
+                <field name="name">Crops Soil Tree View</field>
+                <field name="model">farmer.cropping.soil</field>
+                <field name="arch" type="xml">
+                    <tree>
+                        <field name='name'/>
+                        <!-- <field name='soil_temperature'/>
+                        <field name='soil_condition'/> -->
+                    </tree>
+                </field>
+        </record>
+
+        <record id="view_crops_soil_search" model="ir.ui.view">
+                <field name="name">Crops Soil Search View</field>
+                <field name="model">farmer.cropping.soil</field>
+                <field name="arch" type="xml">
+                    <search>
+                        <field name='name'/>
+                        <!-- <field name='soil_temperature'/>
+                        <field name='soil_condition'/> -->
+                    </search>
+                </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_soil">
+            <field name="name">Soil Temperatures</field>
+            <field name="res_model">farmer.cropping.soil</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+    </data>
+</odoo>
+
+

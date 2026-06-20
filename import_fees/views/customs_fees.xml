@@ -1,0 +1,86 @@
+<odoo>
+    <data>
+
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="import_fees.customs_fees_form">
+            <field name="name">import_fees.customs_fees.form</field>
+            <field name="model">import_fees.customs_fees</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="harmonized_code_id" class="oe_edit_only"/>
+                            <h1><field name="harmonized_code_id" placeholder="Ex. 0123456789" class="oe_inline"/></h1>
+                        </div>
+                        <group>
+                            <field name="rate" widget="percentage"/>
+                        </group>
+                        <group>
+                            <group name="left_main_group">
+                                <field name="value" widget="monetary"/>
+                            </group>
+                            <group name="right_main_group">
+                                <field name="amount" widget="monetary"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="import_fees.customs_fees_tree">
+            <field name="name">import_fees.customs_fees.tree</field>
+            <field name="model">import_fees.customs_fees</field>
+            <field name="arch" type="xml">
+                <tree  create="false" editable="top">
+                    <field name="harmonized_code_id" readonly="1"/>
+                    <field name="rate" widget="percentage" readonly="1"/>
+                    <field name="local_currency_id" readonly="1" optional="hide"/>
+                    <field name="value" widget="monetary" readonly="1" string="Vendor Value"/>
+                    <field name="amount" widget="monetary" readonly="1" string="Customs Duties"/>
+                    <field name="cif_value"/>
+                    <field name="is_com_visible" column_invisible="True"/>
+                    <field name="is_exm_visible" column_invisible="True"/>
+                    <field name="is_cid_visible" column_invisible="True"/>
+                    <field name="is_surcharge_visible" column_invisible="True"/>
+                    <field name="is_pal_visible" column_invisible="True"/>
+                    <field name="is_eic_visible" column_invisible="True"/>
+                    <field name="is_cess_levy_visible" column_invisible="True"/>
+                    <field name="is_excise_duty_visible" column_invisible="True"/>
+                    <field name="is_ridl_visible" column_invisible="True"/>
+                    <field name="is_srl_visible" column_invisible="True"/>
+                    <field name="is_sscl_visible" column_invisible="True"/>
+                    <field name="is_vat_visible" column_invisible="True"/>
+                    <field name="com_value" widget="monetary" invisible="not is_com_visible"  optional="hide"/>
+                    <field name="exm_value" widget="monetary" invisible="not is_exm_visible"  optional="hide"/>
+                    <field name="cid_value" widget="monetary" invisible="not is_cid_visible"  optional="show"/>
+                    <field name="surcharge_value" widget="monetary"
+                           invisible="not is_surcharge_visible"  optional="hide"/>
+                    <field name="pal_value" widget="monetary" invisible="not is_pal_visible"  optional="hide"/>
+                    <field name="eic_value" widget="monetary" invisible="not is_eic_visible"  optional="hide"/>
+                    <field name="srl_value" widget="monetary" invisible="not is_srl_visible"  optional="hide"/>
+                    <field name="ridl_value" widget="monetary"
+                           invisible="not is_ridl_visible"  optional="hide"/>
+                    <field name="sscl_value" widget="monetary"
+                           invisible="not is_sscl_visible"  optional="hide"/>
+                    <field name="cess_levy_value" widget="monetary"
+                           invisible="not is_cess_levy_visible"  optional="hide"/>
+                    <field name="excise_duty_value" widget="monetary"
+                           invisible="not is_excise_duty_visible"  optional="hide"/>
+                    <field name="vat_value" widget="monetary" invisible="not is_vat_visible"  optional="show"/>
+                    <field name="state" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="import_fees.customs_fees_action_window">
+            <field name="name">Customs duties</field>
+            <field name="res_model">import_fees.customs_fees</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

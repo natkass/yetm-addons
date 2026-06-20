@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Product Template -->
+    <record id="view_order_form_inherit_crop_request" model="ir.ui.view">
+        <field name="name">sale.order.form.crop.request</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- <xpath expr="//div[@class='oe_button_box']" position="inside"> -->
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside"> <!-- odoo13 -->
+                <button name="view_crop_request" string="Crop Request" type="object" class="oe_stat_button" icon="fa-pencil-square-o"/>
+            </xpath>
+            <xpath expr="//notebook//page[@name='order_lines']//tree//field[@name='product_uom_qty']" position="after">
+                <field name="crop_id"/>
+                <field name="crop_request_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

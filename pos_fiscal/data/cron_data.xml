@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- 1st Run - Early Morning 06:00 -->
+        <!-- <record id="ir_cron_reconciliation_06_00" model="ir.cron">
+            <field name="name">POS Reconciliation - 06:00</field>
+            <field name="model_id" ref="model_pos_order"/>
+            <field name="state">code</field>
+            <field name="code">model._queue_daily_reconciliation_all_companies()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="nextcall">2025-01-27 06:00:00</field>
+            <field name="active" eval="True"/>
+            <field name="priority">5</field>
+        </record> -->
+
+        <!-- 2nd Run - Midday 12:00 -->
+        <!-- <record id="ir_cron_reconciliation_12_00" model="ir.cron">
+            <field name="name">POS Reconciliation - 12:00</field>
+            <field name="model_id" ref="model_pos_order"/>
+            <field name="state">code</field>
+            <field name="code">model._queue_daily_reconciliation_all_companies()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="nextcall">2025-01-27 12:00:00</field>
+            <field name="active" eval="True"/>
+            <field name="priority">5</field>
+        </record> -->
+
+        <!-- 3rd Run - Evening 18:00 -->
+        <record id="ir_cron_reconciliation_18_00" model="ir.cron">
+            <field name="name">POS Reconciliation - 18:00</field>
+            <field name="model_id" ref="model_pos_order"/>
+            <field name="state">code</field>
+            <field name="code">model._queue_daily_reconciliation_all_companies()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="nextcall">2025-01-27 18:00:00</field>
+            <field name="active" eval="True"/>
+            <field name="priority">5</field>
+        </record>
+
+        <!-- 4th Run - Late Evening 22:00 (FIRST AFTER 22:00) -->
+        <record id="ir_cron_reconciliation_22_00" model="ir.cron">
+            <field name="name">POS Reconciliation - 23:00</field>
+            <field name="model_id" ref="model_pos_order"/>
+            <field name="state">code</field>
+            <field name="code">model._queue_daily_reconciliation_all_companies()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="nextcall">2025-01-27 20:00:00</field>
+            <field name="active" eval="True"/>
+            <field name="priority">5</field>
+        </record>
+        <record id="ir_cron_reconciliation_22_1_00" model="ir.cron">
+                    <field name="name">POS Reconciliation - night 5 </field>
+                    <field name="model_id" ref="model_pos_order"/>
+                    <field name="state">code</field>
+                    <field name="code">model._queue_daily_reconciliation_all_companies()</field>
+                    <field name="interval_number">1</field>
+                    <field name="interval_type">days</field>
+                    <field name="numbercall">-1</field>
+                    <field name="doall" eval="False"/>
+                    <field name="nextcall">2025-01-27 20:00:00</field>
+                    <field name="active" eval="True"/>
+                    <field name="priority">5</field>
+                </record>
+        <!-- 5th Run - Final Daily 23:50 (SECOND AFTER 22:00) -->
+        <!-- <record id="ir_cron_reconciliation_23_50" model="ir.cron">
+            <field name="name">POS Reconciliation - 23:50</field>
+            <field name="model_id" ref="model_pos_order"/>
+            <field name="state">code</field>
+            <field name="code">model._queue_daily_reconciliation_all_companies()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="nextcall">2025-01-27 23:50:00</field>
+            <field name="active" eval="True"/>
+            <field name="priority">5</field>
+        </record> -->
+    </data>
+</odoo>

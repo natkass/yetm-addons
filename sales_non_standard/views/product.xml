@@ -1,0 +1,55 @@
+<odoo>
+
+    <data>
+        <record id="view_product_form_inherit" model="ir.ui.view">
+            <field name="name">product.template.common.form.inherit.nonstandard</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="before">
+                    <group>
+                        <field name="products" string="Non standard Type"/>
+                        <field name="no_rounding" string="No Rounding"/>
+                        <!--                        <field name="fasha_related" string="Related Fasha" options="{&quot;invisible&quot;: [[&quot;products&quot;,&quot;!=&quot;,&quot;Fabric&quot;]]}"/>-->
+                        <!--                        <field name="fasha_related2" string="Related Fasha" options="{&quot;invisible&quot;: [[&quot;products&quot;,&quot;!=&quot;,&quot;Fabric&quot;]]}"/>-->
+                        <!--                        <field name="fasha_ids" string="Assign Fashas" widget="many2many_tags" options="{&quot;invisible&quot;: [[&quot;products&quot;,&quot;!=&quot;,&quot;Fabric&quot;]]}"/>-->
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_product_form_inherit22" model="ir.ui.view">
+            <field name="name">product.template.common.form.inherit.nonstandard2</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="before">
+                    <group>
+                        <field name="fasha_ids" string="Assign Fashas"
+                               widget="many2many_tags"
+                               options="{&quot;invisible&quot;: [[&quot;products&quot;,&quot;!=&quot;,&quot;Fabric&quot;]]}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_mrp_form_inherit22" model="ir.ui.view">
+            <field name="name">mrp.template.common.form.inherit.nonstandard2</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="before">
+                    <!-- <group>
+                        <field name="isNOnStandard"/>
+                        <field name="length" string="Length"
+                               options="{&quot;invisible&quot;: [[&quot;isNOnStandard&quot;,&quot;=&quot;,False]]}"/>
+                        <field name="width" string="width"
+                               options="{&quot;invisible&quot;: [[&quot;isNOnStandard&quot;,&quot;=&quot;,False]]}"/>
+                        <field name="height" string="Height"
+                               options="{&quot;invisible&quot;: [[&quot;isNOnStandard&quot;,&quot;=&quot;,False]]}"/>
+                        <field name="description" string="Description"
+                               options="{&quot;invisible&quot;: [[&quot;isNOnStandard&quot;,&quot;=&quot;,False]]}"/>
+                    </group> -->
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

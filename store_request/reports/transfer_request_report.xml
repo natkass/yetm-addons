@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Report Definition -->
+    <record id="action_report_transfer_request" model="ir.actions.report">
+        <field name="name">Store Request</field>
+        <field name="model">transfer.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">store_request.report_transfer_request_document</field>
+        <field name="report_file">store_request.report_transfer_request_document</field>
+        <field name="binding_model_id" ref="model_transfer_request"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

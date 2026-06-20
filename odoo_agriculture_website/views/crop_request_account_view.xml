@@ -1,0 +1,161 @@
+<odoo>
+    <template id="portal_my_home" name="Portal My Home: request entries" inherit_id="portal.portal_my_home" priority="40">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <!-- <t t-if="crop_request_count" t-call="portal.portal_docs_entry"> -->
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Crop Requests</t>
+                <t t-set="url" t-value="'/crop/request'"/>
+                <!-- <t t-set="count" t-value="crop_request_count"/> -->
+                <t t-set="placeholder_count" t-value="'crop_request_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="crop_request_page" name="Crop Requests">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Crop Requests</t>
+            </t>
+            <t t-if="not requests">
+                <div class="alert alert-warning mt8" role="alert">
+                    There are no Crop Requests.
+                </div>
+            </t>
+                <t t-call="portal.portal_table">
+                        <thead>
+                            <tr>
+                                <th>Crop Requests #</th>
+                                <th>Name</th>
+                                <th>Crop</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="requests" t-as="request">
+                                <tr>
+                                    <td>
+                                        <a t-attf-href="/crop/request/#{request.id}?{{ keep_query() }}"><span t-field="request.number"/></a>
+                                    </td>
+                                    <td><span t-field="request.name"/></td>
+                                    <td><span t-field="request.crop_ids"/></td>
+                                    <td><span t-field="request.start_date"/></td>
+                                    <td><span t-field="request.end_date"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </t>
+                </t>
+                <div t-if="pager" class="o_portal_pager text-center">
+                            <t t-call="website.pager"/>
+                </div>
+    </template>
+
+    <template id="portal_my_crop_requests" name="My Crop Requests">
+        <t t-call="portal.portal_layout">
+            <t t-set="o_portal_fullwidth_alert">
+                <t t-call="portal.portal_back_in_edit_mode">
+                    <t t-set="backend_url" t-value="'/web#return_label=Website&amp;model=farmer.cropping.request&amp;id=%s&amp;view_type=form' % (crop_request.id)"/>
+                </t>
+            </t>
+
+            <t t-call="portal.portal_record_layout">
+                <t t-set="card_header">
+                    <div class="row no-gutters">
+                        <div class="col-md">
+                            <h5 class="mb-1 mb-md-0">
+                                <span t-field="crop_request.name"/>
+                                <small class="text-muted"> (#<span t-field="crop_request.number"/>)</small>
+                            </h5>
+                        </div>
+                        <!-- <div class="col-md text-md-right"> -->
+                        <div class="col-md text-md-end">
+                            <!-- <small class="text-right">Status:</small> -->
+                            <small class="text-end">Status:</small>
+                            <!-- <span t-field="crop_request.state" class=" badge badge-pill badge-info"/> -->
+                            <span t-field="crop_request.state" class=" badge rounded-pill text-bg-info"/>
+                        </div>
+                    </div>
+                </t>
+                <t t-set="card_body">
+                    <div class="row mb-4">
+                        <div class="col-12 col-md-6 mb-1">
+                            <strong>Crop:</strong> <span t-field="crop_request.crop_ids.name"/>
+                        </div>
+                        <div class="col-12 col-md-6 mb-1">
+                            <strong>Request:</strong> <span t-field="crop_request.name"/>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-12 col-md-6 mb-1">
+                            <strong>Phone:</strong> <span t-field="crop_request.phone"/>
+                        </div>
+                        <div class="col-12 col-md-6 mb-1">
+                            <strong>Email:</strong> <span t-field="crop_request.email"/>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-12 col-md-6 mb-1">
+                            <strong>Start Date:</strong> <span t-field="crop_request.start_date" t-options='{"widget": "date"}'/>
+                        </div>
+                        <div class="col-12 col-md-6 mb-1">
+                            <strong>End Date:</strong> <span t-field="crop_request.end_date" t-options='{"widget": "date"}'/>
+                        </div>
+                   </div>
+                  
+                    <div class="row mb-4">
+                        <div class="col-12 col-md-6 mb-1">
+                            <strong>Request Details:</strong> <span t-field="crop_request.description"/>
+                        </div>
+                   </div>
+
+                    <!-- <div class="row mb-4" t-if="crop_request.customer_id">
+                        <div class="col-12 col-md-6 pb-2" t-if="crop_request.customer_id">
+                            <strong>Customer</strong>
+                            <div class="row">
+                                <div class="col flex-grow-0 pr-3">
+                                    <img t-if="crop_request.customer_id.image" class="rounded-circle mt-1 o_portal_contact_img" t-att-src="image_data_uri(crop_request.customer_id.image)" alt="Contact"/>
+                                    <img t-else="" class="rounded-circle mt-1 o_portal_contact_img" src="/web/static/src/img/user_menu_avatar.png" alt="Contact"/>
+                                </div>
+                                <div class="col pl-md-0">
+                                    <div t-field="crop_request.customer_id" t-options='{"widget": "contact", "fields": ["name", "email", "phone"]}'/>
+                                </div>
+                            </div>
+                    </div> -->
+
+                    <div class="row mb-4" t-if="crop_request.customer_id"> <!-- odoo13 -->
+                        <div class="col-12 col-md-6 pb-2" t-if="crop_request.customer_id">
+                            <strong>Customer</strong>
+                            <div class="row">
+                                <div class="col flex-grow-0 pr-3">
+                                    <t t-if="crop_request.customer_id.image_1920">
+                                        <img class="rounded-circle mt-1 o_portal_contact_img" t-att-src="image_data_uri(crop_request.customer_id.image_1920)" alt="Contact"/>
+                                    </t>
+                                    <t t-else="">
+                                        <img class="rounded-circle mt-1 o_portal_contact_img" src="/web/static/src/img/user_menu_avatar.png" alt="Contact"/>
+                                    </t>
+                                </div>
+                                <div class="col pl-md-0">
+                                    <div t-field="crop_request.customer_id" t-options='{"widget": "contact", "fields": ["name", "email", "phone"]}'/>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+           </t>
+       </t>
+       <div class="mt32">
+                <h4><strong>Message and communication history</strong></h4>
+                <t t-call="portal.message_thread">
+                    <t t-set="object" t-value="crop_request"/>
+                    <t t-set="token" t-value="crop_request.access_token"/>
+                    <t t-set="pid" t-value="pid"/>
+                    <t t-set="hash" t-value="hash"/>
+                </t>
+        </div>
+   </t>
+</template>
+</odoo>

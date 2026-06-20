@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- POS Device Form View Inheritance - Device-Level Configuration Overrides -->
+    <record id="view_pos_device_form_config" model="ir.ui.view">
+        <field name="name">pos.device.form.config</field>
+        <field name="model">pos.device</field>
+        <field name="inherit_id" ref="view_pos_device_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="inside">
+                <notebook>
+                    <page string="Reconciliation Config" name="reconciliation_config">
+                        <group>
+                            <group string="Configuration Source">
+                                <field name="use_custom_config" widget="boolean_toggle"/>
+                                <p invisible="not use_custom_config" class="text-info">
+                                    Custom configuration enabled. Settings below override global defaults.
+                                </p>
+                                <p invisible="use_custom_config" class="text-muted">
+                                    Using global configuration. Enable custom config to override for this device.
+                                </p>
+                            </group>
+                        </group>
+
+                        <group invisible="not use_custom_config">
+                            <group string="Inventory Integration">
+                                <field name="enable_inventory_integration" widget="boolean_toggle"/>
+                                <field name="create_picking_on_create" widget="boolean_toggle"
+                                       invisible="not enable_inventory_integration"/>
+                                <field name="create_picking_on_sync" widget="boolean_toggle"
+                                       invisible="not enable_inventory_integration"/>
+                            </group>
+
+                            <group string="Accounting Integration">
+                                <field name="enable_accounting_integration" widget="boolean_toggle"/>
+                                <field name="auto_invoice_created_orders" widget="boolean_toggle"
+                                       invisible="not enable_accounting_integration"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+    
+        <record id="job_workorder_view_task_form_custom" model="ir.ui.view">
+            <field name="name">Project Task form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr = "//field[@name='tag_ids']" position="after">
+                    <field name="job_partner_id"/>
+                    <field name="job_partner_name"/>
+                    <field name="job_partner_email"/>
+                    <field name="job_partner_phone"/>
+                    <field name="job_category"/>
+                </xpath>
+            </field>
+          </record>
+          
+    </data>
+ </odoo>
+ 

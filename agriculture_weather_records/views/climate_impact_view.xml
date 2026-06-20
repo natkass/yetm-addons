@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="climate_impact_form_view">
+            <field name="name">climate.impacts.form</field>
+            <field name="model">climate.impacts</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="health_id"/>
+                                <field name="climate_driver"/>
+                                <field name="exposure"/>
+                            </group>
+                            <group>
+                                <field name="health_outcome"/>
+                                <field name="impact"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="climate_impact_tree_view">
+            <field name="name">climate.impacts.tree</field>
+            <field name="model">climate.impacts</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="health_id"/>
+                    <field name="climate_driver"/>
+                    <field name="exposure"/>
+                    <field name="health_outcome"/>
+                    <field name="impact"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_climate_impact" model="ir.actions.act_window">
+            <field name="name">Climate Impacts</field>
+            <field name="res_model">climate.impacts</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">form,tree</field>
+        </record>
+        
+    </data>
+</odoo>

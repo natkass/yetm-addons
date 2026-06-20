@@ -1,0 +1,209 @@
+<odoo>
+    <template id="report_sales_request_pdf_template">
+        <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="o">
+                <main class="o_report_layout_standard">
+                    <t t-set="doc" t-value="docs[0]"/>
+
+                    <div class="page">
+
+                        <t t-if="o.state == 'draft'">
+                            <div style="
+                                position: fixed;
+                                top: 80%;
+                                left: 20%;
+                                transform: rotate(30deg);
+                                transform-origin: center;
+                                font-size: 100px;
+                                font-weight: bold;
+                                color: rgba(0,0,0,0.1);                                
+                                z-index: -1;
+                                pointer-events: none;
+                                white-space: nowrap;
+                                text-align: center;">
+                                DRAFT
+                            </div>
+                        </t>
+                        
+                        <t t-if="o.state == 'submitted'">
+                            <div style="
+                                position: fixed;
+                                top: 50%;
+                                left: 20%;
+                                transform: rotate(45deg);
+                                transform-origin: center;
+                                font-size: 100px;
+                                font-weight: bold;
+                                color: rgba(0,0,0,0.1);                                
+                                z-index: -1;
+                                pointer-events: none;
+                                white-space: nowrap;
+                                text-align: center;">
+                                SUBMITTED
+                            </div>
+                        </t>
+                        
+                        <t t-if="o.state == 'verified'">
+                            <div style="
+                                position: fixed;
+                                top: 50%;
+                                left: 20%;
+                                transform: rotate(45deg);
+                                transform-origin: center;
+                                font-size: 100px;
+                                font-weight: bold;
+                                color: rgba(0,0,0,0.1);                                
+                                z-index: -1;
+                                pointer-events: none;
+                                white-space: nowrap;
+                                text-align: center;">
+                                VERIFIED
+                            </div>
+                        </t>
+
+                        <t t-if="o.state == 'approved'">
+                            <div style="
+                                position: fixed;
+                                top: 50%;
+                                left: 7%;
+                                transform: rotate(45deg);
+                                transform-origin: center;
+                                font-size: 100px;
+                                font-weight: bold;
+                                color: rgba(0,0,0,0.1);                                
+                                z-index: -1;
+                                pointer-events: none;
+                                white-space: nowrap;
+                                text-align: center;">
+                                SALE APPROVED
+                            </div>
+                        </t>
+
+                        <t t-if="o.state == 'ready'">
+                            <div style="
+                                position: fixed;
+                                top: 50%;
+                                left: 7%;
+                                transform: rotate(45deg);
+                                transform-origin: center;
+                                font-size: 100px;
+                                font-weight: bold;
+                                color: rgba(0,0,0,0.1);                                
+                                z-index: -1;
+                                pointer-events: none;
+                                white-space: nowrap;
+                                text-align: center;">
+                                READY
+                            </div>
+                        </t>
+
+                        <t t-if="o.state == 'done'">
+                            <div style="
+                                position: fixed;
+                                top: 50%;
+                                left: 7%;
+                                transform: rotate(45deg);
+                                transform-origin: center;
+                                font-size: 100px;
+                                font-weight: bold;
+                                color: rgba(0,0,0,0.1);                                
+                                z-index: -1;
+                                pointer-events: none;
+                                white-space: nowrap;
+                                text-align: center;">
+                                DONE
+                            </div>
+                        </t>
+
+                        <t t-if="o.state == 'refused'">
+                            <div style="
+                                position: fixed;
+                                top: 50%;
+                                left: 7%;
+                                transform: rotate(45deg);
+                                transform-origin: center;
+                                font-size: 100px;
+                                font-weight: bold;
+                                color: rgba(0,0,0,0.1);                                
+                                z-index: -1;
+                                pointer-events: none;
+                                white-space: nowrap;
+                                text-align: center;">
+                                REFUSED
+                            </div>
+                        </t>
+
+                        <t t-if="o.state == 'cancel'">
+                            <div style="
+                                position: fixed;
+                                top: 50%;
+                                left: 7%;
+                                transform: rotate(45deg);
+                                transform-origin: center;
+                                font-size: 100px;
+                                font-weight: bold;
+                                color: rgba(0,0,0,0.1);                                
+                                z-index: -1;
+                                pointer-events: none;
+                                white-space: nowrap;
+                                text-align: center;">
+                                CANCELLED
+                            </div>
+                        </t>
+
+                        <h2>Sales Request: <t t-esc="o.name"/></h2>
+
+                        <!-- Customer Info -->
+                        <p><strong>Franchisee:</strong> <t t-esc="o.partner_id.name"/></p>
+                        <p><strong>Date Requested:</strong> <t t-esc="o.date_request"/></p>
+
+                        <!-- Lines Table -->
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Description</th>
+                                    <th>Qty</th>
+                                    <th>Unit Price</th>
+                                    <th>Discount</th>
+                                    <th>Taxes</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.line_ids" t-as="line">
+                                    <td><t t-esc="line.product_id.name"/></td>
+                                    <td><t t-esc="line.name"/></td>
+                                    <td><t t-esc="line.quantity"/></td>
+                                    <td><t t-esc="line.price_unit"/></td>
+                                    <td><t t-esc="line.discount"/></td>
+                                    <td>
+                                        <span t-esc="', '.join(line.tax_id.mapped('name'))"/>
+                                    </td>
+                                    <td><t t-esc="line.price_subtotal"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Totals -->
+                        
+                        <table class="table table-sm mt16">
+                            <tr>
+                                <td><strong>Untaxed:</strong> <t t-esc="o.amount_untaxed"/></td>
+                                <td><strong>Discount :</strong> <t t-esc="o.discount"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Taxes :</strong> <t t-esc="o.amount_tax"/></td>
+                                <td><strong>Total :</strong> <t t-esc="o.amount_total"/></td>
+                            </tr>
+                            
+                        </table>
+                        <div><strong>Requested By:</strong> <span t-esc="o.requested_by.name"/></div>
+                        <div><strong>Verified By:</strong> <span t-esc="o.verified_by.name"/></div>
+                        <div><strong>Approved By:</strong> <span t-esc="o.approved_by.name"/></div>
+                    </div>
+                </main>
+            </t>
+        </t> 
+    </template>
+</odoo>

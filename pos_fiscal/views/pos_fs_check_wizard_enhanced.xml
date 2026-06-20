@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_fs_check_wizard_form_enhanced" model="ir.ui.view">
+        <field name="name">pos.fs.check.wizard.form.enhanced</field>
+        <field name="model">pos.fs.check.wizard</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <form string="POS Reconciliation Center">
+                <sheet>
+                    <!-- Hidden fields for visibility control -->
+                    <field name="pending_jobs_count" invisible="1"/>
+                    <field name="show_preview" invisible="1"/>
+                    <field name="progress_percentage" invisible="1"/>
+                    <field name="result_summary" invisible="1"/>
+                    <field name="last_run_summary" invisible="1"/>
+                    <field name="estimated_time" invisible="1"/>
+                    <field name="send_email_report" invisible="1"/>
+                    
+                    <div class="oe_title">
+                        <h1>
+                            <i class="fa fa-sync-alt text-primary"/> POS Fiscal Reconciliation
+                        </h1>
+                    </div>
+                    
+                    <!-- Queue Jobs Status -->
+                    <div class="alert alert-info" invisible="pending_jobs_count == 0">
+                        <i class="fa fa-clock"/> <span><field name="pending_jobs_count" readonly="1"/> reconciliation jobs in queue</span>
+                    </div>
+                    
+                    <!-- Configuration Summary -->
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <field name="config_summary" widget="html" readonly="1" nolabel="1"/>
+                        </div>
+                    </div>
+
+                    <!-- Last Run Summary -->
+                    <div class="row mb-3" invisible="not last_run_summary">
+                        <div class="col-md-12">
+                            <field name="last_run_summary" widget="html" readonly="1" nolabel="1"/>
+                        </div>
+                    </div>
+                    
+                    <notebook>
+                        <!-- Configuration Tab -->
+                        <page string="Configuration" name="config">
+                            <group>
+                                <group string="Target Selection">
+                                    <field name="company_id" options="{'no_create': True}"/>
+                                    <field name="allowed_device_ids" invisible="1"/>
+                                    <field name="target_mrc_id" 
+                                           domain="[('id', 'in', allowed_device_ids)]"
+                                           options="{'no_create': True}"/>
+                                </group>
+                                <group string="Date Range">
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                </group>
+                            </group>
+                            
+                            <separator string="Reconciliation Options"/>
+                            <group col="4">
+                                <field name="auto_fix_duplicates" widget="boolean_toggle"/>
+                                <field name="auto_create_missing" widget="boolean_toggle"/>
+                                <field name="auto_invoice_created" widget="boolean_toggle"/>
+                                <field name="create_inventory_picking" widget="boolean_toggle"/>
+                                <field name="update_inventory_on_sync" widget="boolean_toggle"/>
+                                <field name="update_accounting_on_sync" widget="boolean_toggle"/>
+                                <field name="show_preview" widget="boolean_toggle" force_save="1"/>
+                                <field name="use_queue_jobs" widget="boolean_toggle"/>
+                                <field name="send_email_report" widget="boolean_toggle" force_save="1"/>
+                                <field name="email_recipients" invisible="not send_email_report"/>
+                            </group>
+                            
+                            <group string="Estimated Processing Time" invisible="not estimated_time">
+                                <field name="estimated_time" readonly="1" nolabel="1"/>
+                            </group>
+                        </page>
+                        
+                        <!-- Preview Tab -->
+                        <page string="Preview" name="preview" invisible="not show_preview">
+                            <div class="container-fluid">
+                                <field name="preview_data" widget="html" readonly="1" nolabel="1"/>
+                            </div>
+                        </page>
+                        
+                        <!-- Progress Tab -->
+                        <page string="Progress" name="progress" invisible="progress_percentage == 0">
+                            <group>
+                                <field name="progress_percentage" widget="progressbar"/>
+                                <field name="current_step" readonly="1"/>
+                            </group>
+                            <separator string="Log Messages"/>
+                            <field name="log_messages" readonly="1" nolabel="1"/>
+                        </page>
+                        
+                        <!-- Results Tab -->
+                        <page string="Results" name="results" invisible="not result_summary">
+                            <field name="has_errors" invisible="1"/>
+                            <field name="result_summary" widget="html" readonly="1" nolabel="1"/>
+                            <group invisible="not has_errors">
+                                <div class="alert alert-warning">
+                                    <i class="fa fa-exclamation-triangle"/> Some errors occurred during reconciliation. Please check the logs for details.
+                                </div>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                
+                <footer>
+                    <button name="action_run_fs_check" 
+                            string="Run Reconciliation" 
+                            type="object" 
+                            class="btn-primary"
+                            icon="fa-play"/>
+                    <button name="action_schedule_daily" 
+                            string="Schedule Daily" 
+                            type="object" 
+                            class="btn-warning"
+                            icon="fa-calendar-check"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Update existing action to use enhanced view -->
+    <record id="action_pos_fs_check_wizard_enhanced" model="ir.actions.act_window">
+        <field name="name">POS Reconciliation Center</field>
+        <field name="res_model">pos.fs.check.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_pos_fs_check_wizard_form_enhanced"/>
+        <field name="target">new</field>
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_view_types">form</field>
+    </record>
+</odoo>

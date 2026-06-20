@@ -1,0 +1,40 @@
+<odoo>
+    <record id="view_sale_order_form_inherit_request" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.manufacturing.request</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_open_manufacturing_request_wizard"
+                        type="object"
+                        string="Manufacturing Request"
+                        invisible="manufacturing_request_count != 0 or state !='sale'"
+                        class="btn-primary"/>
+            </xpath>
+
+            <!-- Smart button -->
+            <xpath expr="//form/sheet/div[@name='button_box']" position="inside">
+                <button name="action_view_manufacturing_requests" type="object" string="Overtime"
+                    invisible="manufacturing_request_count == 0"
+                    class="oe_stat_button" icon="fa-industry">
+                <field name="manufacturing_request_count" string="Manufacturing Requests" widget="statinfo"/>
+            </button>
+            </xpath>
+            
+        
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="branch_id" options="{'no_create': False}" required= "1" readonly="state not in ['draft', 'sent']" placeholder="Select Branch"/>
+            </xpath>
+        </field>
+    </record>
+
+    <menuitem id="menu_manufacturing_requests_sale" name="Manufacturing Requests"
+        parent="sale.sale_menu_root" groups="base.group_user" sequence="40"/>
+    
+    <menuitem id="menu_request_records_sale" name="Manufacturing Request Records"
+        parent="menu_manufacturing_requests_sale" action="action_manufacturing_requests" groups="base.group_user" />
+
+
+    
+
+</odoo>

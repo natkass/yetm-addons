@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_crops_tasks_template_form_inherit" model="ir.ui.view">
+        <field name="name">Crops Tasks Template View</field>
+        <field name="model">crops.tasks.template</field>
+        <field name="inherit_id" ref="odoo_agriculture.view_crops_tasks_template_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='task_id']" position="after">
+                <field name="workcenter_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

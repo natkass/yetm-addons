@@ -1,0 +1,108 @@
+<odoo>
+    <record id="view_hr_advance_form" model="ir.ui.view">
+        <field name="name">hr.advance.form</field>
+        <field name="model">hr.advance</field>
+        <field name="arch" type="xml">
+        <form string="Advance Request">
+            <header>
+                <button name="action_submit" type="object" string="Submit"
+                        invisible= "state != 'draft'" 
+                        groups="hr_plus.group_hr_plus_advance_submit"
+                        class="btn-primary"/>
+                        
+                <!-- <button name="action_verify" type="object" string="Verify"
+                        invisible= "state != 'submitted'" 
+                        groups="hr_plus.group_hr_plus_advance_verify"
+                        class="btn-primary"/> -->
+                <button name="action_approve" type="object" string="Approve"
+                        invisible= "state != 'submitted'" 
+                        groups="hr_plus.group_hr_plus_advance_approve"
+                        class="btn-primary"/>
+                <button name="action_refuse" type="object" string="Refuse"
+                        invisible="state in ['draft', 'approved',  'refused', 'cancelled']"
+                        groups="hr_plus.group_hr_plus_advance_approve"/>
+                <button name="action_cancel" type="object" string="Cancel"
+                        invisible="state in ['draft', 'cancelled']"
+                        groups="hr_plus.group_hr_plus_advance_verify"/>
+                <button name="action_reset_to_draft" type="object" string="Reset to Draft"
+                        invisible="state in ['draft', 'approved','submitted' , 'refused']"
+                        groups="hr_plus.group_hr_plus_advance_submit"/>
+                <field name="state" widget="statusbar"
+                    statusbar_visible="draft,submitted,approved"
+                    statusbar_colors="{'refused':'red', 'cancelled':'orange'}" />
+            </header>
+            <sheet>
+                <h1><field name="name"/></h1>
+            
+            
+                <group>
+                    <group>
+                        <field name="employee_id" readonly="state not in ['draft', 'submitted']"/>
+                        <field name="location_id" readonly="state not in ['draft', 'submitted']"/>
+
+                        <field name="employee_account" readonly="1"/>
+                        <field name="request_date" readonly="state not in ['draft', 'submitted']"/>
+                        <field name="payroll_from" readonly="state not in ['draft', 'submitted']"/>
+                        <field name="payroll_to" readonly="state not in ['draft', 'submitted']"/>
+                        <field name="payslip_id" readonly="1"/>
+                    </group>
+                    <group>
+                        
+                        <field name="employee_wage" readonly="1"/>
+                        <field name="penalty_amount" readonly="1"/>
+                        <field name="loan_amount" readonly="1"/>
+                        <field name="advance_amount" readonly="state not in ['draft', 'submitted']"/>
+                    </group>
+                
+                </group>          
+            </sheet>
+            
+            <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
+            </div>
+        </form>
+        </field>
+    
+    </record>
+
+    <record id="view_hr_advance_tree" model="ir.ui.view">
+        <field name="name">hr.advance.tree</field>
+        <field name="model">hr.advance</field>
+        <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+            <field name="employee_id"/>
+            <field name="employee_account"/>
+            <field name="request_date"/>
+            <field name="advance_amount"/>
+            <field name="state" widget="badge"
+            decoration-info="state == 'submitted'" 
+            decoration-success="state == 'approved'"
+            
+            decoration-warning="state == 'cancelled'"          
+            decoration-danger="state == 'refused'"/>
+            
+        </tree>
+        </field>
+    </record>
+
+  
+
+  
+    <record id="action_hr_advance" model="ir.actions.act_window">
+        <field name="name">Advance Rrequest</field>
+        <field name="res_model">hr.advance</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+  
+    <menuitem id="menu_hr_advance" name="Advance" parent="menu_hr_plus_root" sequence="60" groups="hr_plus.group_hr_plus_advance_submit"/>
+    <menuitem id="menu_hr_advance_request" name="Employee Advance" parent="menu_hr_advance" action="action_hr_advance"/>
+
+
+    
+
+  
+</odoo>

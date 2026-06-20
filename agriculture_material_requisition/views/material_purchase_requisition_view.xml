@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_material_purchase_requisition_inherit" model="ir.ui.view">
+        <field name="name">Material Purchase Requisition View</field>
+        <field name="model">material.purchase.requisition</field>
+        <field name="inherit_id" ref="material_purchase_requisitions.material_purchase_requisition_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='analytic_account_id']" position="after">
+                <!-- <field name="crop_request_id" attrs="{'readonly': [['state', 'in', ['reject','cancel','receive']]]}"/>
+                <field name="crop_id" attrs="{'readonly': [['state', 'in', ['reject','cancel','receive']]]}"/>
+                <field name="agriculture_refrence" attrs="{'readonly': [['state', 'in', ['reject','cancel','receive']]]}"/> -->
+                <field name="crop_request_id" readonly="state in ['reject','cancel','receive']"/>
+                <field name="crop_id" readonly="state in ['reject','cancel','receive']"/>
+                <field name="agriculture_refrence" readonly="state in ['reject','cancel','receive']"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_material_purchase_requisition_list_inherit" model="ir.ui.view">
+        <field name="name">Material Purchase Requisition List View</field>
+        <field name="model">material.purchase.requisition</field>
+        <field name="inherit_id" ref="material_purchase_requisitions.material_purchase_requisition_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='request_date']" position="after">
+                <field name="crop_request_id"/>
+                <field name="crop_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_material_purchase_requisition_search_inherit" model="ir.ui.view">
+        <field name="name">Material Purchase Requisition Search View</field>
+        <field name="model">material.purchase.requisition</field>
+        <field name="inherit_id" ref="material_purchase_requisitions.material_purchase_requisition_search_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_end']" position="after">
+                <field name="crop_request_id"/>
+                <field name="crop_id"/>
+            </xpath>
+            <xpath expr="//filter[@name='date_end']" position="before">
+                    <filter string="Crop Requests" name="crop_request_id" context="{'group_by':'crop_request_id'}"/>
+                    <filter string="Crops" name="crop_id" context="{'group_by':'crop_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_material_purchase_requisitions">
+        <field name="name">Material Requisitions</field>
+        <field name="res_model">material.purchase.requisition</field>
+        <!-- <field name="view_type">form</field> -->  <!-- odoo13 -->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,58 @@
+ <odoo>
+<data noupdate="1">
+<record id="crv_print.payment_crv_format" model="crv.format">
+<field name="name">Default CRV format</field>
+<field name="font_size">20</field>
+<field name="font_css">font-size:20px;</field>
+<field name="ac_pay_css">margin-top:37px;margin-left:12px;letter-spacing:0px;transform: rotate(-47deg);-webkit-transform:rotate(-47deg);</field>
+<field name="date_margin_top">732</field>
+<field name="date_margin_left">1190</field>
+<field name="date_letter_space">1</field>
+<field name="date_css">margin-top:732px;margin-left:1190px;letter-spacing:1px;</field>
+<field name="name_margin_top">822</field>
+<field name="name_margin_left">895</field>
+<field name="name_letter_space">1</field>
+<field name="name_css">margin-top:822px;margin-left:895px;letter-spacing:1px;</field>
+<field name="tin_margin_top">996</field>
+<field name="tin_margin_left">1000</field>
+<field name="tin_letter_space">1</field>
+<field name="tin_css">margin-top:996px;margin-left:1000px;letter-spacing:1px;</field>
+<field name="reason_margin_top">1410</field>
+<field name="reason_margin_left">70</field>
+<field name="reason_letter_space">1</field>
+<field name="reason_css">margin-top:1410px;margin-left:70px;letter-spacing:1px;</field>
+<field name="amount_digit_top">1290</field>
+<field name="amount_digit_left">70</field>
+<field name="amount_digit_letter_space">1</field>
+<field name="amount_digit_css">margin-top:1290px;margin-left:70px;letter-spacing:1px;</field>
+<field name="amount_total_amount_top">1290</field>
+<field name="amount_total_amount_left">70</field>
+<field name="amount_total_amount_space">1</field>
+<field name="amount_total_amount_css">margin-top:1290px;margin-left:70px;letter-spacing:1px;</field>
+<field name="amount_vat_top">1290</field>
+<field name="amount_vat_left">70</field>
+<field name="amount_vat_space">1</field>
+<field name="amount_vat_css">margin-top:1290px;margin-left:70px;letter-spacing:1px;</field>
+<field name="amount_word_top">1330</field>
+<field name="amount_word_left">70</field>
+<field name="amount_word_letter_space">1</field>
+<field name="amount_word_css">margin-top:1330px;margin-left:70px;letter-spacing:1px;</field>
+<field name="whtamount_top">1330</field>
+<field name="whtamount_left">70</field>
+<field name="whtamount_letter_space">1</field>
+<field name="whtamount_css">margin-top:1330px;margin-left:70px;letter-spacing:1px;</field>
+<field name="payment_mode_margin_top">1370</field>
+<field name="payment_mode_margin_left">70</field>
+<field name="payment_mode_letter_space">1</field>
+<field name="payment_mode_css">margin-top:1370px;margin-left:70px;letter-spacing:1px;</field>
+<field name="document_margin_top">1450</field>
+<field name="document_margin_left">70</field>
+<field name="document_letter_space">1</field>
+<field name="document_css">margin-top:1450px;margin-left:70px;letter-spacing:1px;</field>
+<field name="user_margin_top">1450</field>
+<field name="user_margin_left">70</field>
+<field name="user_letter_space">1</field>
+<field name="user_css">margin-top:1450px;margin-left:70px;letter-spacing:1px;</field>
+</record>
+</data>
+</odoo>

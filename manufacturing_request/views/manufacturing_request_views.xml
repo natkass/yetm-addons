@@ -1,0 +1,150 @@
+<odoo>
+    <record id="view_manufacturing_request_form" model="ir.ui.view">
+        <field name="name">manufacturing.request.form</field>
+        <field name="model">manufacturing.request</field>
+        <field name="arch" type="xml">
+            <form string="Manufacturing Request">
+                <header>
+                    <button name="action_submit" type="object" string="Submit"
+                        invisible= "state != 'draft'"
+                        groups="manufacturing_request.group_manufacturing_request_user"
+                        />
+                    <button name="action_verify" type="object" string="Verify"
+                        invisible= "state != 'submitted'" class="btn-primary"
+                        groups="manufacturing_request.group_manufacturing_request_manager"
+                        />
+                    <button name="action_manufacture" type="object" string="Manufacture"
+                        invisible= "state != 'verified'" class="btn-primary"
+                        groups="manufacturing_request.group_manufacturing_request_manager"
+                        />
+                    <button name="action_sent" type="object" string="Sent to Branch"
+                        invisible= "state != 'manufactured'" class="btn-primary"
+                        groups="manufacturing_request.group_manufacturing_request_user"
+                        />
+                    <button name="action_deliver" type="object" string="Deliver"
+                        invisible= "state != 'sent'" class="btn-primary"
+                        groups="manufacturing_request.group_manufacturing_request_user"
+                        />
+                    <button name="action_cancel" type="object" string="Cancel"
+                        invisible="state not in ['draft', 'verified', 'submitted']" 
+                        groups="manufacturing_request.group_manufacturing_request_manager"
+                        />
+                    <button name="action_reset_draft" type="object" string="Reset to Draft"
+                        invisible= "state != 'cancelled'" 
+                        groups="manufacturing_request.group_manufacturing_request_manager"
+                        />
+                    <button name="action_print_request"
+                        string="Print Request"
+                        type="object"
+                        
+                        class="btn-secondary"/>
+
+                    <button name="action_print_lifecycle_request"
+                        string="Print Request Cycle"
+                        type="object"
+                        invisible="state not in ['delivered']"
+                        class="btn-secondary"/>
+                    
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,submitted,verified,manufactured,sent,delivered"/>
+                </header>
+
+                <sheet>
+                    <h1><field name="name"/></h1>
+
+                    <!-- Smart button container -->
+                    <div class="oe_button_box" name="button_box"/>
+
+                    <group>
+                        <group>
+                            <field name="partner_id" readonly="state not in ['draft', 'submitted']" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="customer_phone" readonly="state not in ['draft', 'submitted']" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="promise_date" readonly="state not in['draft', 'submitted']" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="is_delayed" readonly="1" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="production_location_id" options="{'no_create': True, 'no_open': True}" readonly="state not in ['draft', 'submitted', 'verified']"/>
+                            <field name="sale_id" readonly="1"/>
+                            <field name="responsible_id" readonly="1"/>
+                            <field name="branch_id" readonly="state not in ['draft']" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Products">
+                            <field name="line_ids" readonly="state not in ['draft', 'submitted']">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="product_uom_qty"/>
+                                    <field name="product_uom"/>
+                                    <field name="bom_id"/>
+                                    <field name="remark"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Smart button -->
+    <record id="view_manufacturing_request_form_inherit_buttons" model="ir.ui.view">
+        <field name="name">manufacturing.request.form.inherit.buttons</field>
+        <field name="model">manufacturing.request</field>
+        <field name="inherit_id" ref="view_manufacturing_request_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div[@name='button_box']" position="inside">
+                <button name="action_view_manufacturing_order" type="object"
+                    class="oe_stat_button" icon="fa-industry"
+                    invisible = "manufacturing_order_count == 0">
+                    <field name="manufacturing_order_count" string="Manufacturing Orders" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    
+    <record id="view_manufacturing_request_tree" model="ir.ui.view">
+        <field name="name">manufacturing.request.tree</field>
+        <field name="model">manufacturing.request</field>
+        <field name="arch" type="xml">
+            <tree>
+                
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="customer_phone"/>
+                <field name="promise_date"/>
+                <field name="production_location_id"/>
+                <field name="branch_id"/>
+                <field name="responsible_id"/>
+                <field name="state" widget="badge"
+                    decoration-info="state == 'submitted'" 
+                    decoration-success="state == 'delivered'"
+                    decoration-primary="state == 'verified'"
+                    decoration-warning="state == 'manufactured'"          
+                    decoration-danger="state == 'sent'"/>
+                
+                
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_manufacturing_requests" model="ir.actions.act_window">
+        <field name="name">Manufacturing Requests</field>
+        <field name="res_model">manufacturing.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_manufacturing_requests" name="Manufacturing Requests"
+        parent="mrp.menu_mrp_root" />
+    
+    <menuitem id="menu_request_records" name="Manufacturing Request Records"
+        parent="menu_manufacturing_requests" action="action_manufacturing_requests"/>
+</odoo>

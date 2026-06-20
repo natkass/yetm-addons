@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="menu_peachtree_root"
+              name="Peachtree Export"
+              parent="account.menu_finance_reports"
+              sequence="99"/>
+
+    <menuitem id="menu_peachtree_export"
+              name="Export Sales"
+              parent="menu_peachtree_root"
+              action="odoo_peachtree_sync.action_peachtree_export_wizard"
+              sequence="10"/>
+
+    <menuitem id="menu_peachtree_customer_product_export"
+              name="Export Customers / Products"
+              parent="menu_peachtree_root"
+              action="odoo_peachtree_sync.action_peachtree_customer_product_export_wizard"
+              sequence="20"/>
+</odoo>

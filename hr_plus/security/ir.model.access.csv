@@ -1,0 +1,53 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_overtime_submit,hr.overtime.record submit,model_hr_overtime,group_hr_plus_overtime_submit,1,1,1,1
+access_overtime_verify,hr.overtime.record verify,model_hr_overtime,group_hr_plus_overtime_verify,1,1,1,0
+access_overtime_approve,hr.overtime.record approve,model_hr_overtime,group_hr_plus_overtime_approve,1,1,1,0
+access_overtime_manager,hr.overtime.record manager,model_hr_overtime,group_hr_plus_manager,1,1,1,1
+access_overtime_line,hr.overtime.line.user,model_hr_overtime_line,group_hr_plus_user,1,1,1,1
+
+access_incentive_submit,hr.incentive.record submit,model_hr_incentive,group_hr_plus_incentive_submit,1,1,1,0
+access_incentive_verify,hr.incentive.record verify,model_hr_incentive,group_hr_plus_incentive_verify,1,1,0,0
+access_incentive_approve,hr.incentive.record approve,model_hr_incentive,group_hr_plus_incentive_approve,1,1,0,0
+access_incentive_manager,hr.incentive.record manager,model_hr_incentive,group_hr_plus_manager,1,1,1,1
+access_incentive_line,hr.incentive.line access,model_hr_incentive_line,group_hr_plus_user,1,1,1,1
+
+access_daily_allowance_submit,hr.daily.allowance submit,model_hr_daily_allowance,group_hr_plus_daily_allowance_submit,1,1,1,0
+access_daily_allowance_verify,hr.daily.allowance verify,model_hr_daily_allowance,group_hr_plus_daily_allowance_verify,1,1,0,0
+access_daily_allowance_approve,hr.daily.allowance approve,model_hr_daily_allowance,group_hr_plus_daily_allowance_approve,1,1,0,0
+access_daily_allowance_manager,hr.daily.allowance manager,model_hr_daily_allowance,group_hr_plus_manager,1,1,1,1
+access_daily_allowance_line,hr.daily.allowance.line access,model_hr_daily_allowance_line,group_hr_plus_user,1,1,1,1
+
+access_driver_incentive_submit,hr.driver.incentive submit,model_hr_driver_incentive,group_hr_plus_driver_incentive_submit,1,1,1,0
+access_driver_incentive_verify,hr.driver.incentive verify,model_hr_driver_incentive,group_hr_plus_driver_incentive_verify,1,1,0,0
+access_driver_incentive_approve,hr.driver.incentive approve,model_hr_driver_incentive,group_hr_plus_driver_incentive_approve,1,1,0,0
+access_driver_incentive_manager,hr.driver.incentive manager,model_hr_driver_incentive,group_hr_plus_manager,1,1,1,1
+access_driver_incentive_line,hr.driver.incentive.line access,model_hr_driver_incentive_line,group_hr_plus_user,1,1,1,1
+
+access_penalty_submit,hr.penalty submit,model_hr_penalty,group_hr_plus_penalty_submit,1,1,1,0
+access_penalty_verify,hr.penalty verify,model_hr_penalty,group_hr_plus_penalty_verify,1,1,0,0
+access_penalty_approve,hr.penalty approve,model_hr_penalty,group_hr_plus_penalty_approve,1,1,0,0
+access_penalty_manager,hr.penalty manager,model_hr_penalty,group_hr_plus_manager,1,1,1,1
+access_penalty_line,hr.penalty.line access,model_hr_penalty_line,group_hr_plus_user,1,1,1,1
+
+access_loan_submit,hr.loan submit,model_hr_loan,group_hr_plus_loan_submit,1,1,1,0
+access_loan_verify,hr.loan verify,model_hr_loan,group_hr_plus_loan_verify,1,1,0,0
+access_loan_approve,hr.loan approve,model_hr_loan,group_hr_plus_loan_approve,1,1,0,0
+access_loan_manager,hr.loan manager,model_hr_loan,group_hr_plus_manager,1,1,1,1
+access_loan_line,hr.loan.line access,model_hr_loan_line,group_hr_plus_user,1,1,1,1
+
+access_advance_submit,hr.advance submit,model_hr_advance,group_hr_plus_advance_submit,1,1,1,0
+access_advance_verify,hr.advance verify,model_hr_advance,group_hr_plus_advance_verify,1,1,0,0
+access_advance_approve,hr.advance approve,model_hr_advance,group_hr_plus_advance_approve,1,1,0,0
+access_advance_manager,hr.advance manager,model_hr_advance,group_hr_plus_manager,1,1,1,1
+
+access_hr_overtime_user,hr.overtime.user,model_hr_overtime,group_hr_plus_user,1,0,0,0
+access_hr_advance_user,hr.advance.user,model_hr_advance,group_hr_plus_user,1,1,0,0
+access_hr_penalty_user,hr.penalty.user,model_hr_penalty,group_hr_plus_user,1,0,0,0
+access_hr_loan_user,hr.loan.user,model_hr_loan,group_hr_plus_user,1,0,0,0
+access_hr_incentive_user,hr.incentive.user,model_hr_incentive,group_hr_plus_user,1,0,0,0
+access_hr_daily_allowance_user,hr.daily.allowance.user,model_hr_daily_allowance,group_hr_plus_user,1,0,0,0
+access_hr_driver_incentive_user,hr.driver.incentive.user,model_hr_driver_incentive,group_hr_plus_user,1,0,0,0
+
+access_hr_advance_report_wizard,access.hr.advance.report.wizard,model_hr_advance_report_wizard,group_hr_plus_advance_approve,1,1,1,1
+access_hr_loan_installment_report_wizard,access_hr_loan_installment_report_wizard,model_hr_loan_installment_report_wizard,group_hr_plus_loan_approve,1,1,1,1
+

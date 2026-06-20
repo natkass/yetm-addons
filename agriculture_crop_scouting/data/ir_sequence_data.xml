@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="seq_crop_scouting_request" model="ir.sequence">
+            <field name="name">Crop Scouting Request</field>
+            <field name="code">farmer.cropping.scoting</field>
+            <field name="prefix">CROP/SCOUTING/0000</field>
+            <field eval="False" name="company_id"/>
+        </record>
+
+    </data>
+</odoo>

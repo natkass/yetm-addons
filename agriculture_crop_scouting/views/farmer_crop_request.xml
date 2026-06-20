@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_agriculature_crop_scotings">
+            <field name="name">farmer.cropping.request</field>
+            <field name="model">farmer.cropping.request</field>
+            <field name="inherit_id" ref="odoo_agriculture.view_farmer_cropping_request_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='project_id']" position="after">
+                     <field name="create_date"/>
+                     <field name="crops_soil_id"/>
+                     <field name="user_saleperson_id"/>
+                </xpath>
+                <xpath expr="//button[@name='view_project_request']" position="after">
+                        <button name="view_scout_request"
+                        type="object" 
+                        class="oe_stat_button" 
+                        icon="fa-tasks">
+                        <field string="Scoutings" name="scout_count" widget="statinfo"/>
+                        </button>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_transfer_request_transfer_request,store.request.transfer.request,model_transfer_request,,1,1,1,1
+access_transfer_request_transfer_request_item,store.request.transfer.request.item,model_transfer_request_item,,1,1,1,1
+access_transfer_request_confirm_wizard,store.request.confirm.wizard,model_transfer_request_confirm_wizard,,1,1,1,1

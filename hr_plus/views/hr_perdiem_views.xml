@@ -1,0 +1,322 @@
+<odoo>
+  <record id="view_hr_daily_allowance_form" model="ir.ui.view">
+    <field name="name">hr.daily.allowance.form</field>
+    <field name="model">hr.daily.allowance</field>
+    <field name="arch" type="xml">
+      <form string="Daily Allowance Request">
+        <header>
+            <button name="action_submit" type="object" string="Submit"
+                    invisible= "state != 'draft'" 
+                    groups="hr_plus.group_hr_plus_daily_allowance_submit"
+                    class="btn-primary"/>
+                    
+            <button name="action_verify" type="object" string="Verify"
+                    invisible= "state != 'submitted'" 
+                    groups="hr_plus.group_hr_plus_daily_allowance_verify"
+                    class="btn-primary"/>
+            <button name="action_approve" type="object" string="Approve"
+                    invisible= "state != 'hr_verified'" 
+                    groups="hr_plus.group_hr_plus_daily_allowance_approve"
+                    class="btn-primary"/>
+            <button name="action_refuse" type="object" string="Refuse"
+                    invisible="state in ['draft', 'submitted', 'approved', 'refused', 'cancelled']"
+                    groups="hr_plus.group_hr_plus_daily_allowance_approve"/>
+            <button name="action_cancel" type="object" string="Cancel"
+                    invisible="state in ['draft', 'cancelled']"
+                    groups="hr_plus.group_hr_plus_daily_allowance_verify"/>
+            <button name="action_reset_to_draft" type="object" string="Reset to Draft"
+                    invisible="state in ['draft', 'hr_verified', 'approved', 'refused']"
+                    groups="hr_plus.group_hr_plus_daily_allowance_submit"/>
+            <field name="state" widget="statusbar"
+                  statusbar_visible="draft,submitted,hr_verified,approved"
+                  statusbar_colors="{'refused':'red', 'cancelled':'orange'}" />
+        </header>
+        <sheet>
+          <h1><field name="name"/></h1>
+          
+        
+          <group>
+            <group>
+              <field name="manager_id" readonly="state not in ['draft', 'submitted']"/>
+              <field name="date_from" readonly="state not in ['draft', 'submitted']"/>
+              <field name="date_to" readonly="state not in ['draft', 'submitted']"/>
+            </group>
+            <group>
+              <field name="remark" readonly="state not in ['draft', 'submitted']"/>
+              <field name="total_allowance_sum" readonly="1"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="Requested For">
+              <field name="line_ids" readonly="state not in ['draft', 'submitted']">
+                <tree editable="bottom">
+                  <field name="employee_id"/>
+                  <field name="daily_rate"/> 
+                  <field name="date_count"/> 
+                  <field name="total_allowance"/> 
+                                  
+                  <field name="remark"/>
+                  <field name="payslip_id" readonly="1" />
+                  
+                </tree>
+              </field>
+            </page>
+          </notebook>
+          
+        </sheet>
+        
+        <div class="oe_chatter">
+            <field name="message_follower_ids"/>
+            <field name="activity_ids"/>
+            <field name="message_ids"/>
+        </div>
+      </form>
+    </field>
+    
+  </record>
+
+  <record id="view_hr_daily_allowance_tree" model="ir.ui.view">
+    <field name="name">hr.daily.allowance.tree</field>
+    <field name="model">hr.daily.allowance</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="manager_id"/>
+        <field name="date_from"/>
+        <field name="date_to"/>
+        <field name="state" widget="badge"
+          decoration-info="state == 'submitted'" 
+          decoration-success="state == 'approved'"
+          decoration-primary="state == 'hr_verified'"
+          decoration-warning="state == 'cancelled'"          
+          decoration-danger="state == 'refused'"/>
+          
+      </tree>
+    </field>
+  </record>
+
+  <record id="view_hr_daily_allowance_line_tree" model="ir.ui.view">
+    <field name="name">hr.daily.allowance.line.tree</field>
+    <field name="model">hr.daily.allowance.line</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="employee_id"/>
+        <field name="daily_allowance_id"/>
+        <field name="total_allowance"/>        
+        <field name="remark"/>
+        <field name="payslip_id" readonly="1" />
+        <field name="state" widget="badge"
+          decoration-info="state == 'submitted'" 
+          decoration-success="state == 'approved'"
+          decoration-primary="state == 'hr_verified'"
+          decoration-warning="state == 'cancelled'"          
+          decoration-danger="state == 'refused'"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="view_hr_daily_allowance_line_form" model="ir.ui.view">
+    <field name="name">hr.daily.allowance.line.form</field>
+    <field name="model">hr.daily.allowance.line</field>
+    <field name="arch" type="xml">
+      <form>
+        <group>
+          <group>            
+            <field name="daily_allowance_id" readonly="1"/>
+            <field name="employee_id" readonly="1"/>
+            <field name="remark" readonly="1"/>            
+          </group>
+          <group>
+            <field name="daily_rate" readonly="1"/>
+            <field name="date_count" readonly="1"/>
+            <field name="state" widget="badge" readonly="1"
+              decoration-info="state == 'submitted'" 
+              decoration-success="state == 'approved'"
+              decoration-primary="state == 'hr_verified'"
+              decoration-warning="state == 'cancelled'"          
+              decoration-danger="state == 'refused'"/>
+            <field name="payslip_id" readonly="1" />
+          </group>         
+            
+        </group>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_hr_daily_allowance" model="ir.actions.act_window">
+    <field name="name">Daily Allowance</field>
+    <field name="res_model">hr.daily.allowance</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  
+  <menuitem id="menu_hr_perdium" name="Driver Perdium" parent="menu_hr_plus_root" sequence="20"/>
+  <menuitem id="menu_hr_daily_allowance" name="Daily Allowance" parent="menu_hr_perdium" action="action_hr_daily_allowance"/>
+
+  
+  #######################################################
+
+
+  <record id="view_hr_driver_incentive_form" model="ir.ui.view">
+    <field name="name">hr.driver.incentive.form</field>
+    <field name="model">hr.driver.incentive</field>
+    <field name="arch" type="xml">
+      <form string="Driver Incentive Request">
+        <header>
+            <button name="action_submit" type="object" string="Submit"
+                    invisible= "state != 'draft'" 
+                    groups="hr_plus.group_hr_plus_driver_incentive_submit"
+                    class="btn-primary"/>
+                    
+            <button name="action_verify" type="object" string="Verify"
+                    invisible= "state != 'submitted'" 
+                    groups="hr_plus.group_hr_plus_driver_incentive_verify"
+                    class="btn-primary"/>
+            <button name="action_approve" type="object" string="Approve"
+                    invisible= "state != 'hr_verified'" 
+                    groups="hr_plus.group_hr_plus_driver_incentive_approve"
+                    class="btn-primary"/>
+            <button name="action_refuse" type="object" string="Refuse"
+                    invisible="state in ['draft', 'submitted', 'approved', 'refused', 'cancelled']"
+                    groups="hr_plus.group_hr_plus_driver_incentive_approve"/>
+            <button name="action_cancel" type="object" string="Cancel"
+                    invisible="state in ['draft', 'cancelled']"
+                    groups="hr_plus.group_hr_plus_driver_incentive_verify"/>
+            <button name="action_reset_to_draft" type="object" string="Reset to Draft"
+                    invisible="state in ['draft', 'hr_verified', 'approved', 'refused']"
+                    groups="hr_plus.group_hr_plus_driver_incentive_submit"/>
+            <field name="state" widget="statusbar"
+                  statusbar_visible="draft,submitted,hr_verified,approved"
+                  statusbar_colors="{'refused':'red', 'cancelled':'orange'}" />
+        </header>
+        <sheet>
+          <h1><field name="name"/></h1>
+          
+        
+          <group>
+            <group>
+              <field name="manager_id" readonly="state not in ['draft', 'submitted']"/>
+              <field name="date_from" readonly="state not in ['draft', 'submitted']"/>
+              <field name="date_to" readonly="state not in ['draft', 'submitted']"/>
+            </group>
+            <group>
+              <field name="remark" readonly="state not in ['draft', 'submitted']"/>
+              <field name="total_incentive_sum" readonly="1"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="Requested For">
+              <field name="line_ids" readonly="state not in ['draft', 'submitted']">
+                <tree editable="bottom">
+                  <field name="employee_id"/>
+                  <field name="work_performance"/> 
+                  <field name="vehicle_self_care"/>
+                  <field name="attendance"/>
+                  <field name="no_violation"/>
+                  <field name="periodic_improvement"/> 
+                  <field name="total_incentive"/> 
+                                  
+                  <field name="remark"/>
+                  <field name="payslip_id" readonly="1" />
+                  
+                </tree>
+              </field>
+            </page>
+          </notebook>
+          
+        </sheet>
+        
+        <div class="oe_chatter">
+            <field name="message_follower_ids"/>
+            <field name="activity_ids"/>
+            <field name="message_ids"/>
+        </div>
+      </form>
+    </field>
+    
+  </record>
+
+  <record id="view_hr_driver_incentive_tree" model="ir.ui.view">
+    <field name="name">hr.driver.incentive.tree</field>
+    <field name="model">hr.driver.incentive</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="manager_id"/>
+        <field name="date_from"/>
+        <field name="date_to"/>
+        <field name="state" widget="badge"
+          decoration-info="state == 'submitted'" 
+          decoration-success="state == 'approved'"
+          decoration-primary="state == 'hr_verified'"
+          decoration-warning="state == 'cancelled'"          
+          decoration-danger="state == 'refused'"/>
+          
+      </tree>
+    </field>
+  </record>
+
+  <record id="view_hr_driver_incentive_line_tree" model="ir.ui.view">
+    <field name="name">hr.driver.incentive.line.tree</field>
+    <field name="model">hr.driver.incentive.line</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="employee_id"/>
+        <field name="driver_incentive_id"/>
+        <field name="total_incentive"/>        
+        <field name="remark"/>
+        <field name="payslip_id" readonly="1" />
+        <field name="state" widget="badge"
+          decoration-info="state == 'submitted'" 
+          decoration-success="state == 'approved'"
+          decoration-primary="state == 'hr_verified'"
+          decoration-warning="state == 'cancelled'"          
+          decoration-danger="state == 'refused'"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="view_hr_driver_incentive_line_form" model="ir.ui.view">
+    <field name="name">hr.driver.incentive.line.form</field>
+    <field name="model">hr.driver.incentive.line</field>
+    <field name="arch" type="xml">
+      <form>
+        <group>
+          <group>            
+            <field name="driver_incentive_id" readonly="1"/>
+            <field name="employee_id" readonly="1"/>
+            <field name="remark" readonly="1"/>
+            <field name="state" widget="badge" readonly="1"
+              decoration-info="state == 'submitted'" 
+              decoration-success="state == 'approved'"
+              decoration-primary="state == 'hr_verified'"
+              decoration-warning="state == 'cancelled'"          
+              decoration-danger="state == 'refused'"/>
+            <field name="payslip_id" readonly="1" />            
+          </group>
+          <group>
+            <field name="work_performance" readonly="1"/> 
+            <field name="vehicle_self_care" readonly="1"/>
+            <field name="attendance" readonly="1"/>
+            <field name="no_violation" readonly="1"/>
+            <field name="periodic_improvement" readonly="1"/> 
+            <field name="total_incentive" readonly="1"/>
+            
+          </group>         
+            
+        </group>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_hr_driver_incentive" model="ir.actions.act_window">
+    <field name="name">Driver Incentive</field>
+    <field name="res_model">hr.driver.incentive</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  
+  <menuitem id="menu_hr_perdium" name="Driver Perdium" parent="menu_hr_plus_root" sequence="20" groups="hr_plus.group_hr_plus_driver_incentive_submit"/>
+  <menuitem id="menu_hr_driver_incentive" name="Driver Incentive" parent="menu_hr_perdium" action="action_hr_driver_incentive"/>
+
+</odoo>

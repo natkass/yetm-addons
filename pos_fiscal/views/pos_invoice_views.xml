@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_pos_invoice_tree" model="ir.ui.view">
+        <field name="name">pos.invoice.tree</field>
+        <field name="model">pos.invoice</field>
+        <field name="arch" type="xml">
+            <tree duplicate="false">
+                <field name="fsNumber"/>
+                <field name="buyerName"/>
+                <field name="referenceNumber"/>
+                <field name="totalWithTax"/>
+                <field name="date"/>
+                <field name="device_id"/>
+                <field name="reconciliation_status" optional="show" widget="badge" decoration-success="reconciliation_status == 'done'" decoration-warning="reconciliation_status == 'processing'" decoration-danger="reconciliation_status == 'failed'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_pos_invoice_form" model="ir.ui.view">
+        <field name="name">pos.invoice.form</field>
+        <field name="model">pos.invoice</field>
+        <field name="arch" type="xml">
+            <form edit="false" duplicate="false">
+                <sheet>
+                    <group>
+                        <group string="General">
+                            <field name="fsNumber"/>
+                            <field name="referenceNumber"/>
+                            <field name="buyerName"/>
+                            <field name="buyerTaxIdNumber"/>
+                            <field name="date"/>
+                            <field name="time"/>
+                            <field name="device_id"/>
+                            <field name="cashierName"/>
+                            <field name="reconciliation_status" widget="badge" readonly="1"/>
+                            <field name="reconciliation_job_uuid" invisible="not reconciliation_job_uuid" readonly="1"/>
+                        </group>
+                        <group string="Financials">
+                            <field name="totalWithoutTax"/>
+                            <field name="totalTax"/>
+                            <field name="totalWithTax"/>
+                            <field name="totalPaid"/>
+                            <field name="totalDiscount"/>
+                            <field name="totalServiceCharge"/>
+                            <field name="change"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Invoice Lines">
+                            <field name="line_ids">
+                                <tree editable="none">
+                                    <field name="lineIndex"/>
+                                    <field name="itemName"/>
+                                    <field name="quantity"/>
+                                    <field name="price"/>
+                                    <field name="lineDiscountAmount"/>
+                                    <field name="lineServiceChargeAmount"/>
+                                    <field name="lineTotal"/>
+                                    <field name="lineTotalTax"/>
+                                    <field name="lineTotalWithTax"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Additional Info">
+                            <group>
+                                <field name="paymentType"/>
+                                <field name="paymentReferenceNumber"/>
+                                <field name="headerMemo"/>
+                                <field name="footerMemo"/>
+                                <field name="qrCodeData"/>
+                                <field name="ejPath"/>
+                                <field name="printed"/>
+                                <field name="zReportSent"/>
+                                <field name="checksum"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pos_invoice" model="ir.actions.act_window">
+        <field name="name">Sales</field>
+        <field name="res_model">pos.invoice</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+    </record>
+</odoo>

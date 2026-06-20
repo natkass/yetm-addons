@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_non_standard,access.non.value,model_non_standard_value,base.group_user,1,1,1,1
+access_non_standard_fabric,access.non.fabric,model_non_standard_fabric,base.group_user,1,1,1,1
+access_non_standard_fasha,access.non.fasha,model_non_standard_fasha,base.group_user,1,1,1,1
+
+access_non_standard_fasha_variance,access.non.fasha.variance,model_non_standard_fasha_variance,base.group_user,1,1,1,1
+
+access_non_standard_seal_variance,access.non.standard.seal,model_non_standard_seal,base.group_user,1,1,1,1

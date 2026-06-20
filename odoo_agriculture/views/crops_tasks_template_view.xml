@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_crops_tasks_template_form" model="ir.ui.view">
+            <field name="name">Crops Tasks Template View</field>
+            <field name="model">crops.tasks.template</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='task_id'/>
+                            </group>
+                            <group>
+                                <field name='crop_id'/>
+                            </group>
+                        </group>
+                            <notebook>
+                                <page string="Equipments" name='equipment_ids'>
+                                    <field name="equipment_ids"/>
+                                </page>
+                                <page string="Animals" name='animal_ids'>
+                                    <field name="animal_ids" widget="section_and_note_one2many" mode="tree">
+                                        <form>
+                                            <sheet>
+                                                <group>
+                                                    <group>
+                                                        <!-- <field name='crops_tasks_template_id'/> -->
+                                                        <field name='partner_id'/>
+                                                        <field name='start_date'/>
+                                                    </group>
+                                                    <group>
+                                                        <field name='end_date'/>
+                                                        <field name='quantity'/>
+                                                        <field name='description'/>
+                                                    </group>
+                                                </group>
+                                            </sheet>
+                                        </form>
+                                        <tree string="Animals" editable="bottom"> 
+                                            <!-- <field name='crops_tasks_template_id'/> -->
+                                            <field name='partner_id'/>
+                                            <field name='start_date'/>
+                                            <field name='end_date'/>
+                                            <field name='quantity'/>
+                                            <field name='description'/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page string="Fleets" name='fleet_ids'>
+                                    <field name="fleet_ids" widget="section_and_note_one2many" mode="tree">
+                                        <form>
+                                            <sheet>
+                                                <group>
+                                                    <group>
+                                                        <!-- <field name='crops_tasks_template_id'/> -->
+                                                        <field name='vehicle_id'/>
+                                                        <field name='start_date'/>
+                                                    </group>
+                                                    <group>
+                                                        <field name='end_date'/>
+                                                        <field name='quantity'/>
+                                                        <field name='description'/>
+                                                    </group>
+                                                </group>
+                                            </sheet>
+                                        </form>
+                                        <tree string="Fleets" editable="bottom"> 
+                                            <!-- <field name='crops_tasks_template_id'/> -->
+                                            <field name='vehicle_id'/>
+                                            <field name='start_date'/>
+                                            <field name='end_date'/>
+                                            <field name='quantity'/>
+                                            <field name='description'/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                            <!-- <group> -->
+                                <!-- <field name='animal_ids'/> -->
+                                <!-- <field name='fleet_ids'/> -->
+                            <!-- </group> -->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+                       
+        <record id="view_crops_tasks_template_tree" model="ir.ui.view">
+                <field name="name">Crops Tasks Template Tree View</field>
+                <field name="model">crops.tasks.template</field>
+                <field name="arch" type="xml">
+                    <tree>
+                        <field name='task_id'/>
+                        <field name='crop_id'/>
+                        <!-- <field name='animal_ids'/>
+                        <field name='fleet_ids'/>
+                        <field name='equipment_ids'/> -->
+                    </tree>
+                </field>
+        </record>
+
+        <record id="view_crops_tasks_template_search" model="ir.ui.view">
+                <field name="name">Crops Tasks Template Search View</field>
+                <field name="model">crops.tasks.template</field>
+                <field name="arch" type="xml">
+                    <search>
+                        <field name='task_id'/>
+                        <field name='crop_id'/>
+                        <field name='animal_ids'/>
+                        <field name='fleet_ids'/>
+                        <field name='equipment_ids'/>
+                        <group expand="0" string="Group By">
+                            <filter name="Task" context="{'group_by':'task_id'}"/>
+                            <filter name="Crop" context="{'group_by':'crop_id'}"/>
+                        </group>
+                    </search>
+                </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_crops_tasks_template">
+            <field name="name">Crop Process Templates</field>
+            <field name="res_model">crops.tasks.template</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+
+</odoo>
+
+

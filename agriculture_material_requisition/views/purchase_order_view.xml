@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+    
+        <record id="material_requisition_purchase_form_view_inherited" model="ir.ui.view">
+            <field name="name">purchase.order.form.view</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <!-- <xpath expr="//field[@name='incoterm_id']" position="after"> -->
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="custom_crop_request_id"/>
+                    <field name="custom_crop_id"/>
+                    <field name="custom_agriculture_refrence"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

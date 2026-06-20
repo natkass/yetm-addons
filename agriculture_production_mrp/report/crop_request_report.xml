@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <template id="template_report_farmer_cropping_request_inherited" inherit_id="odoo_agriculture.template_report_farmer_cropping_request">
+            <xpath expr="//table/tbody/tr[4]" position="after">
+                <tbody>
+                    <tr>
+                        <td>
+                             <strong>Maufacturing Order:</strong>
+                        </td>
+                        <td>
+                             <span t-field="doc.production_id"/>
+                        </td>
+                        <td>
+                            <strong>Product: </strong>
+                        </td>
+                        <td>
+                            <span t-field="doc.product_temp_id"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                             <strong>Bills Of Material:</strong>
+                        </td>
+                        <td>
+                             <span t-field="doc.custom_bom_id"/>
+                        </td>
+                        <!-- <td>
+                            <strong>Routing: </strong>
+                        </td>
+                        <td>
+                            <span t-field="doc.routing_id"/>
+                        </td> -->
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Manufacturing Qty:</strong>
+                        </td>
+                        <td>
+                            <span t-field="doc.manufacturing_quantity"/>
+                        </td>
+                        <td>
+                            <strong>Manufacturing UoM:</strong>
+                        </td>
+                        <td>
+                            <span t-field="doc.manufacturing_uom_id"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </xpath>
+        </template>
+    </data>
+</odoo>
+
+            

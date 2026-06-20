@@ -1,0 +1,43 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_branch_user_tree" model="ir.ui.view">
+        <field name="name">branch.user.tree</field>
+        <field name="model">branch.user</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_branch_user_form" model="ir.ui.view">
+        <field name="name">branch.user.form</field>
+        <field name="model">branch.user</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_branch_user" model="ir.actions.act_window">
+        <field name="name">Branch</field>
+        <field name="res_model">branch.user</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p>
+                Create and manage branches.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <!-- <menuitem id="menu_branch_user_root" name="Branch Management" sequence="10" /> -->
+    <menuitem id="menu_branch_user" name="Branches" parent="base.menu_users" action="action_branch_user" sequence="10" />
+</odoo>

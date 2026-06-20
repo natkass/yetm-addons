@@ -1,0 +1,32 @@
+<odoo>
+    <record id="view_manufacturing_request_batch_wizard_form" model="ir.ui.view">
+        <field name="name">manufacturing.request.batch.report.wizard.form</field>
+        <field name="model">manufacturing.request.batch.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Batch Lifecycle Report">
+                <group>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="branch_id"/>
+                </group>
+                <footer>
+                    <button string="Print Report" type="object" name="action_print_lifecycle_batch" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_open_batch_lifecycle_wizard" model="ir.actions.act_window">
+        <field name="name">Batch Lifecycle Report</field>
+        <field name="res_model">manufacturing.request.batch.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- <menuitem id="menu_manufacturing_request_reports_root" name="Reports" parent="menu_mrq_advanced_dashboard"/> -->
+    
+    <!-- <menuitem id="menu_manufacturing_request_batch_report" name="Batch Lifecycle Report" parent="menu_manufacturing_requests" action="action_open_batch_lifecycle_wizard"/> -->
+    
+    
+</odoo>

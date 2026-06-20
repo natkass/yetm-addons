@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_farmer_location_crop_form_inherited" model="ir.ui.view">
+        <field name="name">Crop Form View</field>
+        <field name="model">farmer.location.crops</field>
+        <field name="inherit_id" ref="odoo_agriculture.view_farmer_location_crop_form"/>
+        <field name="arch" type="xml">
+            <!-- <xpath expr="//sheet//field[@name='image']" position="after"> -->
+            <!-- <xpath expr="//sheet//field[@name='image']" position="before"> -->
+            <!-- <xpath expr="//sheet//notebook" position="before"> -->
+                <div class="oe_button_box" name="button_box">
+                     <button name="view_material_requistions"
+                           type="object"
+                           class="oe_stat_button"
+                           icon="fa-tasks"
+                           string="Material Requsitions"
+                           widget="statinfo"/>
+                </div>
+            <!-- </xpath> -->
+        </field>
+    </record>
+</odoo>

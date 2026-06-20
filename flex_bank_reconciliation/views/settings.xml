@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="flex_ops_reconciliation_setting_accounts" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="10"/>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//block[@id='invoicing_settings']" position="after">
+                    <h2 class="mt32">Flex OPS Bank Reconciliation</h2>
+                    <div class="row mt16 o_settings_container" name="flex_ops_accounts">
+                        <div class="col-12 col-lg-6 o_setting_box" id="flex_ops_bank_reconcile_journal_id_div">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <div>
+                                    <span class="o_form_label">Post Exchange difference entries in:</span>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="flex_bank_reconcile_difference_journal_id"
+                                           class="col-lg-4 o_light_label"
+                                           string="Journal"/>
+                                    <field name="flex_bank_reconcile_difference_journal_id"
+                                           options="{'no_create': True,'no_edit': True}"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="flex_bank_rec_diff_exp_account_id" class="col-lg-4 o_light_label"/>
+                                    <field name="flex_bank_rec_diff_exp_account_id"
+                                           options="{'no_create': True,'no_edit': True}"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="flex_bank_rec_diff_rev_account_id" class="col-lg-4 o_light_label"/>
+                                    <field name="flex_bank_rec_diff_rev_account_id"
+                                           options="{'no_create': True,'no_edit': True}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

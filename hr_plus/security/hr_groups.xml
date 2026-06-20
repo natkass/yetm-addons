@@ -1,0 +1,180 @@
+<odoo>
+  <!-- Category -->
+  <record id="module_category_hr_plus" model="ir.module.category">
+    <field name="name">HR Plus</field>
+    <field name="description">Access rights for HR Plus features</field>
+    <field name="sequence">20</field>
+  </record>
+
+  <!-- Submitter -->
+  <record id="group_hr_plus_overtime_submit" model="res.groups">
+    <field name="name">HR Plus OT Submit</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+  </record>
+
+  <!-- Verifier -->
+  <record id="group_hr_plus_overtime_verify" model="res.groups">
+    <field name="name">HR Plus OT Verify</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+    <field name="implied_ids" eval="[(4, ref('hr_plus.group_hr_plus_overtime_submit'))]"/>
+  </record>
+
+  <!-- Approver -->
+  <record id="group_hr_plus_overtime_approve" model="res.groups">
+    <field name="name">HR Plus OT Approve</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+    <field name="implied_ids" eval="[(4, ref('hr_plus.group_hr_plus_overtime_verify'))]"/>
+  </record>
+
+  <!-- Submitter -->
+  <record id="group_hr_plus_incentive_submit" model="res.groups">
+    <field name="name">HR Plus Incentive Submit</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+  </record>
+
+  <!-- Verifier -->
+  <record id="group_hr_plus_incentive_verify" model="res.groups">
+    <field name="name">HR Plus Incentive Verify</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+    <field name="implied_ids" eval="[(4, ref('hr_plus.group_hr_plus_incentive_submit'))]"/>
+  </record>
+
+  <!-- Approver -->
+  <record id="group_hr_plus_incentive_approve" model="res.groups">
+    <field name="name">HR Plus Incentive Approve</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+    <field name="implied_ids" eval="[(4, ref('hr_plus.group_hr_plus_incentive_verify'))]"/>
+  </record>
+
+  <!-- Submitter -->
+  <record id="group_hr_plus_daily_allowance_submit" model="res.groups">
+    <field name="name">HR Plus Daily Allowance Submit</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+  </record>
+
+  <!-- Verifier -->
+  <record id="group_hr_plus_daily_allowance_verify" model="res.groups">
+    <field name="name">HR Plus Daily Allowance Verify</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+    <field name="implied_ids" eval="[(4, ref('hr_plus.group_hr_plus_daily_allowance_submit'))]"/>
+  </record>
+
+  <!-- Approver -->
+  <record id="group_hr_plus_daily_allowance_approve" model="res.groups">
+    <field name="name">HR Plus Daily Allowance Approve</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+    <field name="implied_ids" eval="[(4, ref('hr_plus.group_hr_plus_daily_allowance_verify'))]"/>
+  </record>
+
+  <!-- Submitter -->
+  <record id="group_hr_plus_driver_incentive_submit" model="res.groups">
+    <field name="name">HR Plus Driver Incentive Submit</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+  </record>
+
+  <!-- Verifier -->
+  <record id="group_hr_plus_driver_incentive_verify" model="res.groups">
+    <field name="name">HR Plus Driver Incentive Verify</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+    <field name="implied_ids" eval="[(4, ref('hr_plus.group_hr_plus_driver_incentive_submit'))]"/>
+  </record>
+
+  <!-- Approver -->
+  <record id="group_hr_plus_driver_incentive_approve" model="res.groups">
+    <field name="name">HR Plus Driver Incentive Approve</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+    <field name="implied_ids" eval="[(4, ref('hr_plus.group_hr_plus_driver_incentive_verify'))]"/>
+  </record>
+
+  <!-- Submitter -->
+  <record id="group_hr_plus_penalty_submit" model="res.groups">
+    <field name="name">HR Plus Penalty Submit</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+  </record>
+
+  <!-- Verifier -->
+  <record id="group_hr_plus_penalty_verify" model="res.groups">
+    <field name="name">HR Plus Penalty Verify</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+    <field name="implied_ids" eval="[(4, ref('hr_plus.group_hr_plus_penalty_submit'))]"/>
+  </record>
+
+  <!-- Approver -->
+  <record id="group_hr_plus_penalty_approve" model="res.groups">
+    <field name="name">HR Plus Penalty Approve</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+    <field name="implied_ids" eval="[(4, ref('hr_plus.group_hr_plus_penalty_verify'))]"/>
+  </record>
+
+  <!-- Submitter -->
+  <record id="group_hr_plus_loan_submit" model="res.groups">
+    <field name="name">HR Plus Loan Submit</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+  </record>
+
+  <!-- Verifier -->
+  <record id="group_hr_plus_loan_verify" model="res.groups">
+    <field name="name">HR Plus Loan Verify</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+    <field name="implied_ids" eval="[(4, ref('hr_plus.group_hr_plus_loan_submit'))]"/>
+  </record>
+
+  <!-- Approver -->
+  <record id="group_hr_plus_loan_approve" model="res.groups">
+    <field name="name">HR Plus Loan Approve</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+    <field name="implied_ids" eval="[(4, ref('hr_plus.group_hr_plus_loan_verify'))]"/>
+  </record>
+  
+  <!-- Submitter -->
+  <record id="group_hr_plus_advance_submit" model="res.groups">
+    <field name="name">HR Plus Advance Submit</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+  </record>
+
+  <!-- Verifier -->
+  <record id="group_hr_plus_advance_verify" model="res.groups">
+    <field name="name">HR Plus Advance Verify</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+    <field name="implied_ids" eval="[(4, ref('hr_plus.group_hr_plus_advance_submit'))]"/>
+  </record>
+
+  <!-- Approver -->
+  <record id="group_hr_plus_advance_approve" model="res.groups">
+    <field name="name">HR Plus Advance Approve</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+    <field name="implied_ids" eval="[(4, ref('hr_plus.group_hr_plus_advance_verify'))]"/>
+  </record>
+
+  <!-- Manager -->
+  <record id="group_hr_plus_manager" model="res.groups">
+    <field name="name">HR Plus Manager</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+    
+    <field name="implied_ids" eval="[
+        (4, ref('hr_plus.group_hr_plus_overtime_approve')),
+        (4, ref('hr_plus.group_hr_plus_incentive_approve')),
+        (4, ref('hr_plus.group_hr_plus_daily_allowance_approve')),
+        (4, ref('hr_plus.group_hr_plus_driver_incentive_approve')),
+        (4, ref('hr_plus.group_hr_plus_penalty_approve')),
+        (4, ref('hr_plus.group_hr_plus_loan_approve')),
+        (4, ref('hr_plus.group_hr_plus_advance_approve')),
+        (4, ref('hr_plus.group_hr_plus_overtime_verify')),
+        (4, ref('hr_plus.group_hr_plus_incentive_verify')),
+        (4, ref('hr_plus.group_hr_plus_daily_allowance_verify')),
+        (4, ref('hr_plus.group_hr_plus_driver_incentive_verify')),
+        (4, ref('hr_plus.group_hr_plus_penalty_verify')),
+        (4, ref('hr_plus.group_hr_plus_loan_verify')),
+        (4, ref('hr_plus.group_hr_plus_advance_verify')),
+    ]"/>
+  </record>
+
+  <!-- User -->
+  <record id="group_hr_plus_user" model="res.groups">
+    <field name="name">HR Plus User</field>
+    <field name="category_id" ref="hr_plus.module_category_hr_plus"/>
+    
+    
+  </record>
+
+</odoo>

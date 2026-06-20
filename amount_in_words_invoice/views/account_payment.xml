@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Inherit the account.payment form view to display the amount in words -->
+    <record id="view_account_payment_form_inherit_amount_in_words" model="ir.ui.view">
+        <field name="name">account.payment.view.form.inherit.amount.in.words</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_bank_id']" position="after">
+                <field name="number_to_words"/>    
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,108 @@
+<odoo>
+    <record id="view_hr_employee_form_inherit_overtime" model="ir.ui.view">
+        <field name="name">hr.employee.tree.inherit.overtime</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div[@name='button_box']" position="inside">
+            <button name="action_view_overtime_lines" type="object" string="Overtime"
+                    invisible="overtime_line_count == 0"
+                    class="oe_stat_button" icon="fa-clock-o">
+                <field name="overtime_line_count" string="Overtime" widget="statinfo"/>
+            </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_employee_form_inherit_incentive" model="ir.ui.view">
+        <field name="name">hr.employee.tree.inherit.incentive</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div[@name='button_box']" position="inside">
+            <button name="action_view_incentive_lines" type="object" string="incentive"
+                    invisible="incentive_line_count == 0"
+                    class="oe_stat_button" icon="fa-signal">
+                <field name="incentive_line_count" string="Incentive" widget="statinfo"/>
+            </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_employee_form_inherit_daily_allowance" model="ir.ui.view">
+        <field name="name">hr.employee.tree.inherit.daily.allowance</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div[@name='button_box']" position="inside">
+            <button name="action_view_daily_allowance_lines" type="object" string="Daily Allowance"
+                    invisible="daily_allowance_line_count == 0"
+                    class="oe_stat_button" icon="fa-truck">
+                <field name="daily_allowance_line_count" string="Driver Daily Allowance" widget="statinfo"/>
+            </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_employee_form_inherit_driver_incentive" model="ir.ui.view">
+        <field name="name">hr.employee.tree.inherit.driver.incentive</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div[@name='button_box']" position="inside">
+            <button name="action_view_driver_incentive_lines" type="object" string="Driver Incentive"
+                    invisible="driver_incentive_line_count == 0"
+                    class="oe_stat_button" icon="fa-truck">
+                <field name="driver_incentive_line_count" string="Driver Incentive" widget="statinfo"/>
+            </button>
+            </xpath>
+        </field>
+    </record>
+    
+
+    <record id="view_hr_employee_form_inherit_penalty" model="ir.ui.view">
+        <field name="name">hr.employee.tree.inherit.penalty</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div[@name='button_box']" position="inside">
+            <button name="action_view_penalty_lines" type="object" string="Penalty"
+                    invisible="penalty_line_count == 0"
+                    class="oe_stat_button" icon="fa-warning">
+                <field name="penalty_line_count" string="Penalty" widget="statinfo"/>
+            </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_employee_form_inherit_loan" model="ir.ui.view">
+        <field name="name">hr.employee.tree.inherit.loan</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div[@name='button_box']" position="inside">
+            <button name="action_view_loan_lines" type="object" string="Loan"
+                    invisible="loan_line_count == 0"
+                    class="oe_stat_button" icon="fa-suitcase">
+                <field name="loan_line_count" string="Loan" widget="statinfo"/>
+            </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_employee_form_inherit_advance" model="ir.ui.view">
+        <field name="name">hr.employee.tree.inherit.advance</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div[@name='button_box']" position="inside">
+            <button name="action_view_advance" type="object" string="Advance"
+                    invisible="advance_count == 0"
+                    class="oe_stat_button" icon="fa-pencil-square-o">
+                <field name="advance_count" string="Advance" widget="statinfo"/>
+            </button>
+            </xpath>
+        </field>
+    </record>
+    
+</odoo>

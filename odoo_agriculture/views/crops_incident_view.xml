@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_crops_incident_form" model="ir.ui.view">
+            <field name="name">Crops Animals View</field>
+            <field name="model">crops.incident</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='name'/>
+                                <field name='crop_id'/>
+                                <field name='task_id'/>
+                            </group>
+                            <group>
+                                <field name='datetime'/>
+                                <field name='location_id' domain="[('is_location','=', True)]"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="description_page" string="Description">
+                                <field name="description" style="width: 100%;"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+                       
+        <record id="view_crops_incident_tree" model="ir.ui.view">
+                <field name="name">Crops Animals Tree View</field>
+                <field name="model">crops.incident</field>
+                <field name="arch" type="xml">
+                    <tree>
+                        <field name='name'/>
+                        <field name='crop_id'/>
+                        <field name='task_id'/>
+                        <field name='datetime'/>
+                        <field name='location_id' domain="[('is_location','=', True)]"/>
+                        <field name='description'/>
+                    </tree>
+                </field>
+        </record>
+
+        <record id="view_crops_incident_search" model="ir.ui.view">
+                <field name="name">Crops Animals Search View</field>
+                <field name="model">crops.incident</field>
+                <field name="arch" type="xml">
+                    <search>
+                        <field name='name'/>
+                        <field name='crop_id'/>
+                        <field name='task_id'/>
+                        <field name='datetime'/>
+                        <field name='location_id'/>
+                        <field name='description'/>
+                        <group expand="0" string="Group By">
+                            <filter name="Crop" context="{'group_by':'crop_id'}"/>
+                            <filter name="Task" context="{'group_by':'task_id'}"/>
+                            <filter name="Datetime" context="{'group_by':'datetime'}"/>
+                        </group>
+                    </search>
+                </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_crops_incident">
+            <field name="name">Crop Incidents</field>
+            <field name="res_model">crops.incident</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+
+</odoo>
+
+

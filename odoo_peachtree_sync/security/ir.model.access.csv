@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_peachtree_export_wizard,peachtree.export.wizard,model_peachtree_export_wizard,account.group_account_invoice,1,1,1,0
+access_peachtree_customer_product_export_wizard,peachtree.customer.product.export.wizard,model_peachtree_customer_product_export_wizard,account.group_account_invoice,1,1,1,0

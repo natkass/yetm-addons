@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    Adding Module category for the roles-->
+    <record id="module_sales_target" model="ir.module.category">
+        <field name="name">Franchisee Target and Achievement</field>
+        <field name="description">User access rights</field>
+        <field name="sequence">20</field>
+    </record>
+<!--    To add the user group Sales Target Admin with all access-->
+    <record id="sales_target_vs_achievement_group_sales_target_admin"
+            model="res.groups">
+        <field name="name">Franchisee Target Admin</field>        
+        <field name="category_id" ref="module_sales_target"/>
+        
+    </record>
+<!--    To add the user group Users with limited access-->
+    <record id="sales_target_vs_achievement_group_sales_target_user"
+            model="res.groups">
+        <field name="name">Franchisee Target User</field>
+        <field name="category_id" ref="module_sales_target"/>
+    </record>
+
+    
+    <record id="group_franchise_sales" model="res.groups">
+        <field name="name">Franchise / Sales</field>
+        <field name="category_id" ref="module_sales_target"/>
+    </record>
+</odoo>

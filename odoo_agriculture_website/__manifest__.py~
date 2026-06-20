@@ -1,0 +1,61 @@
+# -*- coding: utf-8 -*-
+
+# Part of Probuse Consulting Service Pvt Ltd. See LICENSE file for full copyright and licensing details.
+
+{
+    'name': 'Agriculture Crop Request from Website by Customer',
+    'version': '1.1.1',
+    'category': 'Project',
+    'depends': [
+        'odoo_agriculture'
+    ],
+    'price': 49.0,
+    'currency': 'EUR',
+    'license': 'Other proprietary',
+    'summary': " This app allow create a crop request in backend side ",
+    'description': """
+Agriculture app
+Agriculture Management
+Crop Requests
+Crops
+crop
+Agriculture Management Software
+Incidents
+Dieases Cures
+agribusiness
+crop yield
+agriculture institutes
+Farmers
+AMS
+Farm Locations
+farmers
+farmer
+Agriculture odoo
+odoo Agriculture
+Agriculture Management System
+Animals
+print Crop Requests Report
+print Crops Report
+odoo Agriculture Management Software
+Farm Management Software
+crop request
+cropping
+croping
+This app allow create a crop request in backend side
+
+     """,
+    'author': "Probuse Consulting Service Pvt. Ltd.",
+    'website': "http://www.probuse.com",
+    'support': 'contact@probuse.com',
+    'images': ['static/description/img1.jpg'],
+    'live_test_url': 'https://youtu.be/v8AvL6StwBg',
+    'data':[
+       'views/crop_request_view.xml',
+       'views/portal_form_view.xml',
+       'views/crop_request_account_view.xml',
+    ],
+    'installable' : True,
+    'application' : False,
+}
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

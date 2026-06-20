@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- POS Refund Tree View -->
+    <record id="view_pos_refund_tree" model="ir.ui.view">
+        <field name="name">pos.refund.tree</field>
+        <field name="model">pos.refund</field>
+        <field name="arch" type="xml">
+            <tree create="false" duplicate="false">
+                <field name="rfdNumber"/>
+                <field name="buyerName"/>
+                <field name="referenceNumber"/>
+                <field name="totalWithTax"/>
+                <field name="date"/>
+                <field name="device_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- POS Refund Form View -->
+    <record id="view_pos_refund_form" model="ir.ui.view">
+        <field name="name">pos.refund.form</field>
+        <field name="model">pos.refund</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false" duplicate="false">
+                <sheet>
+                    <group>
+                        <group string="General">
+                            <field name="rfdNumber"/>
+                            <field name="referenceNumber"/>
+                            <field name="buyerName"/>
+                            <field name="buyerTaxIdNumber"/>
+                            <field name="date"/>
+                            <field name="time"/>
+                            <field name="device_id"/>
+                            <field name="cashierName"/>
+                        </group>
+                        <group string="Financials">
+                            <field name="totalWithoutTax"/>
+                            <field name="totalTax"/>
+                            <field name="totalWithTax"/>
+                            <field name="totalPaid"/>
+                            <field name="totalDiscount"/>
+                            <field name="totalServiceCharge"/>
+                            <field name="change"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Refund Lines">
+                            <field name="line_ids">
+                                <tree editable="none">
+                                    <field name="lineIndex"/>
+                                    <field name="itemName"/>
+                                    <field name="quantity"/>
+                                    <field name="price"/>
+                                    <field name="lineDiscountAmount"/>
+                                    <field name="lineServiceChargeAmount"/>
+                                    <field name="lineTotal"/>
+                                    <field name="lineTotalTax"/>
+                                    <field name="lineTotalWithTax"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Additional Info">
+                            <group>
+                                <field name="paymentType"/>
+                                <field name="paymentReferenceNumber"/>
+                                <field name="headerMemo"/>
+                                <field name="footerMemo"/>
+                                <field name="qrCodeData"/>
+                                <field name="ejPath"/>
+                                <field name="printed"/>
+                                <field name="zReportSent"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- POS Refund Action -->
+    <record id="action_pos_refund" model="ir.actions.act_window">
+        <field name="name">Refunds</field>
+        <field name="res_model">pos.refund</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+    </record>
+</odoo>

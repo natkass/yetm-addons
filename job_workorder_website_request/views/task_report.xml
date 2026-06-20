@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- <report
+            id="joborder_report"
+            model="project.task"
+            menu="False"
+            report_type="qweb-pdf"
+            string="Task Report"
+            name="job_workorder_website_request.joborder_report_id" 
+            file="job_workorder_website_request.joborder_report_id"
+         /> -->
+
+        <record id="joborder_report" model="ir.actions.report">
+            <field name="name">Task Report</field>
+            <field name="model">project.task</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">job_workorder_website_request.joborder_report_id</field>
+            <field name="report_file">job_workorder_website_request.joborder_report_id</field>
+            <field name="binding_model_id" ref="project.model_project_task"/>
+            <field name="binding_type">report</field>
+        </record>
+        
+        <template id="joborder_report_id">
+          <t t-foreach="docs.sudo()" t-as="doc">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-if= "doc.job_partner_id">
+                        <t t-set="address">
+                            <div t-field="doc.job_partner_id"
+                                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                        </t>
+                    </t>
+                    <t t-if= "doc.partner_id">
+                        <t t-set="address">
+                            <div t-field="doc.partner_id"
+                                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                        </t>
+                    </t>
+                    <div class="page">
+                            <h3 class="text-center"> <strong>Job Order Details</strong></h3>
+                            <h4 class="text-center">
+                                <strong><span t-field="doc.name"/></strong> 
+                            </h4>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Project </th>
+                                        <th>Job Order Category</th>
+                                        <th>Job Number</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span t-field="doc.project_id.name"/></td>
+                                        <td><span t-field="doc.job_category"/></td>
+                                        <td><span t-field="doc.job_number"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3 class="text-center"> <strong>Other Details</strong></h3>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Assigned To </th>
+                                        <th>Assigning Date </th>
+                                        <th>Deadline</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <!-- <td><span t-field="doc.user_id.name"/></td> -->
+                                        <!-- <td><span t-field="doc.activity_user_id.name"/></td> -->
+                                        <td>
+                                            <t t-foreach="doc.user_ids" t-as="user_id">
+                                                <span t-field="user_id.name"/>,
+                                            </t>
+                                        </td>
+                                        <td><span t-field="doc.date_assign"/></td>
+                                        <td><span t-field="doc.date_deadline"/></td>
+                                    </tr>
+                                </tbody>
+                             </table>
+                            <div class="row">
+                                <div class="col-2">
+                                    <strong>Description :</strong>
+                                </div>
+                                <div class="col-10">
+                                    <span t-field="doc.description"/>
+                                </div>
+                            </div>
+                             <!-- <div class="row col-12">
+                                <div>
+                                    <strong>Description :</strong>
+                                </div>
+                                <div class="col-10">
+                                    <span t-field="doc.description"/>
+                                </div>
+                             </div> -->
+                             <br></br>
+                             <div class="row">
+                                 <div class="col-8">
+                                    Customer Signature:____________________
+                                 </div>
+                             </div>
+                    </div>
+                  </t>
+                </t>
+              </t>
+        </template>
+        
+    </data>
+</odoo>

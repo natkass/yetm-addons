@@ -1,0 +1,185 @@
+<odoo>
+    <record id="view_account_flex_bank_tree" model="ir.ui.view">
+        <field name="name">flex.bank.reconcile.tree</field>
+        <field name="model">flex.bank.reconcile</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="company_id" invisible="1"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="name"/>
+                <field name="reconcile_method"/>
+                <field name="account_id"/>
+                <field name="reconcile_date"/>
+                <field name="beginning_balance"/>
+                <field name="ending_date"/>
+                <field name="ending_balance"/>
+                <field name="difference_balance" invisible="1"/>
+                <field name="difference_balance_duplicated" sum="Total"/>
+                <field name="state" widget="badge"
+                       decoration-warning="state == 'draft'"
+                       decoration-success="state == 'done'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_account_flex_bank_form" model="ir.ui.view">
+        <field name="name">flex.bank.reconcile.form</field>
+        <field name="model">flex.bank.reconcile</field>
+        <field name="arch" type="xml">
+            <form readonly="state == 'done'">
+                <header>
+                    <button string="Reconcile Lines" type="object" class="btn-primary"
+                            name="action_reconcile_lines" invisible="state != 'draft'"/>
+                    <button string="Refresh" type="object"
+                            name="compute_account_move_lines" invisible="state != 'draft'"/>
+                    <button string="Check All" type="object"
+                            name="action_check_all" invisible="state != 'draft'"/>
+                    <button string="Uncheck All" type="object"
+                            name="action_uncheck_all" invisible="state != 'draft'"/>
+                    <button string="Set to Draft" type="object"
+                            name="set_to_draft" invisible="state != 'done'"/>
+                    <field name="state" widget="statusbar" nolabel="1" readonly="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_title" name="title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="company_id" invisible="1"/>
+                            <field name="id" invisible="1"/>
+                            <field name="currency_id" invisible="0"/>
+                            <field name="account_id" readonly="state != 'draft'"/>
+                            <field name="reconcile_method"/>
+                            <field name="reconcile_date"/>
+                            <field name="reconcile_user_id"/>
+                        </group>
+                        <group>
+                            <field name="beginning_balance"/>
+                            <field name="ending_date" readonly="state != 'draft'"/>
+                            <field name="ending_balance" readonly="state != 'draft'"/>
+                            <field name="difference_balance"/>
+                            <button string="Create Expenses OR Revenue" type="object"
+                                    name="button_open_difference_reconcile_wizard" class="btn-primary" colspan="2"
+                                    invisible="state != 'draft'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Statements">
+                            <field name="account_move_line_ids" context="{'flex_bank_reconcile_id': id}"
+                                   domain="[('account_id','=',account_id),('date','&lt;=',ending_date), ('is_reconciled','=','unreconciled')]"
+                                   readonly="True">
+                                <tree create="false" delete="false" edit="false">
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="date"/>
+                                    <field name="move_name"/>
+                                    <field name="account_id" optional="hide"/>
+                                    <field name="partner_id" optional="hide"/>
+                                    <field name="name"/>
+                                    <field name="amount_currency"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="company_currency_id" invisible="1"/>
+                                    <field name="debit"/>
+                                    <field name="credit"/>
+                                    <field name="balance"/>
+                                    <field name="flex_compute" widget="boolean_toggle"
+                                           readonly="flex_bank_reconcile_state == 'done'"/>
+                                    <field name="is_reconciled" invisible="1"/>
+                                    <field name="flex_bank_reconcile_id" invisible="1"/>
+                                    <field name="flex_bank_reconcile_state" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Matched Statements" invisible="state == 'draft'">
+                            <field name="filtered_match_line_ids">
+                                <tree filter_domain="[('flex_compute','=',False)]">
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="company_currency_id" invisible="1"/>
+                                    <field name="date"/>
+                                    <field name="move_name"/>
+                                    <field name="account_id" optional="hide"/>
+                                    <field name="partner_id" optional="hide"/>
+                                    <field name="name"/>
+                                    <field name="amount_currency"/>
+                                    <field name="debit"/>
+                                    <field name="credit"/>
+                                    <field name="balance"/>
+                                    <field name="flex_compute" widget="boolean_toggle" readonly="1"/>
+                                    <field name="is_reconciled" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="UnMatched Statements" invisible="state == 'draft'">
+                            <field name="filtered_unmatch_line_ids">
+                                <tree>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="company_currency_id" invisible="1"/>
+                                    <field name="date"/>
+                                    <field name="move_name"/>
+                                    <field name="account_id" optional="hide"/>
+                                    <field name="partner_id" optional="hide"/>
+                                    <field name="name"/>
+                                    <field name="amount_currency"/>
+                                    <field name="debit"/>
+                                    <field name="credit"/>
+                                    <field name="balance"/>
+                                    <field name="flex_compute" widget="boolean_toggle" readonly="1"/>
+                                    <field name="is_reconciled" invisible="1"/>
+                                </tree>
+                            </field>
+
+                        </page>
+                        <page string="Settings">
+                            <group string="Accounts" readonly="state != 'draft'">
+                                <field name="reconcile_journal_id" readonly="state != 'draft'"/>
+                                <field name="reconcile_exp_account_id" readonly="state != 'draft'"/>
+                                <field name="reconcile_rev_account_id" readonly="state != 'draft'"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_account_flex_bank_search" model="ir.ui.view">
+        <field name="name">flex.bank.reconcile.search</field>
+        <field name="model">flex.bank.reconcile</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter string="Account" name="account" context="{'group_by':'account_id'}"/>
+
+                <filter string="Ending Date" name="ending_date_month" help="ending date of journal lines"
+                        context="{'group_by':'ending_date:month'}"/>
+                <separator/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_account_flex_reconcile" model="ir.actions.act_window">
+        <field name="name">Flex Bank Reconcile</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">flex.bank.reconcile</field>
+        <field name="view_mode">tree,form,search</field>
+        <field name="context">{'search_default_account': 1,'search_default_ending_date_month': 1}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to add a new After Sale
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_flex_bank_reconcile"
+              name="Flex Bank Reconcile"
+              sequence="20"
+              action="action_account_flex_reconcile"
+              parent="account.account_reports_legal_statements_menu"/>
+</odoo>

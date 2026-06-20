@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_farmer_cropping_request_form_inherit" model="ir.ui.view">
+            <field name="name">View Farmer Cropping Request Form Inherit</field>
+            <field name="model">farmer.cropping.request</field>
+            <field name="inherit_id" ref="odoo_agriculture.view_farmer_cropping_request_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="create_job_costing"
+                        string="Create Job Cost Sheet"  
+                        type="object" 
+                        class="oe_highlight" 
+                        invisible="state not in ('in_progress') or custom_job_costing_count == 1"/>
+                        <!-- attrs="{'invisible': ['|',('state', '!=', 'in_progress'),('custom_job_costing_count', '=', 1)]}"/> -->
+                </xpath>
+                <xpath expr="//sheet/div[@name='button_box']" position="inside">
+                    <button class="oe_stat_button" 
+                        icon="fa-book" 
+                        type="object" 
+                        name="open_job_costing" 
+                        invisible="custom_job_costing_count == 0">
+                        <!-- attrs="{'invisible': [('custom_job_costing_count', '=', 0)]}"> -->
+                        <field name="custom_job_costing_count" widget="statinfo" string="Cost Sheet"/>
+                    </button>
+                </xpath>
+           </field>
+        </record>
+    </data>
+</odoo>

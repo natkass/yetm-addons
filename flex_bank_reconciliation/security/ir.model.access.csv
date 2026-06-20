@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_flex_bank_reconcile,flex.bank.reconcile,model_flex_bank_reconcile,group_flex_bank_reconcile_user,1,1,1,1
+access_flex_bank_reconcile_difference_wizard,flex.reconcile.bank.difference,model_flex_reconcile_bank_difference,group_flex_bank_reconcile_user,1,1,1,1
+access_account_move_line_copy,account.move.line.copy,model_account_move_line_copy,group_flex_bank_reconcile_user,1,0,1,0
+
+

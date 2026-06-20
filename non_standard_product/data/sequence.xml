@@ -1,0 +1,8 @@
+<odoo>
+    <record id="seq_non_standard_product" model="ir.sequence">
+        <field name="name">Non-Standard Product</field>
+        <field name="code">non.standard.product</field>
+        <field name="prefix">NSP</field>
+        <field name="padding">4</field>
+    </record>
+</odoo>

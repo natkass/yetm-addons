@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Add MO link field to transfer request form -->
+    <record id="view_transfer_request_form_inherit_mrp" model="ir.ui.view">
+        <field name="name">transfer.request.form.inherit.mrp</field>
+        <field name="model">transfer.request</field>
+        <field name="inherit_id" ref="store_request.view_transfer_requester_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='purchase_request_id']" position="after">
+                <field name="mrp_production_id" readonly="1" invisible="not mrp_production_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

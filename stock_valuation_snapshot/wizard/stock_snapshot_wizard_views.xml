@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ==================== SNAPSHOT LINE VIEWS ==================== -->
+
+    <record id="view_stock_snapshot_line_tree" model="ir.ui.view">
+        <field name="name">stock.snapshot.line.tree</field>
+        <field name="model">stock.snapshot.line</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Valuation Snapshot" create="false" edit="false" delete="false">
+                <field name="product_code"/>
+                <field name="product_name"/>
+                <field name="location_name"/>
+                <field name="parent_location_name"/>
+                <field name="quantity" sum="Total Qty"/>
+                <field name="uom_name"/>
+                <field name="unit_cost"/>
+                <field name="amount" sum="Total Amount"/>
+                <field name="landed_cost" sum="Total Landed Cost"/>
+                <field name="total_amount" sum="Grand Total"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_stock_snapshot_line_search" model="ir.ui.view">
+        <field name="name">stock.snapshot.line.search</field>
+        <field name="model">stock.snapshot.line</field>
+        <field name="arch" type="xml">
+            <search string="Search Snapshot">
+                <field name="product_code"/>
+                <field name="product_name"/>
+                <field name="location_name"/>
+                <field name="parent_location_name"/>
+                <group expand="1" string="Group By">
+                    <filter string="Product" name="group_product" context="{'group_by': 'product_id'}"/>
+                    <filter string="Location" name="group_location" context="{'group_by': 'location_id'}"/>
+                    <filter string="Parent Location" name="group_parent_location" context="{'group_by': 'parent_location_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ==================== MOVEMENT LINE VIEWS ==================== -->
+
+    <record id="view_stock_movement_valuation_tree" model="ir.ui.view">
+        <field name="name">stock.movement.valuation.tree</field>
+        <field name="model">stock.movement.valuation</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Movement Valuation" create="false" edit="false" delete="false">
+                <field name="date"/>
+                <field name="reference"/>
+                <field name="move_type"/>
+                <field name="product_code"/>
+                <field name="product_name"/>
+                <field name="location_name"/>
+                <field name="parent_location_name"/>
+                <field name="quantity" decoration-danger="quantity &lt; 0"/>
+                <field name="uom_name"/>
+                <field name="unit_cost"/>
+                <field name="value" decoration-danger="value &lt; 0" sum="Total Value"/>
+                <field name="landed_cost_amount" decoration-danger="landed_cost_amount &lt; 0" sum="Total Landed Cost"/>
+                <field name="total_value" decoration-danger="total_value &lt; 0" sum="Total"/>
+                <field name="balance_qty"/>
+                <field name="balance_value"/>
+                <field name="balance_total"/>
+                <field name="origin" optional="hide"/>
+                <field name="partner_name" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_stock_movement_valuation_search" model="ir.ui.view">
+        <field name="name">stock.movement.valuation.search</field>
+        <field name="model">stock.movement.valuation</field>
+        <field name="arch" type="xml">
+            <search string="Search Movements">
+                <field name="product_code"/>
+                <field name="product_name"/>
+                <field name="reference"/>
+                <field name="location_name"/>
+                <field name="parent_location_name"/>
+                <field name="origin"/>
+                <field name="partner_name"/>
+                <filter string="Purchases" name="filter_purchase" domain="[('move_type', '=', 'purchase')]"/>
+                <filter string="Sales" name="filter_sale" domain="[('move_type', '=', 'sale')]"/>
+                <filter string="Internal" name="filter_internal" domain="[('move_type', '=', 'internal')]"/>
+                <filter string="Manufacturing" name="filter_manufacturing" domain="[('move_type', '=', 'manufacturing')]"/>
+                <filter string="Adjustments" name="filter_adjustment" domain="[('move_type', '=', 'adjustment')]"/>
+                <filter string="Landed Costs" name="filter_landed_cost" domain="[('move_type', '=', 'landed_cost')]"/>
+                <separator/>
+                <group expand="1" string="Group By">
+                    <filter string="Product" name="group_product" context="{'group_by': 'product_id'}"/>
+                    <filter string="Location" name="group_location" context="{'group_by': 'location_id'}"/>
+                    <filter string="Parent Location" name="group_parent_location" context="{'group_by': 'parent_location_id'}"/>
+                    <filter string="Move Type" name="group_type" context="{'group_by': 'move_type'}"/>
+                    <filter string="Date" name="group_date" context="{'group_by': 'date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ==================== SNAPSHOT WIZARD ==================== -->
+
+    <record id="view_stock_snapshot_wizard_form" model="ir.ui.view">
+        <field name="name">stock.snapshot.wizard.form</field>
+        <field name="model">stock.snapshot.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Stock Valuation Snapshot">
+                <group>
+                    <group>
+                        <field name="state" invisible="1"/>
+                        <field name="start_date" readonly="state != 'draft'"/>
+                        <field name="end_date" readonly="state != 'draft'"/>
+                        <field name="product_ids" widget="many2many_tags" readonly="state != 'draft'" options="{'no_create': True}"/>
+                        <field name="location_ids" widget="many2many_tags" readonly="state != 'draft'"/>
+                        <field name="product_filter" invisible="1"/>
+                        <field name="debug_conversions" invisible="1"/>
+                    </group>
+                </group>
+
+                <!-- Download section -->
+                <group invisible="state != 'excel'" string="Download Report">
+                    <field name="file_data" filename="file_name" readonly="1"/>
+                    <field name="file_name" invisible="1"/>
+                </group>
+
+                <footer>
+                    <!-- Draft state buttons -->
+                    <button name="action_view_snapshot"
+                            string="View in Odoo"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="action_export_excel"
+                            string="Export to Excel"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="state != 'draft'"/>
+
+                    <!-- Back button -->
+                    <button name="action_back_to_draft"
+                            string="Back"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="state == 'draft'"/>
+
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_stock_snapshot_wizard" model="ir.actions.act_window">
+        <field name="name">Stock Valuation Snapshot</field>
+        <field name="res_model">stock.snapshot.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- ==================== MOVEMENT WIZARD ==================== -->
+
+    <record id="view_stock_movement_wizard_form" model="ir.ui.view">
+        <field name="name">stock.movement.wizard.form</field>
+        <field name="model">stock.movement.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Stock Movement Valuation">
+                <group>
+                    <group>
+                        <field name="state" invisible="1"/>
+                        <field name="start_date" readonly="state != 'draft'"/>
+                        <field name="end_date" readonly="state != 'draft'"/>
+                        <field name="product_ids" widget="many2many_tags" readonly="state != 'draft'" options="{'no_create': True}"/>
+                        <field name="location_ids" widget="many2many_tags" readonly="state != 'draft'"/>
+                    </group>
+                </group>
+
+                <!-- Download section -->
+                <group invisible="state != 'excel'" string="Download Report">
+                    <field name="file_data" filename="file_name" readonly="1"/>
+                    <field name="file_name" invisible="1"/>
+                </group>
+
+                <footer>
+                    <!-- Draft state buttons -->
+                    <button name="action_view_movements"
+                            string="View in Odoo"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="action_export_excel"
+                            string="Export to Excel"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="state != 'draft'"/>
+
+                    <!-- Back button -->
+                    <button name="action_back_to_draft"
+                            string="Back"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="state == 'draft'"/>
+
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_stock_movement_wizard" model="ir.actions.act_window">
+        <field name="name">Stock Movement Valuation</field>
+        <field name="res_model">stock.movement.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- ==================== MENU ITEMS ==================== -->
+
+    <menuitem id="menu_stock_valuation_reports"
+              name="Valuation Reports"
+              parent="stock.menu_stock_root"
+              sequence="99"/>
+
+    <menuitem id="menu_stock_snapshot_wizard"
+              name="Stock Valuation Snapshot"
+              parent="menu_stock_valuation_reports"
+              action="action_stock_snapshot_wizard"
+              sequence="10"/>
+
+    <menuitem id="menu_stock_movement_wizard"
+              name="Stock Movement Valuation"
+              parent="menu_stock_valuation_reports"
+              action="action_stock_movement_wizard"
+              sequence="20"/>
+
+</odoo>

@@ -1,0 +1,348 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!-- <report
+            id="report_crop_scouting"
+            string="Crop Scouting"
+            model="farmer.cropping.scoting"
+            report_type="qweb-pdf"
+            name="agriculture_crop_scouting.template_report_crop_scouting"
+            file="agriculture_crop_scouting.template_report_crop_scouting"
+        />
+ -->
+
+        <record id="report_crop_scouting" model="ir.actions.report">
+            <field name="name">Crop Scouting</field>
+            <field name="model">farmer.cropping.scoting</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">agriculture_crop_scouting.template_report_crop_scouting</field>
+            <field name="report_file">agriculture_crop_scouting.template_report_crop_scouting</field>
+            <field name="binding_model_id" ref="model_farmer_cropping_scoting"/>
+            <field name="binding_type">report</field>
+        </record>
+
+
+        <template id="template_report_crop_scouting">
+            <t t-foreach="docs" t-as="doc">
+             <t t-call="web.html_container">
+              <t t-call="web.internal_layout">
+                <div class="page">
+                <div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td style="text-align: center;" colspan="4">
+                                    <strong><h2><span t-field="doc.number"/></h2></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Crop</strong>
+                                </td>
+                                <td>
+                                     <span t-field="doc.custom_crop_id.name"/>
+                                </td>
+                                <td>
+                                    <strong>Crop Request</strong>
+                                </td>
+                                <td>
+                                     <span t-field="doc.custom_crop_request_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Scouting Start Date</strong>
+                                </td>
+                                <td>
+                                     <span t-field="doc.start_date"/>
+                                </td>
+                                <td>
+                                    <strong>Scouting End Date</strong>
+                                </td>
+                                <td>
+                                     <span t-field="doc.end_date"/>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>Company:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.company_id"/>
+                                </td>
+                                <td>
+                                    <strong>Status:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.state"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                     <strong>Created By:</strong>
+                                </td>
+                                <td>
+                                     <span t-field="doc.create_uid"/>
+                                </td>
+                                <td>
+                                     <strong>Created Date:</strong>
+                                </td>
+                                <td>
+                                     <span t-field="doc.create_date"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                     <strong>Officer:</strong>
+                                </td>
+                                <td>
+                                     <span t-field="doc.user_id"/>
+                                </td>
+                                <td>
+                                     <strong>Responsible User:</strong>
+                                </td>
+                                <td>
+                                     <span t-field="doc.responsible_user_id"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                     <strong>Plant Height:</strong>
+                                </td>
+                                <td>
+                                     <span t-field="doc.plant_height"/>
+                                </td>
+                                <td>
+                                    <strong>Soil Tempurature:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.soil_temp_id"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                     <strong>Tempurature:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.temperature"/>
+                                    <span t-field="doc.temp_uom_id"/>
+                                </td>
+                                <td>
+                                    <strong>Air Tempurature:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.air_temp_id"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Wind:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.crop_wind_id"/> 
+                                </td>
+                                <td>
+                                     <strong>Soil Condition:</strong>
+                                </td>
+                                <td>
+                                     <span t-field="doc.soil_condition_id"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                     <strong>Processed By:</strong>
+                                </td>
+                                <td>
+                                     <span t-field="doc.process_uid"/>
+                                </td>
+                                <td>
+                                    <strong>Processed Date:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.processed_date"/>
+                                </td>
+                            </tr>
+                            <tr>
+                               <td>
+                                    <strong>Cloud Cover:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.crop_cloud_cover_id"/>
+                                </td>
+                                <td>
+                                    <strong>Project:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.project_id"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="page-break-after:always"/>
+                    <t t-set="insects" t-value="doc.crop_insects_ids"/>
+                            <tr>
+                                <td style="text-align: left;" colspan="4">
+                                    <strong><h3>Crop Insects</h3></strong>
+                                </td>
+                            </tr>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Insect</th>
+                                <th>Description</th>
+                                <th>Is it Causing Damage?</th>
+                                <th>Number Per Area Scouted</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>Total</th>
+                                <th>Percentage(%)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="crops_insects_tbody">
+                            <tr t-foreach="doc.crop_insects_ids" t-as="insect">
+                                <td><span t-field="insect.insect_id"/></td>
+                                <td><span t-field="insect.description"/></td>
+                                <td><span t-field="insect.causing_damage"/></td>
+                                <td class="text-right" ><span t-field="insect.no_of_area_scouted"/></td>
+                                <td><span t-field="insect.insect_col_1"/></td>
+                                <td><span t-field="insect.insect_col_2"/></td>
+                                <td><span t-field="insect.insect_col_3"/></td>
+                                <td><span t-field="insect.insect_col_4"/></td>
+                                <td><span t-field="insect.insect_col_5"/></td>
+                                <td><span t-field="insect.total"/></td>
+                                <td class="text-right"><span t-field="insect.percentage" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="page-break-after:always"/>
+                    <t t-set="dieases" t-value="doc.crop_dieases_ids"/>
+                            <tr>
+                                <td style="text-align: left;" colspan="4">
+                                    <strong><h3>Crop Dieases</h3></strong>
+                                </td>
+                            </tr>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Dieases</th>
+                                <th>Description</th>
+                                <th>Number of Plants Affected</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                            </tr>
+                        </thead>
+                        <tbody class="crops_dieases_tbody">
+                            <tr t-foreach="doc.crop_dieases_ids" t-as="dieases">
+                                <td><span t-field="dieases.dieases_id"/></td>
+                                <td><span t-field="dieases.description"/></td>
+                                <td class="text-right"><span t-field="dieases.no_of_plant_affected"/></td>
+                                <td><span t-field="dieases.dieases_col_1"/></td>
+                                <td><span t-field="dieases.dieases_col_2"/></td>
+                                <td><span t-field="dieases.dieases_col_3"/></td>
+                                <td><span t-field="dieases.dieases_col_4"/></td>
+                                <td><span t-field="dieases.dieases_col_5"/></td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="page-break-after:always"/>
+                    <t t-set="weeds" t-value="doc.crop_weeds_ids"/>
+                            <tr>
+                                <td style="text-align: left;" colspan="4">
+                                    <strong><h3>Crop Weeds</h3></strong>
+                                </td>
+                            </tr>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Weed</th>
+                                <th>Description</th>
+                                <th>Number Per Square Yard</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>Average Number</th>
+                            </tr>
+                        </thead>
+                        <tbody class="crops_weeds_tbody">
+                            <tr t-foreach="doc.crop_weeds_ids" t-as="weed">
+                                <td><span t-field="weed.weed_id"/></td>
+                                <td><span t-field="weed.description"/></td>
+                                <td class="text-right"><span t-field="weed.no_per_square_yard"/></td>
+                                <td><span t-field="weed.weed_col_1"/></td>
+                                <td><span t-field="weed.weed_col_2"/></td>
+                                <td><span t-field="weed.weed_col_3"/></td>
+                                <td><span t-field="weed.weed_col_4"/></td>
+                                <td><span t-field="weed.weed_col_5"/></td>
+                                <td class="text-right"><span t-field="weed.avg_number"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="page-break-after:always"/>
+                    <t t-set="plant_populations" t-value="doc.crop_plant_population_ids"/>
+                            <tr>
+                                <td style="text-align: left;" colspan="4">
+                                    <strong><h3>Crop Plant Population</h3></strong>
+                                </td>
+                            </tr>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Plant Population</th>
+                                <th>Description</th>
+                                <th>Number of Good Plants</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>Avg. Pop.</th>
+                            </tr>
+                        </thead>
+                        <tbody class="crops_plant_population_tbody">
+                            <tr t-foreach="doc.crop_plant_population_ids" t-as="plant_population">
+                                <td><span t-field="plant_population.plant_population_id"/></td>
+                                <td><span t-field="plant_population.description"/></td>
+                                <td class="text-right"><span t-field="plant_population.no_of_good_plants"/></td>
+                                <td><span t-field="plant_population.plant_population_col_1"/></td>
+                                <td><span t-field="plant_population.plant_population_col_2"/></td>
+                                <td><span t-field="plant_population.plant_population_col_3"/></td>
+                                <td><span t-field="plant_population.plant_population_col_4"/></td>
+                                <td><span t-field="plant_population.plant_population_col_5"/></td>
+                                <td class="text-right"><span t-field="plant_population.avg_populations"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                        <tr>
+                        <td style="text-align: left;" colspan="4">
+                            <strong><h3>Description and Comments:</h3></strong>
+                        </td>
+                        </tr>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <td><span t-field="doc.description"></span></td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </t>
+</t>
+</template>
+</data>
+</odoo>

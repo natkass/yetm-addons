@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_snapshot_wizard_user,stock.snapshot.wizard.user,model_stock_snapshot_wizard,stock.group_stock_user,1,1,1,1
+access_stock_snapshot_wizard_manager,stock.snapshot.wizard.manager,model_stock_snapshot_wizard,stock.group_stock_manager,1,1,1,1
+access_stock_snapshot_line_user,stock.snapshot.line.user,model_stock_snapshot_line,stock.group_stock_user,1,1,1,1
+access_stock_snapshot_line_manager,stock.snapshot.line.manager,model_stock_snapshot_line,stock.group_stock_manager,1,1,1,1
+access_stock_movement_wizard_user,stock.movement.wizard.user,model_stock_movement_wizard,stock.group_stock_user,1,1,1,1
+access_stock_movement_wizard_manager,stock.movement.wizard.manager,model_stock_movement_wizard,stock.group_stock_manager,1,1,1,1
+access_stock_movement_valuation_user,stock.movement.valuation.user,model_stock_movement_valuation,stock.group_stock_user,1,1,1,1
+access_stock_movement_valuation_manager,stock.movement.valuation.manager,model_stock_movement_valuation,stock.group_stock_manager,1,1,1,1

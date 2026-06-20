@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_move_line_form_inherit" model="ir.ui.view">
+        <field name="name">account.move.line.form.inherit</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree"/>
+        <field name="arch" type="xml">
+            <field name="credit" position="after">
+                <field name="flex_bank_reconcile" invisible="1"/>
+                <field name="is_reconciled" invisible="flex_bank_reconcile == False"/>
+            </field>
+        </field>
+    </record>
+</odoo>

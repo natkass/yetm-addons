@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="weather_forecast_form_view">
+            <field name="name">weather.forecast.form</field>
+            <field name="model">weather.forecast</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="weather_forecast_tree_view">
+            <field name="name">weather.forecast.tree</field>
+            <field name="model">weather.forecast</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_weather_forecast" model="ir.actions.act_window">
+            <field name="name">Weather Forecast</field>
+            <field name="res_model">weather.forecast</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem name="Weather Forecast" id="sub_menu_weather_forecast" parent="odoo_agriculture.configuration_topmenu" sequence="16" action="action_weather_forecast"/>
+    </data>
+</odoo>

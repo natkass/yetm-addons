@@ -1,0 +1,34 @@
+<odoo>
+    <record id="view_sale_order_form_inherit_service_charge" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.service.charge</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="pos_config_id" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="pos_etta_sale_order_tree_inherit" model="ir.ui.view">
+        <field name="name">sale.order.tree.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='%(sale.action_view_sale_advance_payment_inv)d']" position="replace">
+            </xpath>
+        </field>
+    </record>
+
+    <!-- <record id="pos_etta_view_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@id='create_invoice']" position="replace">
+            </xpath>
+            <xpath expr="//header/button[@id='create_invoice_percentage']" position="replace">
+            </xpath>
+        </field>
+    </record> -->
+
+</odoo>

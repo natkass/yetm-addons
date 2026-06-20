@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="0">
+    <!-- journals.xml -->
+    <record id="stock_journal" model="account.journal">
+        <field name="name">Stock Journal</field>
+        <field name="type">general</field>
+        <field name="code">STKJ</field>
+    </record>
+    <record id="product_category_3" model="product.category">
+        <field name="parent_id" ref="product.product_category_1"/>
+        <field name="name">Logistics Services</field>
+        <field name="property_cost_method">fifo</field>
+        <field name="property_valuation">real_time</field>
+        <field name="property_stock_journal" ref="stock_journal"/>
+    </record>
+    <record id="customs" model="product.product">
+        <field name="type">service</field>
+        <field name="name">Customs duties</field>
+        <field name="categ_id" ref="product_category_3"/>
+        <field name="type">service</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field name="landed_cost_ok">True</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="company_id" eval="[]"/>
+        <field name="taxes_id" eval="[]"/>
+        <field name="supplier_taxes_id" eval="[]"/>
+    </record>
+    <record id="clearance" model="product.product">
+        <field name="type">service</field>
+        <field name="name">Clearance</field>
+        <field name="categ_id" ref="product_category_3"/>
+        <field name="type">service</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field name="landed_cost_ok">True</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="company_id" eval="[]"/>
+        <field name="taxes_id" eval="[]"/>
+        <field name="supplier_taxes_id" eval="[]"/>
+    </record>
+    <record id="stevedoring" model="product.product">
+        <field name="type">service</field>
+        <field name="name">Stevedoring</field>
+        <field name="categ_id" ref="product_category_3"/>
+        <field name="type">service</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field name="landed_cost_ok">True</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="company_id" eval="[]"/>
+        <field name="taxes_id" eval="[]"/>
+        <field name="supplier_taxes_id" eval="[]"/>
+    </record>
+    <record id="demurrage" model="product.product">
+        <field name="type">service</field>
+        <field name="name">Demurrage</field>
+        <field name="categ_id" ref="product_category_3"/>
+        <field name="type">service</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field name="landed_cost_ok">True</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="company_id" eval="[]"/>
+        <field name="taxes_id" eval="[]"/>
+        <field name="supplier_taxes_id" eval="[]"/>
+    </record>
+    <record id="storage" model="product.product">
+        <field name="type">service</field>
+        <field name="name">Storage</field>
+        <field name="categ_id" ref="product_category_3"/>
+        <field name="type">service</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field name="landed_cost_ok">True</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="company_id" eval="[]"/>
+        <field name="taxes_id" eval="[]"/>
+        <field name="supplier_taxes_id" eval="[]"/>
+    </record>
+    <record id="bank" model="product.product">
+        <field name="type">service</field>
+        <field name="name">Bank Charges</field>
+        <field name="categ_id" ref="product_category_3"/>
+        <field name="type">service</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field name="landed_cost_ok">True</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="company_id" eval="[]"/>
+        <field name="taxes_id" eval="[]"/>
+        <field name="supplier_taxes_id" eval="[]"/>
+    </record>
+    <record id="miscellaneous" model="product.product">
+        <field name="type">service</field>
+        <field name="name">Miscellaneous</field>
+        <field name="categ_id" ref="product_category_3"/>
+        <field name="type">service</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field name="landed_cost_ok">True</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="company_id" eval="[]"/>
+        <field name="taxes_id" eval="[]"/>
+        <field name="supplier_taxes_id" eval="[]"/>
+    </record>
+    <record id="royalty_fee" model="product.product">
+        <field name="type">service</field>
+        <field name="name">Royalty fee</field>
+        <field name="categ_id" ref="product_category_3"/>
+        <field name="type">service</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field name="landed_cost_ok">True</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="company_id" eval="[]"/>
+        <field name="taxes_id" eval="[]"/>
+        <field name="supplier_taxes_id" eval="[]"/>
+    </record>
+    <record id="freight" model="product.product">
+        <field name="type">service</field>
+        <field name="name">Freight</field>
+        <field name="categ_id" ref="product_category_3"/>
+        <field name="type">service</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field name="landed_cost_ok">True</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="company_id" eval="[]"/>
+        <field name="taxes_id" eval="[]"/>
+        <field name="supplier_taxes_id" eval="[]"/>
+    </record>
+    <record id="transit" model="product.product">
+        <field name="type">service</field>
+        <field name="name">Transit</field>
+        <field name="categ_id" ref="product_category_3"/>
+        <field name="type">service</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field name="landed_cost_ok">True</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="company_id" eval="[]"/>
+        <field name="taxes_id" eval="[]"/>
+        <field name="supplier_taxes_id" eval="[]"/>
+    </record>
+    <record id="transport" model="product.product">
+        <field name="type">service</field>
+        <field name="name">Transport</field>
+        <field name="categ_id" ref="product_category_3"/>
+        <field name="type">service</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field name="landed_cost_ok">True</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="company_id" eval="[]"/>
+        <field name="taxes_id" eval="[]"/>
+        <field name="supplier_taxes_id" eval="[]"/>
+    </record>
+    <record id="transport_cfr" model="product.product">
+        <field name="type">service</field>
+        <field name="name">CFR Transport</field>
+        <field name="categ_id" ref="product_category_3"/>
+        <field name="type">service</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field name="landed_cost_ok">True</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="company_id" eval="[]"/>
+        <field name="taxes_id" eval="[]"/>
+        <field name="supplier_taxes_id" eval="[]"/>
+    </record>
+    <record id="insurance" model="product.product">
+        <field name="type">service</field>
+        <field name="name">Insurance</field>
+        <field name="categ_id" ref="product_category_3"/>
+        <field name="type">service</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field name="landed_cost_ok">True</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="company_id" eval="[]"/>
+        <field name="taxes_id" eval="[]"/>
+        <field name="supplier_taxes_id" eval="[]"/>
+    </record>
+    <record id="shipping" model="product.product">
+        <field name="type">service</field>
+        <field name="name">DHL/Fedex/UPS</field>
+        <field name="categ_id" ref="product_category_3"/>
+        <field name="type">service</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field name="landed_cost_ok">True</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="company_id" eval="[]"/>
+        <field name="taxes_id" eval="[]"/>
+        <field name="supplier_taxes_id" eval="[]"/>
+    </record>
+    <record id="other" model="product.product">
+        <field name="type">service</field>
+        <field name="name">Others</field>
+        <field name="categ_id" ref="product_category_3"/>
+        <field name="type">service</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field name="landed_cost_ok">True</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="company_id" eval="[]"/>
+        <field name="taxes_id" eval="[]"/>
+        <field name="supplier_taxes_id" eval="[]"/>
+    </record>
+    <record id="royalty_fee_info" model="product.product">
+        <field name="type">service</field>
+        <field name="name">Royalty Fee Info</field>
+        <field name="categ_id" ref="product_category_3"/>
+        <field name="type">service</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field name="landed_cost_ok">True</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="company_id" eval="[]"/>
+        <field name="taxes_id" eval="[]"/>
+        <field name="supplier_taxes_id" eval="[]"/>
+    </record>
+    <record model="res.partner" id="customs_partner">
+        <field name="name">Customs</field>
+        <field name="is_company" eval="True"/>
+    </record>
+</odoo>

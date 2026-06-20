@@ -1,0 +1,279 @@
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+           <h2 class="oe_slogan" style="color:CRIMSON;"><b>Crop Scouting for Agriculture</h2>
+           <p class="oe_mt32"  style="color:crimson;">
+           <p style="color:crimson;">This app add feature of Crop Scouting for Agriculture.</p>
+           <br><br><b style="color:CRIMSON;">Main Features</b><br>
+          <ul>  
+                 <li style="color:olive;">Agriculture/Scoutings : Create Crop Scouting</li>
+                 <li style="color:olive;">Agriculture/Soil Temperatures : Add Soil Temperatures</li>
+                 <li style="color:olive;">Agriculture/Soil Conditions : Add Soil Conditions</li>
+                 <li style="color:olive;">Agriculture/Winds : Add Winds</li>
+                 <li style="color:olive;">Agriculture/Air Temperatures : Add Air Temperatures</li>
+                 <li style="color:olive;">Agriculture/Cloud Covers : Add Cloud Covers</li>
+                 <li style="color:olive;">Agriculture/Scouting Insects : Add Scouting Insects</li>
+                 <li style="color:olive;">Agriculture/Scouting Dieases : Add Scouting Dieases</li>
+                 <li style="color:olive;">Agriculture/Scouting Weeds : Add Scouting Weeds</li>
+                 <li style="color:olive;">Agriculture/Scouting Plant Populations : Add Plant Populations</li>
+                 <li style="color:olive;">Agriculture/Crop Requests : Smart Button of Scoutings on Crop Requests/li>
+                 <li style="color:olive;">Agriculture/Crops : Smart Button of Scoutings on Crops</li>
+                 <li style="color:olive;">Agriculture/Scoutings : Print PDF - Scoutings Report.</li>
+                 <li style="color:olive;">For more details please watch below screenshots and video.</li>
+         </ul>
+          </p>
+      <p>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Crop Scoutings List View</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="scoutlist.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Crop Scoutings Form View</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="sform1.png">
+           <img src="sform2.png">
+           <img src="sform3.png">
+           <img src="sform4.png">
+           <img src="sform5.png">
+           <img src="other.png">
+           <img src="int.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Crop Scoutings Calendar View</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="scoutcalendarview.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Crop Scoutings Pivot View</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="scoutpivotview.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Crop Scoutings Graph(Bar Chart) View</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="scoutinggraphview.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Crop Scoutings Graph(Line Chart) View</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="scoutinggraph2.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Crop Scoutings Graph(Pie Chart) View</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="scoutinggraph3.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Configuration Menus</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="config_menus.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Soil Tempuratures List View</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="soiltemplist.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Soil Conditions List View</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="soilconditionlist.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Winds List View</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="windslist.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Air Temperatures List View</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="airtemperatureslist.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Cloud Covers List View</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="cloudcoverlist.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Scouting Insects List View</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="Scouting Insectslist.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Scouting Dieases List View</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="Scouting Dieaseslist.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Scouting Weeds List View</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="Scouting Weeds list.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">SCouting Plant Populations List View</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="Scouting Plant Populationlist.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Scoutings Smart Button On Crops</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="smartbuttoncrop.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Scouting View From Smart Button</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="smartbuttonlist.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Scoutings Smart Button On Crop Requests</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="scoutingcropreq.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Scouting View From Smart Button</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="cropscoutinglistsmart.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Crop Scouting Report</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="rprt1.png">
+           <img src="rprt2.png">
+           <img src="report.png">
+           <img src="reporta4.png">
+           <img src="rprt5.png">
+           <img src="rprt6.png">
+           <img src="rprt7.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan">
+            <strong><font style="color:#2dd280;" class="text-epsilon">Contact / Support<br/></font></strong>
+            <strong>
+                <font style="color:crimson;" class="text-epsilon">Introducing</font>
+                <font style="color:crimson;" class="text-epsilon">Probuse Consulting Services Pvt. Ltd.</font>
+            </strong>
+        </h2>
+        <div class="oe_span6">
+           <div class="mt32 col-md-10">
+               <div class="oe_picture" style="margin: 25px 10%;">
+                   <a href="http://www.probuse.com/" target='new'>
+                       <img src="logo.png">
+                   </a>
+               </div>
+               <p class="oe_mt32">
+                   <font style="color:crimson;">If you need any help or want more additional features, you may contact us through:</font><br/>
+                   <font style="color:crimson;">Email: <a href="contact@probuse.com">contact@probuse.com</a> <br/>
+                   <font style="color:crimson;">Website: </font><a href="http://www.probuse.com/" target='new'><u>www.probuse.com</u></a> <br/>
+                   <font style="color:crimson;">Skype: mustufa_probuse</font><br/>
+               </p>
+               <p>
+                    <h2>
+                        <a href="https://www.facebook.com/probusecs" target="new">
+                          <i class="fa fa-facebook-square" style="font-size:38px;"></i>
+                        </a>
+                        <a href="https://twitter.com/mustufa_odoo" target="new">
+                          <i class="fa fa-twitter" style="font-size:38px;"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/mustufa-rangwala-odoo-openerp-0a46777/" target="new">
+                          <i class="fa fa-linkedin" style="font-size:38px;"></i>
+                        </a>
+                        <a href="https://www.youtube.com/channel/UCHlyoC4khP44M1cOCJXo2FQ" target="new">
+                          <i class="fa fa-youtube-play" style="font-size:38px;"></i>
+                        </a>
+                        <a href="https://plus.google.com/u/0/113284573788891837715/posts" target="new" rel="publisher">
+                          <i class="fa fa-google-plus-square" style="font-size:38px;"></i>
+                        </a>
+                  </h2>
+                </p>
+           </div>
+        </div>
+        <div class="mt32 col-md-5">
+              <p style="text-align: justify;">
+                    <font class="text-epsilon" style="color:crimson;">Probuse Consulting Service Pvt Ltd is an Software and Web development specialist which offers complete business application together. We are well experienced to provide a face for your business on the software and Internet level.</font>
+              </p>
+              <p style="text-align: justify;">
+                <font class="text-epsilon" style="color:crimson">Probuse Consulting Service Pvt Ltd is a specialist in Odoo/OpenERP services and could give your business open source hand to drive.</font>
+              </p>
+              <h3 class="o_animate o_anim_bounce_in" style="text-align: left; animation-play-state: paused;">
+                    <font style="font-size: 18px;color:#ff8000;" class="text-epsilon"><strong>Our Services</strong></font>
+              </h3>
+              <ul style="list-style-type:square">
+                    <a href="http://www.probuse.com/page/odoo-implementation" target="new"><li list-style-type: "*";><p style="text-align: left; color:crimson;">Odoo Implementation</p></li></a>
+                    <a href="http://www.probuse.com/page/odoo-support" target="new"><li><p style="text-align: left; color:crimson;">Odoo Support</p></li></a>
+                    <a href="http://www.probuse.com/page/odoo-customization" target="new"><li><p style="text-align: left; color:crimson;">Odoo Customization</p></li></a>
+                    <a href="http://www.probuse.com/page/odoo-migration" target="new"><li><p style="text-align: left; color:crimson;">Odoo Migration</p></li></a>
+                    <a href="http://www.probuse.com/page/odoo-training" target="new"><li><p style="text-align: left; color:crimson;">Odoo Training</p></li></a>
+              </ul>
+        </div>
+    </div>
+</section>
+
+

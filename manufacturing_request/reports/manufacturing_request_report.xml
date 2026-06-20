@@ -1,0 +1,145 @@
+<odoo>
+    <template id="report_manufacturing_request_document">
+        <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="o">
+                <main class="o_report_layout_standard">
+                    <div class="page">
+
+                        
+                        <t t-if="o.state == 'submitted'">
+                            <div style="
+                                position: fixed;
+                                top: 80%;
+                                left: 20%;
+                                transform: rotate(30deg);
+                                transform-origin: center;
+                                font-size: 100px;
+                                font-weight: bold;
+                                color: rgba(0,0,0,0.1);                                
+                                z-index: -1;
+                                pointer-events: none;
+                                white-space: nowrap;
+                                text-align: center;">
+                                SUBMITTED
+                            </div>
+                        </t>
+                        
+                        <t t-if="o.state == 'verified'">
+                            <div style="
+                                position: fixed;
+                                top: 50%;
+                                left: 20%;
+                                transform: rotate(45deg);
+                                transform-origin: center;
+                                font-size: 100px;
+                                font-weight: bold;
+                                color: rgba(0,0,0,0.1);                                
+                                z-index: -1;
+                                pointer-events: none;
+                                white-space: nowrap;
+                                text-align: center;">
+                                VERIFIED
+                            </div>
+                        </t>
+                        
+                        <t t-if="o.state == 'manufactured'">
+                            <div style="
+                                position: fixed;
+                                top: 50%;
+                                left: 20%;
+                                transform: rotate(45deg);
+                                transform-origin: center;
+                                font-size: 100px;
+                                font-weight: bold;
+                                color: rgba(0,0,0,0.1);                                
+                                z-index: -1;
+                                pointer-events: none;
+                                white-space: nowrap;
+                                text-align: center;">
+                                MANUFACTURED
+                            </div>
+                        </t>
+
+                        <t t-if="o.state == 'sent'">
+                            <div style="
+                                position: fixed;
+                                top: 50%;
+                                left: 7%;
+                                transform: rotate(45deg);
+                                transform-origin: center;
+                                font-size: 100px;
+                                font-weight: bold;
+                                color: rgba(0,0,0,0.1);                                
+                                z-index: -1;
+                                pointer-events: none;
+                                white-space: nowrap;
+                                text-align: center;">
+                                SENT TO BRANCH
+                            </div>
+                        </t>
+                        
+                        <t t-if="o.state == 'delivered'">
+                            <div style="
+                                position: fixed;
+                                top: 50%;
+                                left: 20%;
+                                transform: rotate(45deg);
+                                transform-origin: center;
+                                font-size: 100px;
+                                font-weight: bold;
+                                color: rgba(0,0,0,0.1);                                
+                                z-index: -1;
+                                pointer-events: none;
+                                white-space: nowrap;
+                                text-align: center;">
+                                DELIVERED
+                            </div>
+                        </t>
+
+                        <h2>Manufacturing Request</h2>
+                        <h2><strong><span t-field="o.name"/></strong></h2>                        
+                        <p><strong>Sales Ref:</strong> <span t-field="o.sale_id"/></p>
+                        <p><strong>Customer:</strong> <span t-field="o.partner_id"/></p>
+                        <p><strong>Promise Date:</strong> <span t-field="o.promise_date"/></p>
+                        <p><strong>Responsible:</strong> <span t-field="o.responsible_id"/></p>
+
+                        <h3>Products</h3>
+                        <table class="table table-sm o_main_table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>UoM</th>
+                                    <th>Remark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.line_ids" t-as="line">
+                                    <td><span t-field="line.product_id.display_name"/></td>
+                                    <td class="text-center"><span t-field="line.product_uom_qty"/></td>
+                                    <td class="text-center"><span t-field="line.product_uom.name"/></td>
+                                    <td><span t-field="line.remark"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </main>
+            </t>
+        </t>
+    </template>
+
+    
+    <data>
+        <record id="action_report_manufacturing_request" model="ir.actions.report">
+            <field name="name">Production Request</field>
+            <field name="model">manufacturing.request</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">manufacturing_request.report_manufacturing_request_document</field>
+            <field name="report_file">manufacturing_request.report_manufacturing_request_document</field>
+            <field name="print_report_name">'Production Request - %s' % object.name</field>
+            <field name="binding_model_id" ref="model_manufacturing_request"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+    
+</odoo>

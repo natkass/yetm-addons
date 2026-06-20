@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_mrp_store_request_wizard_form" model="ir.ui.view">
+        <field name="name">mrp.store.request.wizard.form</field>
+        <field name="model">mrp.store.request.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Store Request">
+                <sheet>
+                    <group>
+                        <field name="mrp_production_id" readonly="1"/>
+                        <field name="finished_product_id" readonly="1"/>
+                        <field name="picking_type_id" options="{'no_open': True}"/>
+                    </group>
+                    <field name="line_ids">
+                        <tree editable="bottom">
+                            <field name="product_id" column_invisible="1"/>
+                            <field name="finished_product_name" column_invisible="1"/>
+                            <field name="component_display" string="Component / Finished Product" widget="html" readonly="1"/>
+                            <field name="qty"/>
+                            <field name="uom_id" optional="hide"/>
+                            <field name="picking_type_id" options="{'no_open': True}"/>
+                        </tree>
+                    </field>
+                </sheet>
+                <footer>
+                    <button name="action_create_requests"
+                            string="Create Request"
+                            type="object"
+                            class="btn-primary"/>
+                    <button string="Discard" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_mrp_store_request_wizard" model="ir.actions.act_window">
+        <field name="name">Create Store Request</field>
+        <field name="res_model">mrp.store.request.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Dukem Foam Quilting Production Picking Type -->
+        <record id="picking_type_dukem_foam" model="stock.picking.type">
+            <field name="name">Foam Quilting Production</field>
+            <field name="code">mrp_operation</field>
+            <field name="sequence_code">DKF</field>
+            <field name="sequence">10</field>
+            <field name="use_create_lots">False</field>
+            <field name="use_existing_lots">True</field>
+            <field name="default_location_src_id" ref="stock.stock_location_stock"/>
+            <field name="default_location_dest_id" ref="stock.stock_location_stock"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+        </record>
+        
+        <!-- Dukem Bonded Quilting Production Picking Type -->
+        <record id="picking_type_dukem_bonded" model="stock.picking.type">
+            <field name="name">Bonded Quilting Production</field>
+            <field name="code">mrp_operation</field>
+            <field name="sequence_code">DKB</field>
+            <field name="sequence">20</field>
+            <field name="use_create_lots">False</field>
+            <field name="use_existing_lots">True</field>
+            <field name="default_location_src_id" ref="stock.stock_location_stock"/>
+            <field name="default_location_dest_id" ref="stock.stock_location_stock"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+        </record>
+        
+        <!-- Hailegarment Ifoam Production Picking Type -->
+        <record id="picking_type_hailegarment" model="stock.picking.type">
+            <field name="name">Hailegarment Ifoam Production</field>
+            <field name="code">mrp_operation</field>
+            <field name="sequence_code">HGI</field>
+            <field name="sequence">30</field>
+            <field name="use_create_lots">False</field>
+            <field name="use_existing_lots">True</field>
+            <field name="default_location_src_id" ref="stock.stock_location_stock"/>
+            <field name="default_location_dest_id" ref="stock.stock_location_stock"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+        </record>
+        
+        <!-- Kera Ifoam Manufacturing Picking Type -->
+        <record id="picking_type_kera_ifoam" model="stock.picking.type">
+            <field name="name">Kera Ifoam Manufacturing</field>
+            <field name="code">mrp_operation</field>
+            <field name="sequence_code">KIM</field>
+            <field name="sequence">40</field>
+            <field name="use_create_lots">False</field>
+            <field name="use_existing_lots">True</field>
+            <field name="default_location_src_id" ref="stock.stock_location_stock"/>
+            <field name="default_location_dest_id" ref="stock.stock_location_stock"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+        </record>
+    </data>
+</odoo>
