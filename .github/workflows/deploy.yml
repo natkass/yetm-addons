@@ -126,7 +126,54 @@ jobs:
             fi
           done
           echo "✅ All XML files are valid."
+          
+      # ==================== PERFORMANCE TEST (IMPORT/COMPILE TIME) ====================
+      - name: Measure Python compile/import performance
+        run: |
+          echo "Measuring Python compile performance..."
 
+          python3 - <<'EOF'
+          import time
+          import os
+          import sys
+
+          THRESHOLD_SECONDS = 10  # adjust based on repo size
+
+          start = time.perf_counter()
+
+          file_count = 0
+
+          for root, _, files in os.walk("."):
+              for f in files:
+                  if f.endswith(".py") and ".git" not in root:
+                      path = os.path.join(root, f)
+                      file_count += 1
+
+                      try:
+                          with open(path, "r", encoding="utf-8") as fp:
+                              source = fp.read()
+                          compile(source, path, "exec")
+                      except Exception as e:
+                          print(f"❌ Failed compiling {path}: {e}")
+                          sys.exit(1)
+
+          duration = time.perf_counter() - start
+
+          print("\n================ PERFORMANCE REPORT ================")
+          print(f"Python files scanned : {file_count}")
+          print(f"Total compile time   : {duration:.4f} seconds")
+
+          avg = duration / file_count if file_count else 0
+          print(f"Average per file     : {avg:.6f} seconds")
+
+          print("====================================================")
+
+          if duration > THRESHOLD_SECONDS:
+              print(f"❌ Performance regression: exceeded {THRESHOLD_SECONDS}s")
+              sys.exit(1)
+
+          print("✅ Performance within acceptable limits")
+          EOF
   # -----------------------------------------------------------------------
   # Deploy job — Uncomment when CI is stable
   # -----------------------------------------------------------------------
