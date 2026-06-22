@@ -21,12 +21,11 @@ jobs:
       # ==================== MANIFEST VALIDATION ====================
       - name: Validate Odoo Manifests
         run: |
-          python3 <<EOF
+          python3 <<'EOF'
           import ast
           import os
           import sys
           import re
-          from pathlib import Path
 
           REQUIRED_KEYS = {"name", "depends"}
           RECOMMENDED_KEYS = {"version", "author", "license", "category", "description"}
@@ -38,7 +37,6 @@ jobs:
           for root, dirs, files in os.walk("."):
               if "__manifest__.py" in files:
                   path = os.path.join(root, "__manifest__.py")
-                  module_name = os.path.basename(root)
 
                   try:
                       with open(path) as f:
@@ -60,16 +58,16 @@ jobs:
 
                       # Version format
                       if "version" in data:
-                          if not isinstance(data["version"], str) or not VERSION_PATTERN.match(data["version"]):
-                              warnings.append(f"{path}: version should follow format '16.0.1.0.0' (got: {data['version']})")
+                          ver = data["version"]
+                          if not isinstance(ver, str) or not VERSION_PATTERN.match(ver):
+                              warnings.append(f"{path}: version should follow format '16.0.1.0.0' (got: {ver})")
                       else:
                           warnings.append(f"{path}: missing 'version' key (recommended)")
 
                       # Depends should be list
-                      if "depends" in data and not isinstance(data["depends"], list):
+                      if "depends" in data and not isinstance(data.get("depends"), list):
                           errors.append(f"{path}: 'depends' must be a list")
 
-                      # Basic type checks
                       if not isinstance(data.get("name", ""), str):
                           errors.append(f"{path}: 'name' must be a string")
 
@@ -78,13 +76,13 @@ jobs:
                   except Exception as e:
                       errors.append(f"{path}: failed to parse - {e}")
 
-          # Check __init__.py exists in modules
+          # Check __init__.py
           for root, dirs, files in os.walk("."):
               if "__manifest__.py" in files and "__init__.py" not in files:
                   warnings.append(f"{root}: missing __init__.py")
 
           # Summary
-          print("\n" + "="*60)
+          print("\n" + "="*70)
           if warnings:
               print("⚠️  WARNINGS:")
               for w in warnings:
@@ -104,36 +102,30 @@ jobs:
       - name: Check Python syntax in all addons
         run: |
           echo "Checking Python syntax..."
-          find . -name "*.py" ! -path "./.git/*" | while read file; do
-            if ! python3 -m py_compile "$file"; then
-              echo "❌ Syntax error in: $file"
-              exit 1
-            fi
-          done
+          find . -name "*.py" ! -path "./.git/*" -print0 | xargs -0 -n1 python3 -m py_compile || exit 1
           echo "✅ All Python files have valid syntax."
 
-      # ==================== XML VALIDATION ====================
+      # ==================== XML VALIDATION (Fixed) ====================
       - name: Validate XML files
         run: |
           echo "Checking XML syntax..."
-          if find . -name "*.xml" ! -path "./.git/*" | grep -q .; then
-            find . -name "*.xml" ! -path "./.git/*" | while read file; do
-              if ! python3 -c "
-                import sys
-                from lxml import etree
-                try:
-                    etree.parse('$file')
-                    print('✅ $file')
-                except Exception as e:
-                    print('❌ XML error in $file:', e)
-                    sys.exit(1)
-                              "; then
-                                exit 1
-                              fi
-                            done
-                          else
-                            echo "No XML files found."
-                          fi
+          if ! find . -name "*.xml" ! -path "./.git/*" | grep -q .; then
+            echo "No XML files found."
+            exit 0
+          fi
+
+          # Use xmllint (more reliable than inline python -c)
+          sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends libxml2-utils
+
+          find . -name "*.xml" ! -path "./.git/*" | while read -r file; do
+            if ! xmllint --noout "$file" 2>&1; then
+              echo "❌ XML error in: $file"
+              exit 1
+            else
+              echo "✅ $file"
+            fi
+          done
+          echo "✅ All XML files are valid."
 
   # -----------------------------------------------------------------------
   # Deploy job — Uncomment when CI is stable
