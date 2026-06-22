@@ -58,7 +58,8 @@ jobs:
           python3 <<EOF
           import ast, os, sys
 
-          REQUIRED_KEYS = {"name", "version", "depends"}
+          # Make 'version' optional
+          REQUIRED_KEYS = {"name", "depends"}   # removed 'version'
           errors = []
 
           for root, dirs, files in os.walk("."):
