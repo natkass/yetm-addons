@@ -74,7 +74,7 @@
                     />
                     <div
                         class="alert alert-info text-center o_form_header"
-                        invisible="('|', '|',('&', active == True, active_partner == True), ('&', active == False, active_partner == False), ('&', active == True, active_partner == False))"
+                        invisible="(active and active_partner) or ((not active) and (not active_partner)) or (active and (not active_partner))"
                         role="alert"
                     >
                         <a class="close" data-dismiss="alert" href="#">x</a>
