@@ -6,7 +6,6 @@ on:
       - main
 
 jobs:
-
   ci:
     runs-on: ubuntu-latest
 
@@ -19,82 +18,129 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Validate manifest syntax (py_compile)
-        run: |
-          find . -name "__manifest__.py" | while read file; do
-            python3 -m py_compile "$file" && echo "OK: $file"
-          done
-
-      - name: Validate manifest content (ast.literal_eval)
+      # ==================== MANIFEST VALIDATION ====================
+      - name: Validate Odoo Manifests
         run: |
           python3 <<EOF
-          import ast, os, sys
+          import ast
+          import os
+          import sys
+          import re
+          from pathlib import Path
+
+          REQUIRED_KEYS = {"name", "depends"}
+          RECOMMENDED_KEYS = {"version", "author", "license", "category", "description"}
+          VERSION_PATTERN = re.compile(r"^\d+\.\d+\.\d+\.\d+\.\d+$")
 
           errors = []
+          warnings = []
+
           for root, dirs, files in os.walk("."):
               if "__manifest__.py" in files:
                   path = os.path.join(root, "__manifest__.py")
+                  module_name = os.path.basename(root)
+
                   try:
                       with open(path) as f:
                           data = ast.literal_eval(f.read())
+
                       if not isinstance(data, dict):
-                          errors.append(f"{path}: manifest is not a dict")
+                          errors.append(f"{path}: manifest must be a dictionary")
+                          continue
+
+                      # Required keys
+                      missing = REQUIRED_KEYS - data.keys()
+                      if missing:
+                          errors.append(f"{path}: missing required keys {missing}")
+
+                      # Recommended keys
+                      missing_rec = RECOMMENDED_KEYS - data.keys()
+                      if missing_rec:
+                          warnings.append(f"{path}: missing recommended keys {missing_rec}")
+
+                      # Version format
+                      if "version" in data:
+                          if not isinstance(data["version"], str) or not VERSION_PATTERN.match(data["version"]):
+                              warnings.append(f"{path}: version should follow format '16.0.1.0.0' (got: {data['version']})")
                       else:
-                          print(f"OK: {path}")
+                          warnings.append(f"{path}: missing 'version' key (recommended)")
+
+                      # Depends should be list
+                      if "depends" in data and not isinstance(data["depends"], list):
+                          errors.append(f"{path}: 'depends' must be a list")
+
+                      # Basic type checks
+                      if not isinstance(data.get("name", ""), str):
+                          errors.append(f"{path}: 'name' must be a string")
+
+                      print(f"✅ {path}")
+
                   except Exception as e:
-                      errors.append(f"{path}: {e}")
+                      errors.append(f"{path}: failed to parse - {e}")
 
-          if errors:
-              print("\nManifest errors found:")
-              for err in errors:
-                  print(" -", err)
-              sys.exit(1)
-
-          print("\nAll manifests valid.")
-          EOF
-
-      - name: Check required manifest keys
-        run: |
-          python3 <<EOF
-          import ast, os, sys
-
-          # Make 'version' optional
-          REQUIRED_KEYS = {"name", "depends"}   # removed 'version'
-          errors = []
-
+          # Check __init__.py exists in modules
           for root, dirs, files in os.walk("."):
-              if "__manifest__.py" in files:
-                  path = os.path.join(root, "__manifest__.py")
-                  with open(path) as f:
-                      data = ast.literal_eval(f.read())
-                  missing = REQUIRED_KEYS - data.keys()
-                  if missing:
-                      errors.append(f"{path}: missing keys {missing}")
-                  else:
-                      print(f"OK: {path}")
+              if "__manifest__.py" in files and "__init__.py" not in files:
+                  warnings.append(f"{root}: missing __init__.py")
+
+          # Summary
+          print("\n" + "="*60)
+          if warnings:
+              print("⚠️  WARNINGS:")
+              for w in warnings:
+                  print(f"   {w}")
+              print()
 
           if errors:
-              for err in errors:
-                  print(err)
+              print("❌ ERRORS:")
+              for e in errors:
+                  print(f"   {e}")
               sys.exit(1)
 
-          print("\nAll required keys present.")
+          print("🎉 All manifests passed validation!")
           EOF
 
-      - name: Check for Python syntax errors in addon code
+      # ==================== PYTHON SYNTAX ====================
+      - name: Check Python syntax in all addons
         run: |
-          find . -name "*.py" \
-            ! -path "./.git/*" | while read file; do
-            python3 -m py_compile "$file" && echo "OK: $file"
+          echo "Checking Python syntax..."
+          find . -name "*.py" ! -path "./.git/*" | while read file; do
+            if ! python3 -m py_compile "$file"; then
+              echo "❌ Syntax error in: $file"
+              exit 1
+            fi
           done
+          echo "✅ All Python files have valid syntax."
+
+      # ==================== XML VALIDATION ====================
+      - name: Validate XML files
+        run: |
+          echo "Checking XML syntax..."
+          if find . -name "*.xml" ! -path "./.git/*" | grep -q .; then
+            find . -name "*.xml" ! -path "./.git/*" | while read file; do
+              if ! python3 -c "
+                import sys
+                from lxml import etree
+                try:
+                    etree.parse('$file')
+                    print('✅ $file')
+                except Exception as e:
+                    print('❌ XML error in $file:', e)
+                    sys.exit(1)
+                              "; then
+                                exit 1
+                              fi
+                            done
+                          else
+                            echo "No XML files found."
+                          fi
 
   # -----------------------------------------------------------------------
-  # Deploy job — disabled for now, re-enable once CI is stable
+  # Deploy job — Uncomment when CI is stable
   # -----------------------------------------------------------------------
   # deploy:
   #   runs-on: ubuntu-latest
-  #   needs: ci                   # won't run until ci passes
-  #
+  #   needs: ci
   #   steps:
   #     - name: Checkout
   #       uses: actions/checkout@v4
@@ -118,17 +164,10 @@ jobs:
   #         port: ${{ secrets.PORT }}
   #         script: |
   #           sudo mkdir -p /opt/backups
+  #           sudo tar -czf /opt/backups/custom-addons-\$(date +%F-%H%M).tar.gz /opt/yetim/custom-addons
   #
-  #           sudo tar -czf \
-  #           /opt/backups/custom-addons-$(date +%F-%H%M).tar.gz \
-  #           /opt/yetim/custom-addons
-  #
-  #           sudo rsync -av --delete \
-  #           /tmp/yetim-addons/ \
-  #           /opt/yetim/custom-addons/
+  #           sudo rsync -av --delete /tmp/yetim-addons/ /opt/yetim/custom-addons/
   #
   #           sudo systemctl restart yetim.service
-  #
   #           sleep 10
-  #
   #           sudo systemctl is-active yetim.service
